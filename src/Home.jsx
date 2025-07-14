@@ -41,6 +41,7 @@ import {
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import myimage from './assets/myimage1.jpg';
 import cvPdf from './assets/UNNIKISHNAN_MERN-CV.pdf';
+import './style.css';
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
@@ -746,59 +747,6 @@ const Home = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <style>{`
-          .particle {
-            position: fixed;
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: -1;
-            mix-blend-mode: screen;
-          }
-          .floating-shape {
-            filter: blur(30px);
-          }
-          .project-card:hover {
-            transform: translateY(-10px) !important;
-          }
-          .brand-text span {
-            display: inline-block;
-            position: relative;
-          }
-          @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-          }
-          .float-animation {
-            animation: float 6s ease-in-out infinite;
-          }
-          .three-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-          }
-          canvas {
-            display: block;
-          }
-          .contact-form {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 2rem;
-            background: rgba(26, 26, 26, 0.8);
-            border-radius: 16px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-          }
-          .form-field {
-            margin-bottom: 1.5rem;
-          }
-        `}</style>
-
       <div className="three-container" ref={threeContainerRef} />
 
       <Box
@@ -842,10 +790,6 @@ const Home = () => {
                     display: 'inline-block',
                     ml: 0.5,
                     animation: 'glow 2s infinite alternate',
-                    '@keyframes glow': {
-                      '0%': { textShadow: '0 0 5px #ff6bff' },
-                      '100%': { textShadow: '0 0 20px #ff6bff, 0 0 30px #ff6bff' }
-                    },
                   }}
                 >
                   JSX
@@ -1077,11 +1021,6 @@ const Home = () => {
                       borderColor: 'primary.main',
                       boxShadow: '0 0 20px rgba(0, 212, 255, 0.6)',
                       animation: 'pulse 3s infinite',
-                      '@keyframes pulse': {
-                        '0%': { transform: 'scale(1)', opacity: 0.8, boxShadow: '0 0 10px rgba(0, 212, 255, 0.4)' },
-                        '50%': { transform: 'scale(1.05)', opacity: 1, boxShadow: '0 0 30px rgba(0, 212, 255, 0.7)' },
-                        '100%': { transform: 'scale(1)', opacity: 0.8, boxShadow: '0 0 10px rgba(0, 212, 255, 0.4)' }
-                      }
                     }
                   }}
                 >
@@ -1357,33 +1296,6 @@ const Home = () => {
                       }
                     }}
                   >
-                    {/* <Box
-                      className="project-image-placeholder"
-                      sx={{
-                        height: 180,
-                        overflow: 'hidden',
-                        position: 'relative',
-                        transition: 'transform 0.5s ease-in-out',
-                        background: `linear-gradient(135deg, ${index % 2 === 0 ? '#00d4ff' : '#ff6bff'} 0%, ${index % 3 === 0 ? '#673ab7' : '#e91e63'} 100%)`,
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        color: 'rgba(255,255,255,0.3)',
-                        fontSize: '4rem',
-                        fontWeight: 'bold',
-                        textShadow: '2px 2px 4px rgba(0,0,0,0.3)',
-                        zIndex: 1
-                      }}
-                    >
-                      <Box sx={{
-                        position: 'absolute',
-                        top: 0, bottom: 0, left: 0, right: 0,
-                        background: 'url("data:image/svg+xml,%3Csvg width=\'6\' height=\'6\' viewBox=\'0 0 6 6\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'0.1\' fill-rule=\'evenodd\'%3E%3Cpath d=\'M5 0h1L0 6V5zM6 5v1H5z\'/%3E%3C/g%3E%3C/svg%3E")',
-                        zIndex: 2,
-                        opacity: 0.5
-                      }} />
-                      <Box sx={{ zIndex: 3 }}>{index + 1}</Box>
-                    </Box> */}
                     <CardContent sx={{ flexGrow: 1, p: 3 }}>
                       <Typography gutterBottom variant="h6" component="div" fontWeight="bold">
                         {project.title}
@@ -1620,10 +1532,6 @@ const Home = () => {
               sx={{
                 mb: 6,
                 animation: 'fadeIn 0.8s ease-out',
-                '@keyframes fadeIn': {
-                  '0%': { opacity: 0, transform: 'translateY(20px)' },
-                  '100%': { opacity: 1, transform: 'translateY(0)' }
-                }
               }}
             >
               <Box className="form-field">
@@ -1697,29 +1605,17 @@ const Home = () => {
               <IconButton
                 href="https://github.com/unnijsx"
                 target="_blank"
-                // sx={{
-                //   color: 'text.primary',
-                //   transition: 'all 0.3s'
-                // }}
               >
                 <GitHub fontSize="large" />
               </IconButton>
               <IconButton
                 href="https://www.linkedin.com/in/unnikrishnanvp/"
                 target="_blank"
-                // sx={{
-                //   color: 'text.primary',
-                //   transition: 'all 0.3s'
-                // }}
               >
                 <LinkedIn fontSize="large" />
               </IconButton>
               <IconButton
                 href="mailto:unniytman@gmail.com"
-                // sx={{
-                //   color: 'text.primary',
-                //   transition: 'all 0.3s'
-                // }}
               >
                 <Email fontSize="large" />
               </IconButton>

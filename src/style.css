@@ -1,0 +1,76 @@
+.particle {
+  position: fixed;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: -1;
+  mix-blend-mode: screen;
+}
+
+.floating-shape {
+  filter: blur(30px);
+}
+
+.project-card:hover {
+  transform: translateY(-10px) !important;
+}
+
+.brand-text span {
+  display: inline-block;
+  position: relative;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+.float-animation {
+  animation: float 6s ease-in-out infinite;
+}
+
+.three-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+canvas {
+  display: block;
+}
+
+.contact-form {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: rgba(26, 26, 26, 0.8);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.form-field {
+  margin-bottom: 1.5rem;
+}
+
+/* Additional animations */
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 0.8; box-shadow: 0 0 10px rgba(0, 212, 255, 0.4); }
+  50% { transform: scale(1.05); opacity: 1; box-shadow: 0 0 30px rgba(0, 212, 255, 0.7); }
+  100% { transform: scale(1); opacity: 0.8; box-shadow: 0 0 10px rgba(0, 212, 255, 0.4); }
+}
+
+@keyframes glow {
+  0% { text-shadow: 0 0 5px #ff6bff; }
+  100% { text-shadow: 0 0 20px #ff6bff, 0 0 30px #ff6bff; }
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
