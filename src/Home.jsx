@@ -40,7 +40,7 @@ import {
 } from '@mui/icons-material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import myimage from './assets/myimage1.jpg';
-import cvPdf from './assets/Unnikrishnan_CV.pdf';
+import cvPdf from './assets/UNNIKISHNAN_MERN-CV.pdf';
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
