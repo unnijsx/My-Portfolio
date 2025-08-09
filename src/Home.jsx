@@ -39,7 +39,7 @@ import {
   ArrowUpward,
 } from '@mui/icons-material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import myimage from './assets/myimage1.jpg';
+import myimage from './assets/1_1.jpg';
 import cvPdf from './assets/UNNIKISHNAN_MERN-CV.pdf';
 import './style.css';
 
