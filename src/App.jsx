@@ -5,22 +5,19 @@ import { Route, Routes } from 'react-router-dom';
 import { createTheme } from '@mui/material';
 import { ThemeProvider } from '@emotion/react';
 import Test from './Test';
-// No need to import Hide.css here, as visually-hidden will be in Home.jsx
 
 function App() {
   const theme = createTheme({
     palette: {
       primary: {
-        main: '#333333', // Set #333333 as the primary color
+        main: '#333333', 
       },
       secondary: {
-        main: '#6F32BF', // Optional: customize secondary color
+        main: '#6F32BF', 
       },
     },
   });
 
-  // Schema.org markup for Organization and Person
-  // This JSON-LD will be injected into a script tag in the HTML body
   const schemaMarkup = {
     "@context": "https://schema.org",
     "@graph": [
@@ -29,11 +26,10 @@ function App() {
         "@id": "https://unnijsx.online/#organization",
         "name": "Unnijsx Online",
         "url": "https://unnijsx.online/",
-        "logo": "https://unnijsx.online/src/assets/1_1.jpg", // Update if you have a specific logo URL
+        "logo": "https://unnijsx.online/src/assets/1_1.jpg", 
         "sameAs": [
           "https://www.linkedin.com/in/unnikrishnanvp/",
           "https://github.com/unnijsx",
-          // Add your Twitter, etc., if applicable
         ],
         "contactPoint": {
           "@type": "ContactPoint",
@@ -44,13 +40,12 @@ function App() {
       {
         "@type": "Person",
         "@id": "https://unnijsx.online/#person",
-        "name": "Unnikrishnan (unnijsx)", // More specific name for clarity
+        "name": "Unnikrishnan (unnijsx)", 
         "url": "https://unnijsx.online/",
-        "image": "https://unnijsx.online/src/assets/1_1.jpg", // Update if you have a specific profile pic URL
+        "image": "https://unnijsx.online/src/assets/1_1.jpg",
         "sameAs": [
           "https://www.linkedin.com/in/unnikrishnanvp/",
           "https://github.com/unnijsx",
-          // "https://twitter.com/yourhandle", // Add if you have one
         ],
         "worksFor": {
           "@id": "https://unnijsx.online/#organization"
@@ -61,7 +56,6 @@ function App() {
 
   return (
     <>
-      {/* JSON-LD Schema.org Markup for Organization and Person - Keep here for global context */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaMarkup) }}

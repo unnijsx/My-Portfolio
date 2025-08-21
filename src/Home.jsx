@@ -42,7 +42,7 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import myimage from './assets/1_1.jpg';
 import cvPdf from './assets/UNNIKISHNAN_MERN-CV.pdf';
 import './style.css';
-import './Hide.css'; // Make sure Hide.css is imported here for the visually-hidden class
+import './Hide.css'; 
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
@@ -748,7 +748,6 @@ const Home = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      {/* Visually hidden H1 tag for SEO and Accessibility */}
       <h1 className="visually-hidden">Unnijsx - MERN Stack Developer | Official Portfolio</h1>
 
       <div className="three-container" ref={threeContainerRef} />
@@ -879,7 +878,7 @@ const Home = () => {
           <Container maxWidth="md" sx={{ textAlign: 'center', position: 'relative', zIndex: 1 }}>
             <Typography
               variant="h2"
-              component="h1" // This is your *visible* H1. It's good to have a visible H1.
+              component="h1" 
               className="hero-title"
               sx={{
                 fontWeight: 'bold',
@@ -1030,7 +1029,7 @@ const Home = () => {
                 >
                   <Avatar
                     src={myimage}
-                    alt="unnijsx profile picture" // Add descriptive alt text
+                    alt="unnijsx profile picture"
                     sx={{
                       width: '100%',
                       height: '100%',
@@ -1049,7 +1048,7 @@ const Home = () => {
               <Grid item xs={12} md={7}>
                 <Typography
                   variant="h3"
-                  component="h2" // This is fine as H2 for a sub-section
+                  component="h2"
                   className="about-title"
                   sx={{
                     fontWeight: 'bold',
@@ -1626,7 +1625,7 @@ const Home = () => {
             </Box>
 
             <Typography variant="body2" sx={{ mt: 6, opacity: 0.7, fontSize: '0.9rem' }}>
-              Designed and Built by Unnikrishnan.
+              Developed with ❤️ by Unnikrishnan.
             </Typography>
             <Typography variant="body2" sx={{ mt: 1, opacity: 0.6, fontSize: '0.8rem' }}>
               © {new Date().getFullYear()}. All rights reserved.
