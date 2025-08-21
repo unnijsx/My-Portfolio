@@ -42,6 +42,7 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import myimage from './assets/1_1.jpg';
 import cvPdf from './assets/UNNIKISHNAN_MERN-CV.pdf';
 import './style.css';
+import './Hide.css'; // Make sure Hide.css is imported here for the visually-hidden class
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
@@ -747,6 +748,9 @@ const Home = () => {
 
   return (
     <ThemeProvider theme={theme}>
+      {/* Visually hidden H1 tag for SEO and Accessibility */}
+      <h1 className="visually-hidden">Unnijsx - MERN Stack Developer | Official Portfolio</h1>
+
       <div className="three-container" ref={threeContainerRef} />
 
       <Box
@@ -875,7 +879,7 @@ const Home = () => {
           <Container maxWidth="md" sx={{ textAlign: 'center', position: 'relative', zIndex: 1 }}>
             <Typography
               variant="h2"
-              component="h1"
+              component="h1" // This is your *visible* H1. It's good to have a visible H1.
               className="hero-title"
               sx={{
                 fontWeight: 'bold',
@@ -1026,7 +1030,7 @@ const Home = () => {
                 >
                   <Avatar
                     src={myimage}
-                    alt="unnijsx"
+                    alt="unnijsx profile picture" // Add descriptive alt text
                     sx={{
                       width: '100%',
                       height: '100%',
@@ -1045,7 +1049,7 @@ const Home = () => {
               <Grid item xs={12} md={7}>
                 <Typography
                   variant="h3"
-                  component="h2"
+                  component="h2" // This is fine as H2 for a sub-section
                   className="about-title"
                   sx={{
                     fontWeight: 'bold',
@@ -1072,7 +1076,7 @@ const Home = () => {
                     I'm a passionate Full Stack Developer with 1+ years of experience creating
                     robust, scalable, and user-friendly web applications. I specialize in the
                     MERN stack (MongoDB, Express.js, React along with MUI, Node.js) and have a strong interest
-                    in building intuitive user interfaces and optimizing performance.
+                    in building intuitive user interfaces and optimizing performance. I'm also known as **unnijsx** online.
                   </Typography>
                   <Typography variant="body1" paragraph sx={{ mb: 3, fontSize: '1.15rem', lineHeight: 1.8 }}>
                     My journey in software development is driven by curiosity and a desire to solve
