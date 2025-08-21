@@ -1026,7 +1026,7 @@ const Home = () => {
                 >
                   <Avatar
                     src={myimage}
-                    alt="Unnikrishnan"
+                    alt="unnijsx"
                     sx={{
                       width: '100%',
                       height: '100%',
