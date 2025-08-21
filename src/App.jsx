@@ -23,7 +23,6 @@ function App() {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/hi' element={<Test />} />
-          <Route path='/googlea25fe490e23612bc.html' element={<googlea25fe490e23612bc.html></googlea25fe490e23612bc.html>} />
         </Routes>
       </ThemeProvider>
     </>
