@@ -717,7 +717,7 @@ const Home = () => {
     {
       title: 'Cookikko - A Recipe Platform UI',
       description: 'A full-featured online recipe sharing platform with React & Material-UI, allowing users to create, share, and discover recipes. It includes user authentication, recipe submission, search functionality, and detailed recipe views with ingredient lists and step-by-step instructions. The UI is designed to be responsive and intuitive, providing a seamless user experience across devices.',
-      tags: ['React'],
+      tags: ['React','Material-UI'],
       link: 'https://github.com/unnijsx/Cookikko-A-Recipe-Sharing-Web-Frontend-'
     },
     {
@@ -729,7 +729,7 @@ const Home = () => {
     {
       title: 'Dress Itto - An online clothing store',
       description: 'An online clothing store built with React and Material-UI, featuring product listings, a shopping cart, and a streamlined purchasing process. Users can browse products by category, view detailed product descriptions, add items to their cart, and proceed to checkout. The interface is designed for visual appeal and ease of navigation, ensuring a pleasant shopping experience.',
-      tags: ['React', 'Material-UI', 'Node.js', 'Express', 'MongoDB'],
+      tags: ['React', 'Material-UI'],
       link: 'https://github.com/unnijsx/Dress-Itto'
     },
     {
@@ -739,11 +739,17 @@ const Home = () => {
       link: 'https://github.com/unnijsx/Economy-Add-and-Remove-using-MERN'
     },
     {
-      title: 'Portfolio Website',
-      description: 'My personal portfolio website showcasing my projects, skills, and experience. This site is built using React and Material-UI, incorporating modern design principles and smooth animations with GSAP. It serves as a dynamic resume, providing visitors with an interactive overview of my capabilities and past work. The responsive layout ensures a great experience on any device.',
-      tags: ['React', 'Material-UI'],
-      link: 'https://github.com/unnijsx/Portfolio-Website'
-    }
+      title: 'Digital Shop Platform',
+      description: 'A comprehensive e-commerce platform without online payments, but build with discord integration(discord.js) with credit system and referal system.',
+      tags: ['React', 'Node.js', 'Express', 'MongoDB'],
+      link: 'https://github.com/unnijsx/Dc-shop'
+    },
+        {
+      title: 'Student Attendance Management',
+      description: 'Student attendance management system built with MERN stack, allowing teachers to mark attendance, generate reports, and manage student records efficiently.',
+      tags: ['React', 'Node.js', 'Express', 'MongoDB'],
+      link: 'https://github.com/unnijsx/Student-Management'
+    },
   ];
 
   return (
