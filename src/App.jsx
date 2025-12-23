@@ -5,6 +5,9 @@ import { Route, Routes } from 'react-router-dom';
 import { createTheme } from '@mui/material';
 import { ThemeProvider } from '@emotion/react';
 import Test from './Test';
+import SnakeGame from './Game';
+import HappyMensDay from './Mens';
+import TheyyamLanding from './TheyyamPage';
 
 function App() {
   const theme = createTheme({
@@ -65,7 +68,9 @@ function App() {
       <ThemeProvider theme={theme}>
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/hi' element={<Test />} />
+          <Route path='/pulimbaillam' element={<TheyyamLanding />} />
+          <Route path='/game' element={<SnakeGame />} />
+          <Route path='/mensday' element={<HappyMensDay />} />
         </Routes>
       </ThemeProvider>
     </>
