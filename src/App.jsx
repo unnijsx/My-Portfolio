@@ -1,5 +1,4 @@
-import React from 'react';
-import Home from './Home';
+import HomePremium from './HomePremium';
 import { ToastContainer } from 'react-toastify';
 import { Route, Routes } from 'react-router-dom';
 import { createTheme } from '@mui/material';
@@ -13,10 +12,10 @@ function App() {
   const theme = createTheme({
     palette: {
       primary: {
-        main: '#333333', 
+        main: '#333333',
       },
       secondary: {
-        main: '#6F32BF', 
+        main: '#6F32BF',
       },
     },
   });
@@ -29,7 +28,7 @@ function App() {
         "@id": "https://unnijsx.online/#organization",
         "name": "Unnijsx Online",
         "url": "https://unnijsx.online/",
-        "logo": "https://unnijsx.online/src/assets/1_1.jpg", 
+        "logo": "https://unnijsx.online/src/assets/1_1.jpg",
         "sameAs": [
           "https://www.linkedin.com/in/unnikrishnanvp/",
           "https://github.com/unnijsx",
@@ -43,7 +42,7 @@ function App() {
       {
         "@type": "Person",
         "@id": "https://unnijsx.online/#person",
-        "name": "Unnikrishnan (unnijsx)", 
+        "name": "Unnikrishnan (unnijsx)",
         "url": "https://unnijsx.online/",
         "image": "https://unnijsx.online/src/assets/1_1.jpg",
         "sameAs": [
@@ -67,7 +66,7 @@ function App() {
       <ToastContainer />
       <ThemeProvider theme={theme}>
         <Routes>
-          <Route path='/' element={<Home />} />
+          <Route path='/' element={<HomePremium />} />
           <Route path='/pulimbaillam' element={<TheyyamLanding />} />
           <Route path='/game' element={<SnakeGame />} />
           <Route path='/mensday' element={<HappyMensDay />} />
