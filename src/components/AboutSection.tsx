@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Code2, Download, ExternalLink } from "lucide-react";
+import cvPdf from "../assets/UNNIKRISHNAN_RESUME.pdf";
 
 export default function AboutSection() {
     return (
@@ -23,12 +24,11 @@ export default function AboutSection() {
                                 Architect of <span className="text-secondary">Digital</span> Solutions
                             </h3>
                             <p className="text-text-secondary leading-relaxed mb-6 text-lg">
-                                I started my journey with a curiosity for how things work on the internet.
-                                That curiosity evolved into a passion for building robust, scalable applications.
+                                Detail-oriented and motivated MERN Stack Developer with experience in designing and building full-stack applications.
+                                Skilled in developing scalable APIs, responsive user interfaces, and integrating cloud services.
                             </p>
                             <p className="text-text-secondary leading-relaxed text-lg">
-                                Whether it's optimizing database queries or crafting pixel-perfect UIs,
-                                I treat every line of code as a piece of engineering art.
+                                Currently enhancing expertise in DevOps practices, AWS, and Linux-based deployments.
                             </p>
                         </div>
                     </motion.div>
@@ -47,15 +47,18 @@ export default function AboutSection() {
                             A Developer based <br />
                             in <span className="text-primary italic">India 🇮🇳</span>
                         </h2>
+                        <h3 className="text-xl font-bold text-text-secondary-light dark:text-gray-300 mb-6 font-heading tracking-wide">
+                            MERN Stack Developer @ Srishti Innovative
+                        </h3>
                         <p className="text-text-secondary text-xl leading-relaxed mb-10 max-w-xl font-medium">
-                            I specialize in the <span className="text-text-primary font-black">MERN stack</span> (MongoDB, Express, React, Node.js).
-                            My focus is on creating solutions that are not only functional but also intuitive and highly performant.
+                            I specialize in building full-stack solutions that are not only functional but also intuitive and highly performant.
+                            I treat every problem as a puzzle to be solved with clean, efficient code.
                         </p>
 
                         <div className="grid grid-cols-2 gap-6 mb-12">
                             <div className="p-6 bg-bg-primary dark:bg-bg-secondary/50 rounded-3xl border border-border-color hover:border-primary/30 transition-all group shadow-sm dark:shadow-none">
                                 <h4 className="text-4xl font-black text-primary mb-1 group-hover:scale-110 transition-transform">1+</h4>
-                                <p className="text-xs text-text-secondary font-black uppercase tracking-widest">Years Experience</p>
+                                <p className="text-xs text-text-secondary font-black uppercase tracking-widest">Year Experience on MERN Projects</p>
                             </div>
                             <div className="p-6 bg-bg-primary dark:bg-bg-secondary/50 rounded-3xl border border-border-color hover:border-secondary/30 transition-all group shadow-sm dark:shadow-none">
                                 <h4 className="text-4xl font-black text-secondary mb-1 group-hover:scale-110 transition-transform">10+</h4>
@@ -70,11 +73,13 @@ export default function AboutSection() {
                             >
                                 Let's Talk <ExternalLink className="w-5 h-5 ml-2" />
                             </a>
-                            <button
+                            <a
+                                href={cvPdf}
+                                download="UNNIKRISHNAN_RESUME.pdf"
                                 className="inline-flex items-center px-8 py-4 bg-bg-secondary text-text-primary border border-border-color font-black rounded-2xl hover:bg-bg-primary transition-all active:scale-95"
                             >
                                 Résumé <Download className="w-5 h-5 ml-2" />
-                            </button>
+                            </a>
                         </div>
                     </motion.div>
                 </div>

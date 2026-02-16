@@ -3,28 +3,28 @@ import { PinContainer } from "./ui/3d-pin";
 
 const projects = [
     {
-        title: "Cookikko Platform",
-        href: "https://github.com/unnijsx/Cookikko-A-Recipe-Sharing-Web-Frontend-",
-        category: "Full Stack",
-        description: "A beautiful recipe sharing platform with advanced search and social features built with React and Material-UI.",
-        stats: { search: "Advanced", ui: "Material" },
-        tags: ["React", "Material-UI", "GSAP"]
+        title: "DC-Shop E-Commerce",
+        href: "https://github.com/unnijsx/DC-Shop",
+        category: "MERN + Discord.js",
+        description: "Full-stack e-commerce app integrated with Discord.js for real-time notifications and community interaction.",
+        stats: { social: "Discord", security: "JWT" },
+        tags: ["MongoDB", "Express", "React", "Node", "Discord.js"]
     },
     {
         title: "Job Portal MERN",
         href: "https://github.com/unnijsx/Job-Portal-using-MERN",
         category: "Full Stack",
-        description: "Robust recruitment platform with user authentication, job posting, and application tracking system.",
-        stats: { stack: "MERN", auth: "JWT" },
-        tags: ["MongoDB", "Express", "React", "Node"]
+        description: "Enabling seekers and recruiters to connect with role-based access and optimized database queries.",
+        stats: { stack: "MERN", perf: "Optimized" },
+        tags: ["Role-Based", "Auth", "REST API", "CRUD"]
     },
     {
-        title: "Dress-Itto Store",
-        href: "https://github.com/unnijsx/Dress-Itto",
-        category: "E-commerce",
-        description: "Modern e-commerce platform for fashion retail with cart functionality and seamless payment integration.",
-        stats: { retail: "Fashion", features: "Cart" },
-        tags: ["React", "E-commerce", "ContextAPI"]
+        title: "Cookikko Platform",
+        href: "https://github.com/unnijsx/Cookikko-A-Recipe-Sharing-Web-Frontend-",
+        category: "UI Architecture",
+        description: "High-end recipe sharing platform featuring advanced search logic and cinematic GSAP animations.",
+        stats: { motion: "GSAP", logic: "Search" },
+        tags: ["React", "Material-UI", "UX/UI"]
     }
 ];
 

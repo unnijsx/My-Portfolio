@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Sun, Moon, Download, Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import cvPdf from '../assets/UNNIKRISHNAN_RESUME.pdf';
 
 interface NavbarProps {
     isDark: boolean;
@@ -45,21 +46,10 @@ export default function PremiumNavbar({ isDark, onToggleTheme }: NavbarProps) {
 
                     {/* Desktop Actions - Rightish */}
                     <div className="flex items-center gap-6">
-                        <button
-                            onClick={onToggleTheme}
-                            className="p-2 hover:scale-110 active:scale-95 transition-all text-white"
-                            aria-label="Toggle theme"
-                        >
-                            {isDark ? (
-                                <Sun className="w-4 h-4" />
-                            ) : (
-                                <Moon className="w-4 h-4" />
-                            )}
-                        </button>
 
                         <a
-                            href="/resume.pdf"
-                            download
+                            href={cvPdf}
+                            download="UNNIKRISHNAN_RESUME.pdf"
                             className="hidden md:flex items-center gap-2 text-[11px] tracking-[0.3em] font-heading hover:opacity-70 transition-opacity group"
                         >
                             RESUME
@@ -107,8 +97,8 @@ export default function PremiumNavbar({ isDark, onToggleTheme }: NavbarProps) {
                                 </a>
                             ))}
                             <a
-                                href="/resume.pdf"
-                                download
+                                href={cvPdf}
+                                download="UNNIKRISHNAN_RESUME.pdf"
                                 className="flex items-center gap-3 text-lg tracking-[0.2em] font-heading text-primary mt-4"
                             >
                                 RESUME

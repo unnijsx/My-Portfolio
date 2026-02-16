@@ -9,7 +9,7 @@ import {
     X,
     ChevronDown
 } from 'lucide-react';
-import cvPdf from './assets/UNNIKISHNAN_MERN-CV.pdf';
+import cvPdf from './assets/UNNIKRISHNAN_RESUME.pdf';
 import myimage from './assets/1_1.jpg';
 
 // --- Minimalist Components ---

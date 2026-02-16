@@ -45,7 +45,7 @@ export default function ContactSection() {
                                 </div>
                                 <div>
                                     <div className="text-xs font-black uppercase tracking-widest text-text-secondary mb-1">Direct Message</div>
-                                    <div className="text-xl font-black text-text-primary">unnikishnan@example.com</div>
+                                    <div className="text-xl font-black text-text-primary">unniytman@gmail.com</div>
                                 </div>
                             </div>
                         </div>
@@ -68,7 +68,7 @@ export default function ContactSection() {
                                             name="name"
                                             required
                                             className="w-full bg-bg-primary/50 border-2 border-border-color rounded-2xl p-4 focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none transition-all text-text-primary font-black placeholder:text-text-secondary/30"
-                                            placeholder="John Doe"
+                                            placeholder="Unnikrishnan V P"
                                         />
                                     </div>
                                     <div className="space-y-3">
@@ -78,7 +78,7 @@ export default function ContactSection() {
                                             name="email"
                                             required
                                             className="w-full bg-bg-primary/50 border-2 border-border-color rounded-2xl p-4 focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none transition-all text-text-primary font-black placeholder:text-text-secondary/30"
-                                            placeholder="john@example.com"
+                                            placeholder="unniytman@gmail.com"
                                         />
                                     </div>
                                 </div>

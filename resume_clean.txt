@@ -1,0 +1,63 @@
+ 
+MERN Stack Developer 
+📧 
+  
+Detail-oriented and motivated MERN Stack Developer with experience in designing and 
+building full-stack applications. Skilled in developing scalable APIs, responsive user 
+interfaces, and integrating cloud services. Currently enhancing expertise in DevOps 
+practices, AWS, and Linux-based deployments. 
+  
+ Full-Stack Development: MERN Stack (MongoDB, Express, React, Node.js), REST APIs 
+ Frontend Skills: Interactive UI Design, Responsive Web Design, JavaScript (ES6+), 
+HTML5, CSS3 
+ Backend & Databases: Node.js, Express.js, MongoDB, MySQL (Basics) 
+ Tools & Platforms: Git, GitHub, Postman, AWS (Basics), Linux 
+ Other Skills: Problem Solving, Critical Thinking, Agile & Scrum Practices 
+  
+MERN Stack Developer – Srishti Innovative 
+April 2025 – Present 
+ Conducted training sessions on MERN stack technologies, mentoring new developers. 
+ Designed and delivered hands-on projects to enhance practical learning for trainees. 
+ Developed and maintained client full-stack web applications with a focus on scalability 
+and performance. 
+ Performed code reviews and provided technical support to ensure clean, maintainable 
+codebases. 
+  
+ Job Portal (MERN Stack) 
+Developed a job portal application enabling job seekers and recruiters to connect. 
+Implemented user authentication, role-based access, and responsive UI. Integrated CRUD 
+functionalities and optimized database queries for performance. 
+ Department Automation (Django) 
+unniytman@gmail.com |  +91 8848853516 |  www.unnijsx.online |  Kannur, Kerala
+Professional Summary
+Key Competencies
+Professional Experience
+Projects
+Unnikrishnan V P
+Created a web application to digitalize departmental manual tasks, including student 
+management and batch-wise semester progress tracking. Focused on usability and reducing 
+manual workload. 
+ Student Management System (MERN Stack) 
+Built a student attendance tracker and report generator with the MERN stack. Implemented 
+features for attendance marking, report generation, and streamlined data workflows, 
+reducing manual effort and improving efficiency. 
+ DC-Shop (MERN Stack + Discord.js E-Commerce App) 
+Created a full-stack e-commerce application using the MERN stack integrated with 
+Discord.js for notifications and community interaction. Implemented product listings, cart 
+functionality, and secure JWT-based authentication. Designed a responsive UI for seamless 
+shopping while enabling Discord integration for order updates and real-time alerts. 
+  
+ Bachelor of Computer Applications (BCA) – Kannur University, Kerala | 2021 – 2024 
+ Higher Secondary Education – Kerala Board of Higher Secondary Education | 2019 – 
+2021 
+ High School Education – Board of Public Examinations, Kerala | 2019 
+  
+ MERN Stack Intern – Riss Technologies (Oct 2024 – Jan 2025) 
+  
+ English – Speak & Write (Intermediate) 
+ Malayalam – Native 
+ Tamil – Speak (Basic) 
+ Hindi – Speak & Write (Basic) 
+Education
+Certifications
+Languages
