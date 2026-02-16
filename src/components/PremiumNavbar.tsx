@@ -84,9 +84,18 @@ export default function PremiumNavbar({ isDark, onToggleTheme }: NavbarProps) {
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -20 }}
-                        className="fixed inset-0 z-[90] bg-bg-primary/95 backdrop-blur-2xl flex flex-col items-center justify-center p-8 md:hidden"
+                        className="fixed inset-0 z-[110] bg-bg-primary/95 backdrop-blur-2xl flex flex-col items-center justify-center p-8 md:hidden"
                     >
-                        <div className="flex flex-col items-center gap-8">
+                        {/* Explicit Close Button for Mobile Overlay */}
+                        <button
+                            onClick={toggleMenu}
+                            className="absolute top-8 right-4 p-4 text-text-primary hover:scale-110 active:scale-95 transition-all"
+                            aria-label="Close menu"
+                        >
+                            <X className="w-8 h-8" />
+                        </button>
+
+                        <div className="flex flex-col items-center gap-8 text-center px-4">
                             {navItems.map((item) => (
                                 <a
                                     key={item.label}
