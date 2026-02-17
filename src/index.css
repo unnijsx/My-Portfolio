@@ -169,4 +169,42 @@ body {
   80% {
     transform: translateY(0);
   }
+
+  60% {
+    transform: translateY(-0.1em);
+  }
+
+  80% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.reveal {
+  animation: reveal 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes scan-slow {
+  0% {
+    transform: translateY(-100%);
+  }
+
+  100% {
+    transform: translateY(600px);
+  }
+}
+
+.animate-scan-slow {
+  animation: scan-slow 4s linear infinite;
 }

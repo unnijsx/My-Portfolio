@@ -114,21 +114,6 @@ export default function HomePremium() {
                 )}
             </AnimatePresence>
 
-            <style>{`
-                @keyframes reveal {
-                    from { opacity: 0; transform: translateY(30px); }
-                    to { opacity: 1; transform: translateY(0); }
-                }
-                .reveal {
-                    animation: reveal 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-                }
-                
-                /* Selection styling */
-                ::selection {
-                    background: var(--color-primary);
-                    color: white;
-                }
-            `}</style>
         </div>
     );
 }
