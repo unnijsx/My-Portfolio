@@ -16,6 +16,7 @@ import {
 // Video imports
 import whitetodark from "../../assets/videos/whitetodark.mp4";
 import darktowhite from "../../assets/videos/darktowhite.mp4";
+import myProfilePic from "../../assets/1_1.jpg";
 
 const TECH_STACK = [
     { name: "React", icon: Layout },
@@ -156,30 +157,56 @@ export default function HeroSection({ isDark, isTransitioning, transitionType }:
                     </div>
 
                     {/* --- RIGHT COLUMN --- */}
-                    <div className="lg:col-span-5 space-y-6 lg:mt-12">
-                        <div className="animate-fade-in delay-500 relative overflow-hidden rounded-3xl border border-border-color bg-bg-secondary/50 p-8 backdrop-blur-xl shadow-2xl transition-colors duration-1000">
-                            <div className="absolute top-0 right-0 -mr-16 -mt-16 h-64 w-64 rounded-full bg-primary/5 blur-3xl pointer-events-none" />
+                    <div className="lg:col-span-5 flex flex-col items-center lg:items-end space-y-8 lg:mt-0 perspective-1000">
+
+                        {/* 1. Slanted Profile "Card" */}
+                        <div className="relative group animate-fade-in delay-500 z-20">
+                            {/* Decorative backing for the slant */}
+                            <div className="absolute inset-0 bg-gradient-to-br from-primary via-secondary to-primary opacity-20 blur-xl rounded-[2rem] transform -rotate-6 scale-105 transition-transform group-hover:rotate-0 group-hover:scale-110 duration-700" />
+
+                            {/* The Main Image Container */}
+                            <div className="relative w-64 h-64 sm:w-80 sm:h-80 rounded-[2rem] overflow-hidden border border-white/10 shadow-2xl transform rotate-3 transition-transform duration-700 group-hover:rotate-0">
+                                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent z-10 pointer-events-none" />
+                                <img
+                                    src={myProfilePic}
+                                    alt="Unni Profile"
+                                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                />
+
+                                {/* Overlay Badge */}
+                                <div className="absolute bottom-4 left-4 z-20">
+                                    <div className="px-4 py-2 rounded-xl bg-black/40 backdrop-blur-md border border-white/10 flex items-center gap-2">
+                                        <div className="size-2 rounded-full bg-green-500 animate-pulse" />
+                                        <span className="text-xs font-mono text-white tracking-widest uppercase">Open to Work</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* 2. Stats "Console" (Reverted to pure data) */}
+                        <div className="w-full max-w-md animate-fade-in delay-600 relative overflow-hidden rounded-3xl border border-border-color bg-bg-secondary/50 p-6 backdrop-blur-xl shadow-2xl transition-colors duration-1000">
+                            <div className="absolute top-0 right-0 -mr-16 -mt-16 h-48 w-48 rounded-full bg-primary/5 blur-3xl pointer-events-none" />
                             <div className="relative z-10">
-                                <div className="flex items-center gap-4 mb-8">
+                                <div className="flex items-center gap-4 mb-6">
                                     <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 ring-1 ring-primary/20">
                                         <Target className="h-6 w-6 text-primary" />
                                     </div>
                                     <div>
-                                        <div className={`text-3xl font-black tracking-tight text-text-primary transition-colors duration-1000 ${textInvertClass}`}>10+</div>
-                                        <div className={`text-sm text-text-secondary transition-colors duration-1000 ${textInvertClass}`}>Projects Completed</div>
+                                        <div className={`text-2xl font-black tracking-tight text-text-primary transition-colors duration-1000 ${textInvertClass}`}>10+</div>
+                                        <div className={`text-xs text-text-secondary transition-colors duration-1000 ${textInvertClass}`}>Projects Completed</div>
                                     </div>
                                 </div>
-                                <div className="space-y-3 mb-8">
-                                    <div className="flex justify-between text-sm">
+                                <div className="space-y-3 mb-6">
+                                    <div className="flex justify-between text-xs">
                                         <span className={`text-text-secondary font-medium uppercase tracking-wider ${textInvertClass}`}>MERN Proficiency</span>
                                         <span className={`text-text-primary font-bold ${textInvertClass}`}>95%</span>
                                     </div>
-                                    <div className="h-2 w-full overflow-hidden rounded-full bg-border-color/50">
+                                    <div className="h-1.5 w-full overflow-hidden rounded-full bg-border-color/50">
                                         <div className="h-full w-[95%] rounded-full bg-gradient-to-r from-primary to-secondary" />
                                     </div>
                                 </div>
-                                <div className="h-px w-full bg-border-color mb-6" />
-                                <div className="grid grid-cols-3 gap-4 text-center">
+                                <div className="h-px w-full bg-border-color mb-4" />
+                                <div className="grid grid-cols-3 gap-2 text-center text-xs">
                                     <div className={`${textInvertClass}`}>
                                         <StatItem value="1+" label="Years" />
                                     </div>
@@ -190,19 +217,6 @@ export default function HeroSection({ isDark, isTransitioning, transitionType }:
                                     <div className="w-px h-full bg-border-color mx-auto" />
                                     <div className={`${textInvertClass}`}>
                                         <StatItem value="100%" label="Commit" />
-                                    </div>
-                                </div>
-                                <div className="mt-8 flex flex-wrap gap-2">
-                                    <div className={`inline-flex items-center gap-1.5 rounded-full border border-border-color bg-bg-bg-primary/50 dark:bg-bg-secondary px-3 py-1 text-[10px] font-bold tracking-wide text-text-secondary ${textInvertClass}`}>
-                                        <span className="relative flex h-2 w-2">
-                                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                                            <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-                                        </span>
-                                        AVAILABLE FOR HIRE
-                                    </div>
-                                    <div className={`inline-flex items-center gap-1.5 rounded-full border border-border-color bg-bg-bg-primary/50 dark:bg-bg-secondary px-3 py-1 text-[10px] font-bold tracking-wide text-text-secondary ${textInvertClass}`}>
-                                        <Crown className="w-3 h-3 text-secondary" />
-                                        MERN STACK
                                     </div>
                                 </div>
                             </div>
