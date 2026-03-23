@@ -53,40 +53,8 @@ export default function FeedbackRedesign({ isColorful }: FeedbackRedesignProps) 
     };
 
     return (
-        <section id="feedback" className={`py-40 transition-colors duration-1000 ${isColorful ? 'bg-[#0A0A0B]' : 'bg-[#0E0E0E]'} text-[#E5E5E0] relative border-t border-white/5 overflow-hidden selection:bg-white selection:text-black`}>
+        <section id="feedback" className={`py-40 transition-colors duration-1000 ${isColorful ? 'bg-transparent' : 'bg-[#0E0E0E]'} text-[#E5E5E0] relative border-t border-white/5 overflow-hidden selection:bg-white selection:text-black`}>
             
-            {/* Aurora Background Blobs */}
-            <AnimatePresence>
-                {isColorful && (
-                    <motion.div 
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 1.5 }}
-                        className="absolute inset-0 z-0 pointer-events-none overflow-hidden"
-                    >
-                        <motion.div 
-                            animate={{ 
-                                x: [0, 60, -40], 
-                                y: [0, -50, 50],
-                                scale: [1, 1.1, 1]
-                            }}
-                            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                            className="absolute top-[30%] right-[-10%] w-[50vw] h-[50vw] rounded-full bg-cyan-600/10 blur-[130px]" 
-                        />
-                        <motion.div 
-                            animate={{ 
-                                x: [0, -60, 40], 
-                                y: [0, 50, -50],
-                                scale: [1.1, 0.9, 1.1]
-                            }}
-                            transition={{ duration: 24, repeat: Infinity, ease: "linear" }}
-                            className="absolute bottom-[30%] left-[-10%] w-[45vw] h-[45vw] rounded-full bg-purple-600/10 blur-[120px]" 
-                        />
-                    </motion.div>
-                )}
-            </AnimatePresence>
-
             {/* Atmospheric Background Decor */}
             <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-[radial-gradient(circle,rgba(255,255,255,0.03)_0%,transparent_70%)] blur-[120px]" />

@@ -8,40 +8,7 @@ interface LiveArchitecturesProps {
 
 export default function LiveArchitectures({ isColorful }: LiveArchitecturesProps) {
     return (
-        <section id="architectures" className={`relative transition-colors duration-1000 ${isColorful ? 'bg-[#0A0A0B]' : 'bg-[#0E0E0E]'} text-[#E5E5E0] py-32 px-6 md:px-12 selection:bg-white selection:text-black`}>
-            
-            {/* Aurora Background Blobs */}
-            <AnimatePresence>
-                {isColorful && (
-                    <motion.div 
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 1.5 }}
-                        className="absolute inset-0 z-0 pointer-events-none overflow-hidden"
-                    >
-                        <motion.div 
-                            animate={{ 
-                                x: [0, -40, 60], 
-                                y: [0, 50, -30],
-                                scale: [1, 1.2, 0.9]
-                            }}
-                            transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
-                            className="absolute top-[20%] left-[-5%] w-[40vw] h-[40vw] rounded-full bg-cyan-600/10 blur-[110px]" 
-                        />
-                        <motion.div 
-                            animate={{ 
-                                x: [0, 40, -60], 
-                                y: [0, -50, 30],
-                                scale: [1, 0.9, 1.1]
-                            }}
-                            transition={{ duration: 22, repeat: Infinity, ease: "linear" }}
-                            className="absolute bottom-[20%] right-[-5%] w-[45vw] h-[45vw] rounded-full bg-purple-600/10 blur-[120px]" 
-                        />
-                    </motion.div>
-                )}
-            </AnimatePresence>
-
+        <section id="architectures" className={`relative transition-colors duration-1000 ${isColorful ? 'bg-transparent' : 'bg-[#0E0E0E]'} text-[#E5E5E0] py-32 px-6 md:px-12 selection:bg-white selection:text-black`}>
             <motion.div 
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}

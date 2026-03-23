@@ -8,9 +8,10 @@ import { saveAs } from 'file-saver';
 
 interface HeroRedesignProps {
     isColorful?: boolean;
+    setIsColorful?: (val: boolean) => void;
 }
 
-export default function HeroRedesign({ isColorful }: HeroRedesignProps) {
+export default function HeroRedesign({ isColorful, setIsColorful }: HeroRedesignProps) {
     const { scrollY } = useScroll();
     
     // Parallax values for depth
@@ -28,24 +29,51 @@ export default function HeroRedesign({ isColorful }: HeroRedesignProps) {
     };
 
     return (
-        <section id="home" className="relative min-h-screen md:h-screen bg-[#E5E5E0] text-[#1c1c1c] overflow-hidden selection:bg-black selection:text-white flex flex-col items-center justify-between py-12 md:py-12 px-4 md:px-12">
+        <section id="home" className={`relative min-h-screen md:h-screen transition-colors duration-1000 ${isColorful ? 'bg-transparent text-white' : 'bg-[#E5E5E0] text-[#1c1c1c]'} overflow-hidden selection:bg-black selection:text-white flex flex-col items-center justify-between py-12 md:py-12 px-4 md:px-12`}>
             
             {/* Top Bar */}
             <motion.nav 
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1, delay: FINAL_ITEMS_DELAY }}
-                className="w-full flex flex-row justify-between items-start z-30 pt-8 md:pt-0"
+                transition={{ duration: 0.8 }}
+                className="w-full flex flex-row justify-between items-start z-[60] pt-8 md:pt-0 pointer-events-none"
             >
-                <div className="flex flex-col gap-1">
-                    <span className="text-[10px] font-bold uppercase tracking-[0.2em] opacity-40">(Full Stack Developer)</span>
-                    <span className="font-bold text-xs md:text-sm tracking-tight whitespace-nowrap">UNNIKRISHNAN V P</span>
+                <div className="flex flex-col gap-1 pointer-events-auto">
+                    <span className={`text-[10px] font-bold uppercase tracking-[0.2em] opacity-40 ${isColorful ? 'text-white' : ''}`}>(Full Stack Developer)</span>
+                    <span className={`font-bold text-xs md:text-sm tracking-tight whitespace-nowrap ${isColorful ? 'text-white' : ''}`}>UNNIKRISHNAN V P</span>
                 </div>
-                <div className="flex flex-col items-end gap-1 mr-4 sm:mr-16 md:mr-32">
-                    <span className="text-[9px] md:text-[10px] font-bold uppercase tracking-[0.2em] opacity-40 whitespace-nowrap">(BASED IN)</span>
-                    <span className="font-bold text-[9px] md:text-sm tracking-tight whitespace-nowrap">INDIA, KERALA</span>
+
+                <div className="flex items-center gap-6 mr-4 sm:mr-16 md:mr-32 pointer-events-auto">
+                    {/* Pill Theme Toggle - Resized for ultra-compact look */}
+                    <button 
+                        onClick={() => setIsColorful?.(!isColorful)}
+                        className={`flex items-center gap-3 px-2 py-1 rounded-full border transition-all duration-500 cursor-pointer ${
+                            isColorful 
+                            ? 'bg-black/40 border-white/10 hover:bg-black/60 backdrop-blur-md' 
+                            : 'bg-black/[0.04] border-black/10 hover:bg-black/10'
+                        }`}
+                    >
+                        <div className={`relative w-6 h-3.5 rounded-full transition-colors duration-500 ${isColorful ? 'bg-white/10' : 'bg-black/20'}`}>
+                            <motion.div 
+                                animate={{ x: isColorful ? 10 : 0 }}
+                                transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                                className={`absolute inset-y-[2px] left-[2px] w-2 h-2 rounded-full shadow-sm bg-white`}
+                            />
+                        </div>
+                        <span className={`text-[8px] font-black uppercase tracking-widest transition-colors ${isColorful ? 'text-white' : 'text-black'}`}>
+                            {isColorful ? 'Aurora Glass' : 'Minimal B&W'}
+                        </span>
+                    </button>
+
+                    <div className="flex flex-col items-end gap-1">
+                        <span className={`text-[9px] md:text-[10px] font-bold uppercase tracking-[0.2em] opacity-40 whitespace-nowrap ${isColorful ? 'text-white' : ''}`}>(BASED IN)</span>
+                        <span className={`font-bold text-[9px] md:text-sm tracking-tight whitespace-nowrap ${isColorful ? 'text-white' : ''}`}>INDIA, KERALA</span>
+                    </div>
                 </div>
+
             </motion.nav>
+
+
 
             {/* Main Content Area - Stacked on mobile, Layered on desktop */}
             <div className="flex-1 w-full flex flex-col items-center justify-center relative md:static py-12 md:py-0">
@@ -60,7 +88,7 @@ export default function HeroRedesign({ isColorful }: HeroRedesignProps) {
                             initial={{ opacity: 0, scale: 1.1 }}
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: TEXT_DELAY }}
-                            className="text-[11vw] sm:text-5xl md:text-[12vw] font-black tracking-[-0.06em] uppercase whitespace-nowrap leading-none transition-all duration-700 w-full text-center"
+                            className={`text-[11vw] sm:text-5xl md:text-[12vw] font-black tracking-[-0.06em] uppercase whitespace-nowrap leading-none transition-all duration-700 w-full text-center ${isColorful ? 'text-transparent bg-clip-text bg-gradient-to-r from-white via-cyan-100 to-purple-200 drop-shadow-[0_0_40px_rgba(34,211,238,0.2)]' : ''}`}
                         >
                             UNNIKRISHNAN
                         </motion.h1>
@@ -82,9 +110,10 @@ export default function HeroRedesign({ isColorful }: HeroRedesignProps) {
                         <img 
                             src={profileImage} 
                             alt="Unnikrishnan" 
-                            className="w-full h-full object-contain object-bottom filter grayscale brightness-[0.85] md:brightness-[0.85] group-hover:brightness-100 transition-all duration-700"
+                            className={`w-full h-full object-contain object-bottom transition-all duration-700 ${isColorful ? 'filter-none brightness-90 group-hover:brightness-110' : 'filter grayscale brightness-[0.85] md:brightness-[0.85] group-hover:brightness-100'}`}
                         />
-                        <div className="absolute inset-x-0 bottom-0 h-16 md:h-32 bg-gradient-to-t from-[#E5E5E0] to-transparent pointer-events-none z-10" />
+                        {/* Fades photo into the section background */}
+                        <div className={`absolute inset-x-0 bottom-0 h-16 md:h-32 bg-gradient-to-t to-transparent pointer-events-none z-10 ${isColorful ? 'from-[#0A0A0B]' : 'from-[#E5E5E0]'}`} />
                     </motion.div>
                 </div>
             </div>

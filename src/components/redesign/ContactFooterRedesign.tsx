@@ -23,40 +23,7 @@ export default function ContactFooterRedesign({ isColorful }: ContactFooterRedes
     };
 
     return (
-        <section id="contact" className={`relative transition-colors duration-1000 ${isColorful ? 'bg-[#0A0A0B] text-white selection:bg-cyan-500' : 'bg-[#E5E5E0] text-[#1c1c1c] selection:bg-black'} selection:text-white pt-32 rounded-t-[3rem] -mt-[3rem] z-20 shadow-[0_-20px_50px_rgba(0,0,0,0.5)] overflow-hidden`}>
-            
-            {/* Aurora Background Blobs */}
-            <AnimatePresence>
-                {isColorful && (
-                    <motion.div 
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 1.5 }}
-                        className="absolute inset-0 z-0 pointer-events-none"
-                    >
-                        <motion.div 
-                            animate={{ 
-                                x: [0, -40, 40], 
-                                y: [0, 50, -50],
-                                scale: [1, 1.2, 0.95]
-                            }}
-                            transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
-                            className="absolute top-[-5%] left-[-5%] w-[40vw] h-[40vw] rounded-full bg-cyan-600/10 blur-[100px]" 
-                        />
-                        <motion.div 
-                            animate={{ 
-                                x: [0, 40, -40], 
-                                y: [0, -50, 50],
-                                scale: [1.1, 0.9, 1.15]
-                            }}
-                            transition={{ duration: 22, repeat: Infinity, ease: "linear" }}
-                            className="absolute bottom-[-5%] right-[-5%] w-[45vw] h-[45vw] rounded-full bg-purple-600/10 blur-[110px]" 
-                        />
-                    </motion.div>
-                )}
-            </AnimatePresence>
-
+        <section id="contact" className={`relative transition-colors duration-1000 ${isColorful ? 'bg-transparent text-white selection:bg-cyan-500' : 'bg-[#E5E5E0] text-[#1c1c1c] selection:bg-black'} selection:text-white pt-32 rounded-t-[3rem] -mt-[3rem] z-20 shadow-[0_-20px_50px_rgba(0,0,0,0.5)] overflow-hidden`}>
             {/* Top Heading */}
             <div className="px-6 md:px-12 text-center flex justify-center mb-16 overflow-hidden max-w-full relative z-10">
                 <motion.h2 

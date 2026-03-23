@@ -27,23 +27,7 @@ export default function ServicesRedesign({ isColorful }: ServicesRedesignProps) 
     ];
 
     return (
-        <section id="services" className={`relative min-h-screen transition-colors duration-1000 ${isColorful ? 'bg-[#0A0A0B]' : 'bg-[#0E0E0E]'} text-[#E5E5E0] py-32 px-6 md:px-12 selection:bg-white selection:text-black`}>
-            
-            {/* Aurora Glow (Subtle) */}
-            <AnimatePresence>
-                {isColorful && (
-                    <motion.div 
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        className="absolute inset-0 z-0 pointer-events-none overflow-hidden"
-                    >
-                        <div className="absolute top-[20%] right-[-10%] w-[40vw] h-[40vw] bg-purple-500/10 blur-[100px] rounded-full" />
-                        <div className="absolute bottom-[20%] left-[-10%] w-[30vw] h-[30vw] bg-cyan-500/10 blur-[80px] rounded-full" />
-                    </motion.div>
-                )}
-            </AnimatePresence>
-
+        <section id="services" className={`relative min-h-screen transition-colors duration-1000 ${isColorful ? 'bg-transparent' : 'bg-[#0E0E0E]'} text-[#E5E5E0] py-32 px-6 md:px-12 selection:bg-white selection:text-black`}>
             <motion.div 
                 variants={fadeUp}
                 initial="hidden"

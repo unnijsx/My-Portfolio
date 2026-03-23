@@ -37,23 +37,7 @@ export default function WorksRedesign({ isColorful }: WorksRedesignProps) {
     ];
 
     return (
-        <section id="works" className={`relative transition-colors duration-1000 ${isColorful ? 'bg-[#0A0A0B]' : 'bg-[#0E0E0E]'} text-[#E5E5E0] py-32 px-6 md:px-12 selection:bg-white selection:text-black min-h-screen z-10`}>
-            
-            {/* Aurora Background Glow */}
-            <AnimatePresence>
-                {isColorful && (
-                    <motion.div 
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        className="absolute inset-0 z-0 pointer-events-none overflow-hidden"
-                    >
-                        <div className="absolute top-[30%] left-[-10%] w-[50vw] h-[50vw] bg-cyan-500/5 blur-[120px] rounded-full" />
-                        <div className="absolute bottom-[30%] right-[-10%] w-[40vw] h-[40vw] bg-purple-500/5 blur-[100px] rounded-full" />
-                    </motion.div>
-                )}
-            </AnimatePresence>
-
+        <section id="works" className={`relative transition-colors duration-1000 ${isColorful ? 'bg-transparent' : 'bg-[#0E0E0E]'} text-[#E5E5E0] py-32 px-6 md:px-12 selection:bg-white selection:text-black min-h-screen z-10`}>
             <motion.div 
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}

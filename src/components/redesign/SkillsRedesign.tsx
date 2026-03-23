@@ -16,40 +16,8 @@ export default function SkillsRedesign({ isColorful }: SkillsRedesignProps) {
     };
 
     return (
-        <section id="skills" className={`relative min-h-screen transition-colors duration-1000 ${isColorful ? 'bg-[#0A0A0B]' : 'bg-[#0E0E0E]'} text-[#E5E5E0] py-32 px-6 md:px-12 selection:bg-white selection:text-black flex flex-col justify-between overflow-hidden`}>
+        <section id="skills" className={`relative min-h-screen transition-colors duration-1000 ${isColorful ? 'bg-transparent' : 'bg-[#0E0E0E]'} text-[#E5E5E0] py-32 px-6 md:px-12 selection:bg-white selection:text-black flex flex-col justify-between overflow-hidden`}>
             
-            {/* Aurora Background Blobs */}
-            <AnimatePresence>
-                {isColorful && (
-                    <motion.div 
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 1.5 }}
-                        className="absolute inset-0 z-0 pointer-events-none"
-                    >
-                        <motion.div 
-                            animate={{ 
-                                x: [0, 50, -30], 
-                                y: [0, -40, 40],
-                                scale: [1, 1.1, 1]
-                            }}
-                            transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-                            className="absolute top-[10%] right-[10%] w-[45vw] h-[45vw] rounded-full bg-purple-600/10 blur-[120px]" 
-                        />
-                        <motion.div 
-                            animate={{ 
-                                x: [0, -50, 30], 
-                                y: [0, 40, -40],
-                                scale: [1, 1.15, 0.95]
-                            }}
-                            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                            className="absolute bottom-[10%] left-[10%] w-[50vw] h-[50vw] rounded-full bg-cyan-600/10 blur-[130px]" 
-                        />
-                    </motion.div>
-                )}
-            </AnimatePresence>
-
             {/* Top Section */}
             <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8 items-start relative z-10 w-full">
                 
