@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { motion, AnimatePresence } from "framer-motion"
 import { cn } from "../../lib/utils"
 
 interface RatingInteractionProps {
@@ -9,11 +10,11 @@ interface RatingInteractionProps {
 }
 
 const ratingData = [
-    { emoji: "😔", label: "Terrible", color: "from-red-400 to-red-500", shadowColor: "shadow-red-500/30" },
-    { emoji: "😕", label: "Poor", color: "from-orange-400 to-orange-500", shadowColor: "shadow-orange-500/30" },
-    { emoji: "😐", label: "Okay", color: "from-yellow-400 to-yellow-500", shadowColor: "shadow-yellow-500/30" },
-    { emoji: "🙂", label: "Good", color: "from-lime-400 to-lime-500", shadowColor: "shadow-lime-500/30" },
-    { emoji: "😍", label: "Amazing", color: "from-emerald-400 to-emerald-500", shadowColor: "shadow-emerald-500/30" },
+    { emoji: "😔", label: "Terrible", glow: "rgba(239, 68, 68, 0.2)" },
+    { emoji: "😕", label: "Poor", glow: "rgba(249, 115, 22, 0.2)" },
+    { emoji: "😐", label: "Okay", glow: "rgba(234, 179, 8, 0.2)" },
+    { emoji: "🙂", label: "Good", glow: "rgba(132, 204, 22, 0.2)" },
+    { emoji: "😍", label: "Amazing", glow: "rgba(16, 185, 129, 0.2)" },
 ]
 
 export function RatingInteraction({ onChange, className }: RatingInteractionProps) {
@@ -28,68 +29,79 @@ export function RatingInteraction({ onChange, className }: RatingInteractionProp
     const displayRating = hoverRating || rating
 
     return (
-        <div className={cn("flex flex-col items-center gap-6", className)}>
+        <div className={cn("flex flex-col items-center gap-10", className)}>
             {/* Emoji rating buttons */}
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-4">
                 {ratingData.map((item, i) => {
                     const value = i + 1
                     const isActive = value <= displayRating
+                    const isSelected = rating === value
 
                     return (
-                        <button
+                        <motion.button
                             key={value}
                             onClick={() => handleClick(value)}
                             onMouseEnter={() => setHoverRating(value)}
                             onMouseLeave={() => setHoverRating(0)}
+                            whileHover={{ scale: 1.2, y: -5 }}
+                            whileTap={{ scale: 0.9 }}
                             className="group relative focus:outline-none"
                             aria-label={`Rate ${value}: ${item.label}`}
                         >
+                            {/* Glow effect behind emoji */}
+                            <AnimatePresence>
+                                {(isActive || isSelected) && (
+                                    <motion.div
+                                        initial={{ opacity: 0, scale: 0.5 }}
+                                        animate={{ opacity: 1, scale: 1.5 }}
+                                        exit={{ opacity: 0, scale: 0.5 }}
+                                        className="absolute inset-0 rounded-full blur-xl z-0"
+                                        style={{ backgroundColor: item.glow }}
+                                    />
+                                )}
+                            </AnimatePresence>
+
                             <div
                                 className={cn(
-                                    "relative flex h-14 w-14 items-center justify-center rounded-2xl transition-all duration-300 ease-out",
-                                    isActive ? "scale-110" : "scale-100 group-hover:scale-105",
+                                    "relative flex h-16 w-16 items-center justify-center rounded-2xl transition-all duration-500 ease-out z-10",
+                                    isActive ? "grayscale-0 scale-110" : "grayscale opacity-30 group-hover:opacity-100 group-hover:grayscale-0",
+                                    isSelected && "ring-2 ring-white/20 bg-white/5"
                                 )}
                             >
-                                {/* Emoji with smooth grayscale transition */}
-                                <span
-                                    className={cn(
-                                        "text-3xl transition-all duration-300 ease-out select-none",
-                                        isActive
-                                            ? "grayscale-0 drop-shadow-lg"
-                                            : "grayscale opacity-40 group-hover:opacity-70 group-hover:grayscale-[0.3]",
-                                    )}
-                                >
+                                <span className="text-4xl select-none leading-none">
                                     {item.emoji}
                                 </span>
                             </div>
-                        </button>
+                        </motion.button>
                     )
                 })}
             </div>
 
-            <div className="relative h-7 w-32">
-                {/* Default "Rate us" text */}
-                <div
-                    className={cn(
-                        "absolute inset-0 flex items-center justify-center transition-all duration-300 ease-out",
-                        displayRating > 0 ? "opacity-0 blur-md scale-95" : "opacity-100 blur-0 scale-100",
-                    )}
-                >
-                    <span className="text-sm font-medium text-zinc-500">Rate us</span>
-                </div>
-
-                {/* Rating labels with blur in/out effect */}
-                {ratingData.map((item, i) => (
-                    <div
-                        key={i}
-                        className={cn(
-                            "absolute inset-0 flex items-center justify-center transition-all duration-300 ease-out",
-                            displayRating === i + 1 ? "opacity-100 blur-0 scale-100" : "opacity-0 blur-md scale-105",
-                        )}
-                    >
-                        <span className="text-sm font-semibold tracking-wide text-white">{item.label}</span>
-                    </div>
-                ))}
+            <div className="relative h-8 flex items-center justify-center min-w-[120px]">
+                <AnimatePresence mode="wait">
+                    {displayRating === 0 ? (
+                        <motion.span
+                            key="idle"
+                            initial={{ opacity: 0, y: 10, filter: "blur(4px)" }}
+                            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                            exit={{ opacity: 0, y: -10, filter: "blur(4px)" }}
+                            className="text-xs font-bold uppercase tracking-[0.3em] text-white/20 whitespace-nowrap"
+                        >
+                            Rate the feeling
+                        </motion.span>
+                    ) : (
+                        <motion.span
+                            key={ratingData[displayRating - 1].label}
+                            initial={{ opacity: 0, y: 10, filter: "blur(4px)" }}
+                            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                            exit={{ opacity: 0, y: -10, filter: "blur(4px)" }}
+                            className="text-sm font-black uppercase tracking-widest text-[#E5E5E0] whitespace-nowrap"
+                        >
+                            {ratingData[displayRating - 1].label}
+                        </motion.span>
+                    )
+                    }
+                </AnimatePresence>
             </div>
         </div>
     )

@@ -1,25 +1,7 @@
-import HomePremium from './HomePremium';
-import { ToastContainer } from 'react-toastify';
+import PortfolioRedesign from './PortfolioRedesign';
 import { Route, Routes } from 'react-router-dom';
-import { createTheme } from '@mui/material';
-import { ThemeProvider } from '@emotion/react';
-import Test from './Test';
-import SnakeGame from './Game';
-import HappyMensDay from './Mens';
-import TheyyamLanding from './TheyyamPage';
 
 function App() {
-  const theme = createTheme({
-    palette: {
-      primary: {
-        main: '#333333',
-      },
-      secondary: {
-        main: '#6F32BF',
-      },
-    },
-  });
-
   const schemaMarkup = {
     "@context": "https://schema.org",
     "@graph": [
@@ -62,16 +44,9 @@ function App() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaMarkup) }}
       />
-
-      <ToastContainer />
-      <ThemeProvider theme={theme}>
-        <Routes>
-          <Route path='/' element={<HomePremium />} />
-          <Route path='/pulimbaillam' element={<TheyyamLanding />} />
-          <Route path='/game' element={<SnakeGame />} />
-          <Route path='/mensday' element={<HappyMensDay />} />
-        </Routes>
-      </ThemeProvider>
+      <Routes>
+        <Route path='/' element={<PortfolioRedesign />} />
+      </Routes>
     </>
   );
 }

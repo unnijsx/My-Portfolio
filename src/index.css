@@ -7,6 +7,16 @@
   font-style: normal;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+/* Force hardware acceleration for all motion elements */
+[class*="motion-"] {
+  will-change: transform, opacity;
+  transform: translateZ(0);
+}
+
 @theme inline {
   --color-primary: #3b82f6;
   --color-secondary: #f59e0b;
@@ -45,6 +55,15 @@
   --text-secondary: #94a3b8;
   --border-color: #1e293b;
   --accent-glow: rgba(59, 130, 246, 0.2);
+}
+
+html, body {
+  scrollbar-width: none !important; /* Firefox */
+  -ms-overflow-style: none !important; /* IE/Edge */
+}
+
+html::-webkit-scrollbar, body::-webkit-scrollbar {
+  display: none !important; /* Chrome, Safari, Opera */
 }
 
 body {
