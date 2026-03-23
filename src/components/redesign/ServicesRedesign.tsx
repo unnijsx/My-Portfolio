@@ -1,7 +1,11 @@
 import React, { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 
-export default function ServicesRedesign() {
+interface ServicesRedesignProps {
+    isColorful?: boolean;
+}
+
+export default function ServicesRedesign({ isColorful }: ServicesRedesignProps) {
     const fadeUp = {
         hidden: { opacity: 0, y: 50 },
         show: { opacity: 1, y: 0, transition: { duration: 1, ease: [0.16, 1, 0.3, 1] } }
@@ -23,34 +27,50 @@ export default function ServicesRedesign() {
     ];
 
     return (
-        <section id="services" className="relative min-h-screen bg-[#0E0E0E] text-[#E5E5E0] py-32 px-6 md:px-12 selection:bg-white selection:text-black">
-                       <motion.div 
+        <section id="services" className={`relative min-h-screen transition-colors duration-1000 ${isColorful ? 'bg-[#0A0A0B]' : 'bg-[#0E0E0E]'} text-[#E5E5E0] py-32 px-6 md:px-12 selection:bg-white selection:text-black`}>
+            
+            {/* Aurora Glow (Subtle) */}
+            <AnimatePresence>
+                {isColorful && (
+                    <motion.div 
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="absolute inset-0 z-0 pointer-events-none overflow-hidden"
+                    >
+                        <div className="absolute top-[20%] right-[-10%] w-[40vw] h-[40vw] bg-purple-500/10 blur-[100px] rounded-full" />
+                        <div className="absolute bottom-[20%] left-[-10%] w-[30vw] h-[30vw] bg-cyan-500/10 blur-[80px] rounded-full" />
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
+            <motion.div 
                 variants={fadeUp}
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true, margin: "-100px" }}
-                className="border-b border-white/10 pb-8 mb-16 md:mb-20"
+                className={`border-b transition-colors duration-500 ${isColorful ? 'border-purple-500/20' : 'border-white/10'} pb-8 mb-16 md:mb-20 z-10 relative`}
             >
                 <h2 className="text-[12vw] sm:text-[10vw] leading-none font-black tracking-[-0.04em] uppercase">
                     WHAT I DO
                 </h2>
             </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 relative">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 relative z-10">
                 <div className="hidden md:block col-span-5 relative">
                     <motion.div 
                         variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }}
                         className="sticky top-40 flex flex-col gap-8"
                     >
-                        <p className="text-[10px] font-bold uppercase tracking-widest text-[#E5E5E0]/40">
+                        <p className={`text-[10px] font-bold uppercase tracking-widest ${isColorful ? 'text-cyan-400/50' : 'text-[#E5E5E0]/40'}`}>
                             (ABOUT ME)
                         </p>
-                        <h3 className="text-3xl font-black leading-tight border-l-2 border-white/20 pl-6 py-2">
+                        <h3 className={`text-3xl font-black leading-tight border-l-2 pl-6 py-2 transition-colors duration-500 ${isColorful ? 'border-purple-500/40' : 'border-white/20'}`}>
                              A Developer based <br />
-                             in <span className="text-white italic">India 🇮🇳</span>
+                             in <span className={`${isColorful ? 'text-cyan-400' : 'text-white'} italic transition-colors`}>India 🇮🇳</span>
                         </h3>
                         <div className="flex gap-4 items-center">
-                            <div className="size-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center font-bold text-xl">1+</div>
+                            <div className={`size-12 rounded-full flex items-center justify-center font-bold text-xl border transition-all duration-500 ${isColorful ? 'bg-purple-500/10 border-purple-500/30' : 'bg-white/5 border-white/10'}`}>1+</div>
                             <p className="text-[10px] font-bold uppercase tracking-widest opacity-40">Years Experience on<br/>MERN Projects</p>
                         </div>
                     </motion.div>
@@ -63,14 +83,14 @@ export default function ServicesRedesign() {
                         initial="hidden"
                         whileInView="show"
                         viewport={{ once: true, margin: "-100px" }}
-                        className="text-xl md:text-2xl font-medium leading-relaxed max-w-xl text-[#E5E5E0]/80 mb-8 md:mb-12"
+                        className={`text-xl md:text-2xl font-medium leading-relaxed max-w-xl mb-8 md:mb-12 transition-colors duration-500 ${isColorful ? 'text-white/90' : 'text-[#E5E5E0]/80'}`}
                     >
                         I'm a detail-oriented and motivated MERN Stack Developer with experience in designing and building full-stack applications. I treat every problem as a puzzle to be solved with clean, efficient code.
                     </motion.p>
 
                     <div className="relative w-full">
                         {services.map((svc, i) => (
-                            <ServiceCard key={i} svc={svc} index={i} totalCards={services.length} />
+                            <ServiceCard key={i} svc={svc} index={i} totalCards={services.length} isColorful={isColorful} />
                         ))}
                     </div>
 
@@ -81,7 +101,7 @@ export default function ServicesRedesign() {
     );
 }
 
-function ServiceCard({ svc, index, totalCards }: { svc: any, index: number, totalCards: number }) {
+function ServiceCard({ svc, index, totalCards, isColorful }: { svc: any, index: number, totalCards: number, isColorful?: boolean }) {
     const cardRef = useRef(null);
     const { scrollYProgress } = useScroll({
         target: cardRef,
@@ -98,12 +118,14 @@ function ServiceCard({ svc, index, totalCards }: { svc: any, index: number, tota
         <div ref={cardRef} className="h-[100vh] relative last:h-fit">
             <motion.div 
                 style={{ scaleY, scale, opacity, translateZ: 0 }}
-                className="sticky top-28 md:top-40 origin-top bg-[#0E0E0E] w-full flex flex-col md:flex-row gap-6 md:gap-24 border-t border-white/10 pt-8 md:pt-12 pb-8 md:pb-12 shadow-[0_-20px_50px_rgba(0,0,0,0.8)] z-10 will-change-transform"
+                className={`sticky top-28 md:top-40 origin-top w-full flex flex-col md:flex-row gap-6 md:gap-24 border-t pt-8 md:pt-12 pb-8 md:pb-12 shadow-[0_-20px_50px_rgba(0,0,0,0.8)] z-10 will-change-transform transition-colors duration-1000 ${
+                    isColorful ? 'bg-[#0A0A0B] border-white/5' : 'bg-[#0E0E0E] border-white/10'
+                }`}
             >
-                <div className="text-2xl md:text-4xl font-black tracking-tighter opacity-50">({svc.num})</div>
+                <div className={`text-2xl md:text-4xl font-black tracking-tighter transition-colors duration-500 ${isColorful ? 'text-purple-400/50' : 'opacity-50'}`}>({svc.num})</div>
                 <div className="flex-1 flex flex-col gap-4 md:gap-6">
-                    <h3 className="text-2xl md:text-5xl font-black tracking-tighter leading-tight">{svc.title}</h3>
-                    <p className="text-base md:text-xl font-medium leading-relaxed max-w-md text-[#E5E5E0]/70">
+                    <h3 className={`text-2xl md:text-5xl font-black tracking-tighter leading-tight transition-colors duration-500 ${isColorful ? 'text-white' : ''}`}>{svc.title}</h3>
+                    <p className={`text-base md:text-xl font-medium leading-relaxed max-w-md transition-colors duration-500 ${isColorful ? 'text-white/60' : 'text-[#E5E5E0]/70'}`}>
                         {svc.body}
                     </p>
                     
@@ -111,10 +133,12 @@ function ServiceCard({ svc, index, totalCards }: { svc: any, index: number, tota
                         {svc.items.map((item: string, j: number) => (
                             <li 
                                 key={j}
-                                className="flex gap-4 border-b border-white/10 pb-3 md:pb-4 items-center group cursor-default hover:border-white/40 transition-colors"
+                                className={`flex gap-4 border-b pb-3 md:pb-4 items-center group cursor-default transition-all duration-300 ${
+                                    isColorful ? 'border-white/5 hover:border-cyan-500/40' : 'border-white/10 hover:border-white/40'
+                                }`}
                             >
-                                <span className="text-[10px] md:text-xs font-bold tracking-widest opacity-50 font-mono group-hover:text-white transition-colors">0{j+1}</span>
-                                <span className="text-lg md:text-xl font-bold tracking-tight">{item}</span>
+                                <span className={`text-[10px] md:text-xs font-bold tracking-widest font-mono transition-colors duration-300 ${isColorful ? 'text-purple-400/40 group-hover:text-cyan-400' : 'opacity-50 group-hover:text-white'}`}>0{j+1}</span>
+                                <span className={`text-lg md:text-xl font-bold tracking-tight transition-colors duration-300 ${isColorful ? 'text-white/80 group-hover:text-white' : ''}`}>{item}</span>
                             </li>
                         ))}
                     </ul>

@@ -11,6 +11,7 @@ import OverlayMenu from './components/redesign/OverlayMenu';
 
 export default function PortfolioRedesign() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isColorful, setIsColorful] = useState(false);
 
     useEffect(() => {
         // Prevent body scroll when menu is open
@@ -24,7 +25,7 @@ export default function PortfolioRedesign() {
 
     return (
         <ReactLenis root>
-            <div className="bg-[#E5E5E0] text-[#1c1c1c] font-sans selection:bg-black selection:text-white w-full overflow-x-hidden">
+            <div className={`transition-colors duration-1000 ${isColorful ? 'bg-[#0A0A0B]' : 'bg-[#E5E5E0]'} text-[#1c1c1c] font-sans selection:bg-black selection:text-white w-full overflow-x-hidden`}>
                 
                 {/* Floating Menu Button */}
                 <button 
@@ -37,17 +38,22 @@ export default function PortfolioRedesign() {
                 </button>
 
                 {/* Glassmorphic Overlay Menu */}
-                <OverlayMenu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
+                <OverlayMenu 
+                    isOpen={isMenuOpen} 
+                    onClose={() => setIsMenuOpen(false)} 
+                    isColorful={isColorful}
+                    setIsColorful={setIsColorful}
+                />
 
                 {/* Individual Sections */}
-                <main>
-                    <HeroRedesign />
-                    <ServicesRedesign />
-                    <WorksRedesign />
-                    <SkillsRedesign />
-                    <LiveArchitectures />
-                    <FeedbackRedesign />
-                    <ContactFooterRedesign />
+                <main className="relative z-10 transition-colors duration-1000">
+                    <HeroRedesign isColorful={isColorful} />
+                    <ServicesRedesign isColorful={isColorful} />
+                    <WorksRedesign isColorful={isColorful} />
+                    <SkillsRedesign isColorful={isColorful} />
+                    <LiveArchitectures isColorful={isColorful} />
+                    <FeedbackRedesign isColorful={isColorful} />
+                    <ContactFooterRedesign isColorful={isColorful} />
                 </main>
 
             </div>

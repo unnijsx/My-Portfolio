@@ -6,7 +6,11 @@ import profileImage from '../../assets/images/bgremovedmyimage.png';
 import resumeUrl from '../../assets/UNNIKRISHNAN_RESUME.pdf?url';
 import { saveAs } from 'file-saver';
 
-export default function HeroRedesign() {
+interface HeroRedesignProps {
+    isColorful?: boolean;
+}
+
+export default function HeroRedesign({ isColorful }: HeroRedesignProps) {
     const { scrollY } = useScroll();
     
     // Parallax values for depth
@@ -93,23 +97,27 @@ export default function HeroRedesign() {
                  className="w-full flex flex-col md:flex-row justify-between items-center md:items-end gap-12 md:gap-8 z-30 mb-4 px-4 md:px-2"
             >
                 <div className="max-w-xs flex flex-col items-center md:items-start text-center md:text-left gap-4">
-                    <ArrowDownRight size={32} strokeWidth={1} className="opacity-40 hidden md:block" />
-                    <p className="text-base md:text-xl font-medium leading-tight max-w-[220px] md:max-w-none text-[#1c1c1c]">
+                    <ArrowDownRight size={32} strokeWidth={1} className={`${isColorful ? 'text-cyan-400/50' : 'opacity-40'} hidden md:block`} />
+                    <p className={`text-base md:text-xl font-medium leading-tight max-w-[220px] md:max-w-none ${isColorful ? 'text-white/80' : 'text-[#1c1c1c]'}`}>
                         Developer specialized in MERN stack, REST APIs, and full project architecture.
                     </p>
                 </div>
                 
                 <div className="flex flex-col items-center md:items-end gap-4">
                     <div className="inline-flex items-center gap-4 group cursor-pointer">
-                        <span className="text-[10px] font-black uppercase tracking-widest text-[#1c1c1c]/40">Scroll to explore</span>
-                        <div className="hidden md:block w-8 md:w-12 h-px bg-black/10 group-hover:w-20 transition-all duration-500" />
-                        <span className="md:hidden text-[#1c1c1c]/20 text-xs animate-bounce mt-1">↓</span>
+                        <span className={`text-[10px] font-black uppercase tracking-widest ${isColorful ? 'text-white/30' : 'text-[#1c1c1c]/40'}`}>Scroll to explore</span>
+                        <div className={`hidden md:block w-8 md:w-12 h-px transition-all duration-500 group-hover:w-20 ${isColorful ? 'bg-white/20' : 'bg-black/10'}`} />
+                        <span className={`md:hidden text-xs animate-bounce mt-1 ${isColorful ? 'text-white/20' : 'text-[#1c1c1c]/20'}`}>↓</span>
                     </div>
                     <button
                         onClick={handleResumeDownload}
-                        className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-black/15 bg-black/[0.04] hover:bg-black hover:text-white hover:border-black transition-all duration-300 group/dl cursor-pointer"
+                        className={`inline-flex items-center gap-2 px-6 py-3 rounded-full border transition-all duration-300 group/dl cursor-pointer ${
+                            isColorful 
+                            ? 'bg-white/5 border-white/10 text-white hover:bg-white/10 hover:border-cyan-500/50 hover:shadow-[0_0_20px_rgba(34,211,238,0.2)]' 
+                            : 'bg-black/[0.04] border-black/15 text-black hover:bg-black hover:text-white hover:border-black'
+                        }`}
                     >
-                        <Download size={12} strokeWidth={2.5} className="group-hover/dl:animate-bounce" />
+                        <Download size={14} strokeWidth={2.5} className="group-hover/dl:animate-bounce" />
                         <span className="text-[10px] font-black uppercase tracking-widest">Resume</span>
                     </button>
                 </div>

@@ -1,7 +1,11 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
 
-export default function WorksRedesign() {
+interface WorksRedesignProps {
+    isColorful?: boolean;
+}
+
+export default function WorksRedesign({ isColorful }: WorksRedesignProps) {
     const [projects, setProjects] = useState<any[]>([]);
     const [activeIndex, setActiveIndex] = useState(0);
 
@@ -33,36 +37,51 @@ export default function WorksRedesign() {
     ];
 
     return (
-        <section id="works" className="relative bg-[#0E0E0E] text-[#E5E5E0] py-32 px-6 md:px-12 selection:bg-white selection:text-black min-h-screen z-10">
+        <section id="works" className={`relative transition-colors duration-1000 ${isColorful ? 'bg-[#0A0A0B]' : 'bg-[#0E0E0E]'} text-[#E5E5E0] py-32 px-6 md:px-12 selection:bg-white selection:text-black min-h-screen z-10`}>
             
+            {/* Aurora Background Glow */}
+            <AnimatePresence>
+                {isColorful && (
+                    <motion.div 
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="absolute inset-0 z-0 pointer-events-none overflow-hidden"
+                    >
+                        <div className="absolute top-[30%] left-[-10%] w-[50vw] h-[50vw] bg-cyan-500/5 blur-[120px] rounded-full" />
+                        <div className="absolute bottom-[30%] right-[-10%] w-[40vw] h-[40vw] bg-purple-500/5 blur-[100px] rounded-full" />
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
             <motion.div 
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
                 viewport={{ once: true, margin: "-100px" }}
-                className="border-b border-white/10 pb-8 mb-16 md:mb-20 flex flex-col md:flex-row justify-between items-start md:items-end gap-8"
+                className={`border-b transition-colors duration-500 ${isColorful ? 'border-cyan-500/20' : 'border-white/10'} pb-8 mb-16 md:mb-20 flex flex-col md:flex-row justify-between items-start md:items-end gap-8 relative z-10`}
             >
                 <div className="max-w-[90vw]">
                     <h2 className="text-[12vw] sm:text-[10vw] leading-none font-black tracking-[-0.04em] uppercase">
                         SELECTED WORKS
                     </h2>
-                    <p className="font-mono text-[10px] md:text-sm tracking-widest text-[#E5E5E0]/40 mt-4 uppercase">Fetched dynamically from GitHub API</p>
+                    <p className={`font-mono text-[10px] md:text-sm tracking-widest mt-4 uppercase ${isColorful ? 'text-cyan-400/40' : 'text-[#E5E5E0]/40'}`}>Fetched dynamically from GitHub API</p>
                 </div>
                 <div className="flex gap-8 md:gap-12 text-sm md:text-base mb-2 max-w-sm">
-                    <span className="font-bold tracking-widest text-[#E5E5E0]/40 uppercase text-[10px] hidden sm:block">(PROJECTS)</span>
-                    <p className="font-medium leading-relaxed opacity-70">
+                    <span className={`font-bold tracking-widest uppercase text-[10px] hidden sm:block ${isColorful ? 'text-purple-400/40' : 'text-[#E5E5E0]/40'}`}>(PROJECTS)</span>
+                    <p className={`font-medium leading-relaxed transition-colors ${isColorful ? 'text-white/70' : 'opacity-70'}`}>
                         Thoughtfully crafted digital experiences that blend utility and aesthetics.
                     </p>
                 </div>
             </motion.div>
 
             {/* Use items-start to allow the sidebar to independently stretch while staying pinned to the top of the grid row */}
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-12 relative mt-16 md:mt-32 items-start">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-12 relative mt-16 md:mt-32 items-start z-10">
                 
                 {/* Sticky Number Sidebar - self-stretch ensures it covers the full height of the projects column */}
                 <aside className="md:col-span-4 hidden md:block self-stretch relative">
                     <div className="sticky top-[25vh] z-30 py-4 flex items-center justify-center pointer-events-none">
-                        <div className="relative h-[15vw] w-full flex items-center justify-center overflow-hidden font-black tracking-tighter text-white/80 select-none drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)] text-[16vw]">
+                        <div className={`relative h-[15vw] w-full flex items-center justify-center overflow-hidden font-black tracking-tighter select-none drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)] text-[16vw] transition-colors duration-1000 ${isColorful ? 'text-transparent bg-clip-text bg-gradient-to-b from-white via-cyan-400 to-purple-500' : 'text-white/80'}`}>
                             {(displayProjects[activeIndex]?.num || "01").split('').map((char, i) => (
                                 <div key={i} className="relative h-full flex items-center overflow-hidden px-[0.5vw] min-w-[0.6em]">
                                     <AnimatePresence mode="popLayout" initial={false}>
@@ -98,6 +117,7 @@ export default function WorksRedesign() {
                                 project={project} 
                                 index={index}
                                 onInView={() => setActiveIndex(index)} 
+                                isColorful={isColorful}
                             />
                         ))
                     )}
@@ -109,7 +129,7 @@ export default function WorksRedesign() {
     );
 }
 
-function ProjectCard({ project, index, onInView }: { project: any, index: number, onInView: () => void }) {
+function ProjectCard({ project, index, onInView, isColorful }: { project: any, index: number, onInView: () => void, isColorful?: boolean }) {
     const ref = useRef(null);
     // Detection margin: trigger when the project card enters the central horizontal band of the viewport
     const isInView = useInView(ref, { margin: "-40% 0px -40% 0px" });
@@ -131,7 +151,7 @@ function ProjectCard({ project, index, onInView }: { project: any, index: number
         >
             {/* Mobile Number Indicator */}
             <div className="md:hidden flex items-baseline gap-4 mb-2">
-                 <h3 className="text-7xl font-black tracking-tighter text-[#E5E5E0]">
+                 <h3 className={`text-7xl font-black tracking-tighter transition-colors duration-500 ${isColorful ? 'text-cyan-400/40' : 'text-[#E5E5E0]'}`}>
                     {project.num}
                 </h3>
                 <div className="h-px flex-1 bg-white/10" />
@@ -140,8 +160,8 @@ function ProjectCard({ project, index, onInView }: { project: any, index: number
             {/* Header */}
             <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 md:gap-4">
                 <div className="max-w-2xl w-full">
-                    <p className="font-mono text-[10px] md:text-sm tracking-widest text-[#E5E5E0]/60 mb-2">{project.category}</p>
-                    <a href={project.link} target="_blank" rel="noreferrer" className="group/link flex items-center gap-2 text-2xl sm:text-4xl md:text-5xl font-black tracking-tighter uppercase hover:text-white/60 transition-colors overflow-wrap-anywhere break-words block leading-none">
+                    <p className={`font-mono text-[10px] md:text-sm tracking-widest mb-2 transition-colors ${isColorful ? 'text-purple-400/60' : 'text-[#E5E5E0]/60'}`}>{project.category}</p>
+                    <a href={project.link} target="_blank" rel="noreferrer" className={`group/link flex items-center gap-2 text-2xl sm:text-4xl md:text-5xl font-black tracking-tighter uppercase transition-all overflow-wrap-anywhere break-words block leading-none ${isColorful ? 'text-white hover:text-cyan-400' : 'hover:text-white/60'}`}>
                         <span>{project.title}</span>
                         <svg 
                             viewBox="0 0 24 24" 
@@ -159,7 +179,9 @@ function ProjectCard({ project, index, onInView }: { project: any, index: number
                 </div>
                 <div className="flex gap-2 flex-wrap">
                     {project.tags.map((tag: string) => (
-                        <span key={tag} className="border border-[#E5E5E0]/20 rounded-full px-4 py-1.5 text-[10px] font-bold tracking-widest uppercase cursor-default bg-white/5">
+                        <span key={tag} className={`border rounded-full px-4 py-1.5 text-[10px] font-bold tracking-widest uppercase cursor-default transition-all duration-300 ${
+                            isColorful ? 'border-cyan-500/20 bg-cyan-500/5 text-cyan-200' : 'border-[#E5E5E0]/20 bg-white/5'
+                        }`}>
                             {tag}
                         </span>
                     ))}

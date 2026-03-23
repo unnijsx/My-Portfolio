@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
 
 interface OverlayMenuProps {
     isOpen: boolean;
     onClose: () => void;
+    isColorful: boolean;
+    setIsColorful: (val: boolean) => void;
 }
 
 const menuItems = [
@@ -15,7 +17,9 @@ const menuItems = [
     { label: 'CONTACT', href: '#contact' }
 ];
 
-export default function OverlayMenu({ isOpen, onClose }: OverlayMenuProps) {
+export default function OverlayMenu({ isOpen, onClose, isColorful, setIsColorful }: OverlayMenuProps) {
+    const [copied, setCopied] = useState(false);
+
     return (
         <AnimatePresence>
             {isOpen && (
@@ -58,9 +62,39 @@ export default function OverlayMenu({ isOpen, onClose }: OverlayMenuProps) {
                             transition={{ delay: 0.5 }}
                             className="mt-12 flex flex-col gap-6"
                         >
+                            {/* Theme Toggle */}
                             <div>
+                                <h4 className="text-[10px] font-bold tracking-widest uppercase text-white/50 mb-2">Theme Mode</h4>
+                                <button 
+                                    onClick={() => setIsColorful(!isColorful)}
+                                    className="group flex items-center gap-3 bg-white/5 hover:bg-white/10 border border-white/10 px-4 py-2 rounded-full transition-all duration-500"
+                                >
+                                    <div className="relative w-8 h-4 bg-white/10 rounded-full overflow-hidden">
+                                        <motion.div 
+                                            animate={{ x: isColorful ? 16 : 0 }}
+                                            className={`absolute inset-y-1 left-1 w-2 h-2 rounded-full transition-colors duration-500 ${isColorful ? 'bg-cyan-400 shadow-[0_0_10px_#22d3ee]' : 'bg-white'}`}
+                                        />
+                                    </div>
+                                    <span className="text-[10px] font-black uppercase tracking-widest text-[#EAEAEA] group-hover:text-white transition-colors">
+                                        {isColorful ? 'Aurora Glass' : 'Minimal B&W'}
+                                    </span>
+                                </button>
+                            </div>
+
+                            <div className="relative group">
                                 <h4 className="text-[10px] font-bold tracking-widest uppercase text-white/50 mb-1">Email Address</h4>
-                                <a href="mailto:contact@unnijsx.online" className="text-sm font-medium hover:text-white">contact@unnijsx.online</a>
+                                <button 
+                                    onClick={() => {
+                                        navigator.clipboard.writeText('unniytman@gmail.com');
+                                        setCopied(true);
+                                        setTimeout(() => setCopied(false), 2000);
+                                    }}
+                                    className="text-sm font-medium transition-all relative flex items-center gap-3 group/mail"
+                                >
+                                    <span className={`transition-colors duration-300 ${copied ? 'text-green-400' : 'text-[#EAEAEA] hover:text-white'}`}>
+                                        {copied ? 'Copied to clipboard!' : 'unniytman@gmail.com'}
+                                    </span>
+                                </button>
                             </div>
                             <div className="flex gap-4 text-sm font-medium">
                                 <a href="https://www.linkedin.com/in/unnikrishnanvp/" target="_blank" rel="noreferrer" className="hover:text-white transition-colors">LinkedIn</a>
