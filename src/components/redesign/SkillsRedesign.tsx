@@ -24,7 +24,7 @@ export default function SkillsRedesign() {
                     initial="hidden"
                     whileInView="show"
                     viewport={{ once: true, margin: "-100px" }}
-                    className="col-span-1 md:col-span-8 flex flex-col leading-[0.85] font-black tracking-[-0.04em] uppercase text-[15vw] sm:text-[12vw] md:text-[8vw] z-10"
+                    className="col-span-1 md:col-span-8 flex flex-col leading-[0.85] font-black tracking-[-0.04em] uppercase text-[12.5vw] sm:text-[12vw] md:text-[8vw] z-10"
                 >
                     <motion.span variants={fadeUp} className="text-[#E5E5E0]">DESIGN</motion.span>
                     <motion.span variants={fadeUp} className="text-[#E5E5E0]/80">DEVELOP</motion.span>
@@ -40,7 +40,7 @@ export default function SkillsRedesign() {
                     className="col-span-1 md:col-span-4 flex flex-col gap-10 md:gap-16 mt-8 md:mt-0 w-full md:max-w-sm justify-self-end text-left md:text-right"
                 >
                     <div className="flex justify-start md:justify-end">
-                        <h2 className="text-6xl md:text-8xl font-black tracking-tighter">Skills</h2>
+                        <h2 className="text-5xl md:text-8xl font-black tracking-tighter">Skills</h2>
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 md:gap-12 shrink-0 font-medium text-left">

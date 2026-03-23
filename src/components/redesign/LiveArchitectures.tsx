@@ -15,7 +15,7 @@ export default function LiveArchitectures() {
                 className="border-b border-white/10 pb-8 mb-16 md:mb-20 flex flex-col md:flex-row justify-between items-start md:items-end gap-8"
             >
                 <div>
-                    <h2 className="text-6xl sm:text-[10vw] md:text-[8vw] leading-none font-black tracking-[-0.04em] uppercase">
+                    <h2 className="text-[12vw] sm:text-[10vw] md:text-[8vw] leading-none font-black tracking-[-0.04em] uppercase">
                         LIVE<br className="md:hidden" /> ARCHITECTURES
                     </h2>
                 </div>

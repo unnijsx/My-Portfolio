@@ -37,7 +37,7 @@ export default function HeroRedesign() {
                     <span className="text-[10px] font-bold uppercase tracking-[0.2em] opacity-40">(Full Stack Developer)</span>
                     <span className="font-bold text-xs md:text-sm tracking-tight whitespace-nowrap">UNNIKRISHNAN V P</span>
                 </div>
-                <div className="flex flex-col items-end gap-1 mr-24 sm:mr-16 md:mr-32">
+                <div className="flex flex-col items-end gap-1 mr-4 sm:mr-16 md:mr-32">
                     <span className="text-[9px] md:text-[10px] font-bold uppercase tracking-[0.2em] opacity-40 whitespace-nowrap">(BASED IN)</span>
                     <span className="font-bold text-[9px] md:text-sm tracking-tight whitespace-nowrap">INDIA, KERALA</span>
                 </div>
@@ -56,7 +56,7 @@ export default function HeroRedesign() {
                             initial={{ opacity: 0, scale: 1.1 }}
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: TEXT_DELAY }}
-                            className="text-4xl sm:text-5xl md:text-[12vw] font-black tracking-[-0.06em] uppercase whitespace-nowrap leading-none transition-all duration-700 w-full text-center"
+                            className="text-[11vw] sm:text-5xl md:text-[12vw] font-black tracking-[-0.06em] uppercase whitespace-nowrap leading-none transition-all duration-700 w-full text-center"
                         >
                             UNNIKRISHNAN
                         </motion.h1>

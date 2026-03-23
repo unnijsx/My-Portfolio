@@ -24,7 +24,7 @@ export default function PortfolioRedesign() {
 
     return (
         <ReactLenis root>
-            <div className="bg-[#E5E5E0] text-[#1c1c1c] font-sans selection:bg-black selection:text-white max-w-full">
+            <div className="bg-[#E5E5E0] text-[#1c1c1c] font-sans selection:bg-black selection:text-white w-full overflow-x-hidden">
                 
                 {/* Floating Menu Button */}
                 <button 

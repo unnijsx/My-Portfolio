@@ -31,7 +31,7 @@ export default function ServicesRedesign() {
                 viewport={{ once: true, margin: "-100px" }}
                 className="border-b border-white/10 pb-8 mb-16 md:mb-20"
             >
-                <h2 className="text-5xl sm:text-[10vw] leading-none font-black tracking-[-0.04em] uppercase">
+                <h2 className="text-[12vw] sm:text-[10vw] leading-none font-black tracking-[-0.04em] uppercase">
                     WHAT I DO
                 </h2>
             </motion.div>

@@ -22,13 +22,13 @@ export default function ContactFooterRedesign() {
         <section id="contact" className="relative bg-[#E5E5E0] text-[#1c1c1c] selection:bg-black selection:text-white pt-32 rounded-t-[3rem] -mt-[3rem] z-20 shadow-[0_-20px_50px_rgba(0,0,0,0.5)]">
             
             {/* Top Heading */}
-            <div className="px-6 md:px-12 text-center flex justify-center mb-16 overflow-hidden">
+            <div className="px-6 md:px-12 text-center flex justify-center mb-16 overflow-hidden max-w-full">
                 <motion.h2 
                     initial={{ y: 100, opacity: 0 }}
                     whileInView={{ y: 0, opacity: 1 }}
                     transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
                     viewport={{ once: true }}
-                    className="text-[12vw] leading-[0.8] font-black tracking-[-0.04em] uppercase max-w-[90vw] break-words"
+                    className="text-[10vw] leading-[0.8] font-black tracking-[-0.04em] uppercase max-w-full break-words"
                 >
                     LET'S MAKE<br />IT HAPPEN
                 </motion.h2>

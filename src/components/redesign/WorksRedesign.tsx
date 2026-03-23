@@ -43,7 +43,7 @@ export default function WorksRedesign() {
                 className="border-b border-white/10 pb-8 mb-16 md:mb-20 flex flex-col md:flex-row justify-between items-start md:items-end gap-8"
             >
                 <div className="max-w-[90vw]">
-                    <h2 className="text-4xl sm:text-[10vw] leading-none font-black tracking-[-0.04em] uppercase">
+                    <h2 className="text-[12vw] sm:text-[10vw] leading-none font-black tracking-[-0.04em] uppercase">
                         SELECTED WORKS
                     </h2>
                     <p className="font-mono text-[10px] md:text-sm tracking-widest text-[#E5E5E0]/40 mt-4 uppercase">Fetched dynamically from GitHub API</p>
