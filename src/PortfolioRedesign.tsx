@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ReactLenis } from '@studio-freight/react-lenis';
+import { ReactLenis } from 'lenis/react';
 import HeroRedesign from './components/redesign/HeroRedesign';
 import ServicesRedesign from './components/redesign/ServicesRedesign';
 import WorksRedesign from './components/redesign/WorksRedesign';
