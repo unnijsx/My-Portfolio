@@ -60,13 +60,13 @@ export default function WorksRedesign({ isColorful }: WorksRedesignProps) {
             </motion.div>
 
             {/* Use items-start to allow the sidebar to independently stretch while staying pinned to the top of the grid row */}
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-12 relative mt-16 md:mt-32 items-start z-10">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-12 relative mt-16 md:mt-32 z-10">
                 
                 {/* Sticky Number Sidebar - self-stretch ensures it covers the full height of the projects column */}
                 <aside className="md:col-span-4 hidden md:block self-stretch relative">
                     <div className="sticky top-[25vh] z-30 py-4 flex items-center justify-center pointer-events-none">
                         <div className={`relative h-[15vw] w-full flex items-center justify-center overflow-hidden font-black tracking-tighter select-none drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)] text-[16vw] transition-colors duration-1000 ${isColorful ? 'text-transparent bg-clip-text bg-gradient-to-b from-white via-cyan-400 to-purple-500' : 'text-white/80'}`}>
-                            {(displayProjects[activeIndex]?.num || "01").split('').map((char, i) => (
+                            {(displayProjects[activeIndex]?.num || "01").split('').map((char: string, i: number) => (
                                 <div key={i} className="relative h-full flex items-center overflow-hidden px-[0.5vw] min-w-[0.6em]">
                                     <AnimatePresence mode="popLayout" initial={false}>
                                         <motion.span
@@ -116,7 +116,7 @@ export default function WorksRedesign({ isColorful }: WorksRedesignProps) {
 function ProjectCard({ project, index, onInView, isColorful }: { project: any, index: number, onInView: () => void, isColorful?: boolean }) {
     const ref = useRef(null);
     // Detection margin: trigger when the project card enters the central horizontal band of the viewport
-    const isInView = useInView(ref, { margin: "-40% 0px -40% 0px" });
+    const isInView = useInView(ref, { margin: "-30% 0px -30% 0px" });
 
     useEffect(() => {
         if (isInView) {
