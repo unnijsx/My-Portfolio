@@ -1,5 +1,6 @@
 import PortfolioRedesign from './PortfolioRedesign';
 import { Route, Routes } from 'react-router-dom';
+import PortfolioCreator from './components/redesign/PortfolioCreator';
 
 function App() {
   const schemaMarkup = {
@@ -46,6 +47,7 @@ function App() {
       />
       <Routes>
         <Route path='/' element={<PortfolioRedesign />} />
+        <Route path='/portfoliocreator' element={<PortfolioCreator />} />
       </Routes>
     </>
   );
