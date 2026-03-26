@@ -31,6 +31,9 @@ import {
     Eye
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { Canvas, useFrame } from '@react-three/fiber';
+import { Environment, Float, OrbitControls, useGLTF, PresentationControls } from '@react-three/drei';
+import { useTransform, useSpring, useScroll } from 'framer-motion';
 
 interface Project {
     id: string;
@@ -62,6 +65,74 @@ interface Page {
     sections: string[]; // 'hero' | 'works' | 'skills' | 'contact' | 'gallery' | 'experience' | 'text'
 }
 
+// --- CINEMATIC OVERLAY HELPER --- //
+const CinematicOverlay = ({ children, progress, range, side }: { children: React.ReactNode, progress: any, range: [number, number], side: 'left' | 'right' | 'center' }) => {
+    const opacity = useTransform(progress, [range[0], range[0] + 0.05, range[1] - 0.05, range[1]], [0, 1, 1, 0]);
+    const x = useTransform(progress, [range[0], range[1]], side === 'left' ? [-100, 0] : side === 'right' ? [100, 0] : [0, 0]);
+    const y = useTransform(progress, [range[0], range[1]], [50, -50]);
+
+    return (
+        <motion.div
+            style={{ opacity, x, y }}
+            className={`h-screen w-full flex items-center px-12 md:px-24 pointer-events-none ${side === 'left' ? 'justify-start' : side === 'right' ? 'justify-end' : 'justify-center'}`}
+        >
+            <div className="max-w-xl w-full pointer-events-auto bg-black/60 backdrop-blur-3xl p-10 rounded-[3rem] border border-white/10 shadow-3xl">
+                {children}
+            </div>
+        </motion.div>
+    );
+};
+
+// --- GENERIC SECTION RENDERER FOR CINEMATIC --- //
+const SectionContent = ({ type, data }: { type: 'hero' | 'works' | 'skills' | 'contact' | 'gallery' | 'experience', data: any }) => {
+    switch(type) {
+        case 'hero':
+            return (
+                <div className="text-left">
+                    <h1 className="text-6xl font-black uppercase tracking-tighter mb-4 leading-none">{data.name}</h1>
+                    <p className="text-xl font-bold text-cyan-400 uppercase tracking-widest mb-6">{data.role}</p>
+                    <p className="text-lg opacity-60 leading-relaxed font-medium">{data.bio}</p>
+                </div>
+            );
+        case 'works':
+            return (
+                <div className="text-left space-y-6">
+                    <h2 className="text-3xl font-black uppercase tracking-tight">Recent Artifacts</h2>
+                    <div className="space-y-4">
+                        {data.projects.slice(0, 2).map((p: any) => (
+                            <div key={p.id} className="flex gap-4">
+                                <div className="size-16 rounded-xl overflow-hidden shrink-0">
+                                    <img src={p.image} className="w-full h-full object-cover" />
+                                </div>
+                                <div>
+                                    <p className="font-bold uppercase tracking-tight text-sm">{p.title}</p>
+                                    <p className="text-[10px] opacity-40 line-clamp-2">{p.description}</p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            );
+        case 'experience':
+            return (
+                <div className="text-left space-y-6">
+                    <h2 className="text-3xl font-black uppercase tracking-tight">Career Orbit</h2>
+                    <div className="space-y-4">
+                        {data.experiences.slice(0, 2).map((exp: any) => (
+                            <div key={exp.id}>
+                                <p className="font-bold text-cyan-400 text-xs uppercase tracking-widest">{exp.duration}</p>
+                                <p className="font-black uppercase tracking-tight">{exp.company}</p>
+                                <p className="text-[10px] opacity-40">{exp.position}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            );
+        default:
+            return <div className="text-left"><h2 className="text-3xl font-black uppercase tracking-tight">{type.toUpperCase()}</h2><p className="opacity-40">Section implementation in progress...</p></div>;
+    }
+};
+
 interface Section {
     id: string;
     type: 'hero' | 'works' | 'skills' | 'contact' | 'gallery' | 'experience';
@@ -69,7 +140,62 @@ interface Section {
     content: any;
 }
 
-type ThemeMode = 'aura' | 'minimal' | 'cyber' | 'brutalist' | 'terminal';
+type ThemeMode = 'aura' | 'minimal' | 'cyber' | 'brutalist' | 'terminal' | 'cinematic';
+
+// --- 3D CINEMATIC COMPONENTS --- //
+const CinematicBlob = ({ smoothProgress }: { smoothProgress: any }) => {
+    const meshRef = React.useRef<any>(null);
+
+    // Mapped for 5 Scenes
+    const blobX = useTransform(smoothProgress, [0, 0.15, 0.35, 0.55, 0.75, 1], [0, 4.5, -4.5, 0, 0, 0]);
+    const blobY = useTransform(smoothProgress, [0, 0.55, 0.7, 0.8, 1], [0, 0, 3, -3, -4]);
+    const blobScale = useTransform(smoothProgress, [0, 0.5, 0.75, 1], [1.2, 1.5, 2.0, 2.5]);
+
+    useFrame((state) => {
+        if (!meshRef.current) return;
+        const progress = smoothProgress.get();
+        meshRef.current.rotation.y = progress * Math.PI * 4 + state.clock.elapsedTime * 0.2;
+        meshRef.current.rotation.x = progress * Math.PI * 2 + state.clock.elapsedTime * 0.1;
+        meshRef.current.position.x = blobX.get();
+        meshRef.current.position.y = blobY.get() + Math.sin(state.clock.elapsedTime * 2) * 0.2;
+        const s = blobScale.get();
+        meshRef.current.scale.set(s, s, s);
+    });
+
+    return (
+        <Float speed={2} floatIntensity={1}>
+            <mesh ref={meshRef}>
+                <torusKnotGeometry args={[1, 0.35, 256, 64]} />
+                <meshPhysicalMaterial 
+                    color="#ffffff" 
+                    transmission={0.95} 
+                    thickness={2} 
+                    roughness={0.1} 
+                    metalness={0.1} 
+                    ior={1.5}
+                />
+            </mesh>
+        </Float>
+    );
+};
+
+const CustomModelRenderer = ({ url, smoothProgress }: { url: string, smoothProgress: any }) => {
+    const { scene } = useGLTF(url);
+    const modelRef = React.useRef<any>(null);
+
+    const modelX = useTransform(smoothProgress, [0, 0.15, 0.35, 0.55, 0.75, 1], [0, 4, -4, 0, 0, 0]);
+    const modelScale = useTransform(smoothProgress, [0, 0.5, 1], [1, 1.5, 2]);
+
+    useFrame((state) => {
+        if (!modelRef.current) return;
+        modelRef.current.rotation.y = state.clock.elapsedTime * 0.5 + smoothProgress.get() * Math.PI;
+        modelRef.current.position.x = modelX.get();
+        const s = modelScale.get();
+        modelRef.current.scale.set(s, s, s);
+    });
+
+    return <primitive ref={modelRef} object={scene} />;
+};
 
 export default function PortfolioCreator() {
     const [name, setName] = useState("Unnikrishnan");
@@ -98,6 +224,9 @@ export default function PortfolioCreator() {
     const [sidebarWidth, setSidebarWidth] = useState(400);
     const [isResizing, setIsResizing] = useState(false);
     const [previewTheme, setPreviewTheme] = useState<ThemeMode | null>(null);
+    const [customModelUrl, setCustomModelUrl] = useState<string>('');
+    const [modelScale, setModelScale] = useState(1);
+    const previewContainerRef = React.useRef<HTMLDivElement>(null);
     const [isSidebarExpanded, setIsSidebarExpanded] = useState(true);
     const [isPreviewMode, setIsPreviewMode] = useState(false);
     const activePage = pages.find(p => p.id === activePageId) || pages[0];
@@ -131,6 +260,16 @@ export default function PortfolioCreator() {
         const data = { name, role, bio, longBio, projects, gallery, experiences, theme, accentColor, step, pages, activePageId, sidebarWidth };
         localStorage.setItem('portfolio-builder-data', JSON.stringify(data));
     }, [name, role, bio, longBio, projects, gallery, experiences, theme, accentColor, step, pages, activePageId, sidebarWidth]);
+
+    const { scrollYProgress } = useScroll({
+        container: previewContainerRef
+    });
+    
+    const smoothProgress = useSpring(scrollYProgress, {
+        stiffness: 50,
+        damping: 30,
+        restDelta: 0.001
+    });
 
     const addProject = () => {
         const newProject: Project = {
@@ -292,6 +431,12 @@ export default function Portfolio() {
             text: '#00FF41',
             card: 'rgba(0,255,65,0.05)',
             accent: '#00FF41'
+        },
+        cinematic: {
+            bg: '#000000',
+            text: '#FFFFFF',
+            card: 'rgba(255,255,255,0.05)',
+            accent: '#fbbf24'
         }
     };
 
@@ -310,6 +455,9 @@ export default function Portfolio() {
                 )}
                 {theme === ('cyber' as ThemeMode) && (
                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,0,255,0.05),transparent_70%)]" />
+                )}
+                {theme === ('cinematic' as ThemeMode) && (
+                    <div className="absolute inset-0 bg-black" />
                 )}
                 <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.03] mix-blend-overlay" />
             </div>
@@ -345,7 +493,8 @@ export default function Portfolio() {
                                 { id: 'minimal', name: 'Sleek Minimal', desc: 'Focus on pure typography and structured whitespace.', accent: 'from-gray-400 to-white' },
                                 { id: 'cyber', name: 'Cyberpunk', desc: 'High-contrast glitch effects and neon grids.', accent: 'from-magenta-500 to-amber-500' },
                                 { id: 'brutalist', name: 'Neo Brutalist', desc: 'Raw, bold borders and unapologetic high-contrast design.', accent: 'from-orange-500 to-yellow-500' },
-                                { id: 'terminal', name: 'Retro Terminal', desc: 'Vintage command-line aesthetic for the true digital artisan.', accent: 'from-green-500 to-emerald-900' }
+                                { id: 'terminal', name: 'Retro Terminal', desc: 'Vintage command-line aesthetic for the true digital artisan.', accent: 'from-green-500 to-emerald-900' },
+                                { id: 'cinematic', name: 'Cinematic 3D', desc: 'Scroll-driven storytelling with immersive 3D spatial transformations.', accent: 'from-gold-500 to-indigo-600' }
                             ].map((t) => (
                                 <motion.button
                                     key={t.id}
@@ -363,6 +512,7 @@ export default function Portfolio() {
                                             {t.id === 'cyber' && <Layers className="text-white size-6" />}
                                             {t.id === 'brutalist' && <GripVertical className="text-black size-6" />}
                                             {t.id === 'terminal' && <Plus className="text-white size-6 rotate-45" />}
+                                            {t.id === 'cinematic' && <Box className="text-white size-6" />}
                                         </div>
                                         <div className="flex justify-between items-start mb-4">
                                             <h3 className="text-2xl font-black uppercase tracking-tight">{t.name}</h3>
@@ -589,7 +739,8 @@ export default function Portfolio() {
                                                         { id: 'minimal', name: 'Sleek Minimal' },
                                                         { id: 'cyber', name: 'Cyberpunk' },
                                                         { id: 'brutalist', name: 'Neo Brutalist' },
-                                                        { id: 'terminal', name: 'Retro Terminal' }
+                                                        { id: 'terminal', name: 'Retro Terminal' },
+                                                        { id: 'cinematic', name: 'Cinematic 3D' }
                                                     ].map(t => (
                                                         <button
                                                             key={t.id}
@@ -601,6 +752,37 @@ export default function Portfolio() {
                                                     ))}
                                                 </div>
                                             </div>
+
+                                            {theme === 'cinematic' && (
+                                                <div className="space-y-4 pt-4 border-t border-white/5 animate-in fade-in slide-in-from-top-4">
+                                                    <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-gold-500 block">3D Architecture</label>
+                                                    <div className="space-y-2">
+                                                        <p className="text-xs text-white/40 mb-1">Custom GLB Model URL</p>
+                                                        <input 
+                                                            value={customModelUrl}
+                                                            onChange={(e) => setCustomModelUrl(e.target.value)}
+                                                            className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-gold-500/50 transition-colors font-mono"
+                                                            placeholder="https://.../model.glb"
+                                                        />
+                                                        <p className="text-[9px] text-white/20 italic">Leave empty to use high-fidelity torus fallback.</p>
+                                                    </div>
+                                                    <div className="space-y-2">
+                                                        <div className="flex justify-between">
+                                                            <p className="text-xs text-white/40 mb-1">Model Scale</p>
+                                                            <span className="text-[10px] font-mono text-gold-500">{modelScale.toFixed(1)}x</span>
+                                                        </div>
+                                                        <input 
+                                                            type="range"
+                                                            min="0.5"
+                                                            max="5"
+                                                            step="0.1"
+                                                            value={modelScale}
+                                                            onChange={(e) => setModelScale(parseFloat(e.target.value))}
+                                                            className="w-full accent-gold-500"
+                                                        />
+                                                    </div>
+                                                </div>
+                                            )}
 
                                             <div className="space-y-4">
                                                 <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-purple-400/60 block">Accent Architecture</label>
@@ -1049,6 +1231,7 @@ export default function Portfolio() {
                             {/* The "Viewport" */}
                             <div className="flex-1 p-8 md:p-16 flex items-center justify-center">
                                 <div 
+                                    ref={previewContainerRef}
                                     className="w-full h-full rounded-[40px] border relative overflow-y-auto scroll-hide transition-all duration-1000 shadow-[0_40px_100px_-20px_rgba(0,0,0,0.9)]"
                                     style={{ 
                                         backgroundColor: currentStyle.bg,
@@ -1081,201 +1264,254 @@ export default function Portfolio() {
                                         )}
 
                                         {/* Portfolio Body */}
+                                        {/* Portfolio Body */}
                                         <AnimatePresence mode="wait">
-                                            <motion.div
-                                                key={activePageId}
-                                            initial={{ opacity: 0, x: 20 }}
-                                            animate={{ opacity: 1, x: 0 }}
-                                            transition={{ duration: 0.5 }}
-                                        >
-                                            {/* Header Section */}
-                                            {activePage.sections.includes('hero') && (
-                                                <motion.header 
-                                                    initial={{ opacity: 0, y: 20 }}
-                                                    animate={{ opacity: 1, y: 0 }}
-                                                    className="mb-32 relative z-10"
+                                            {theme === 'cinematic' ? (
+                                                <motion.div
+                                                    key={`cinematic-${activePageId}`}
+                                                    className="h-[600vh] relative w-full"
                                                 >
-                                                    <span 
-                                                        className="text-[10px] font-bold tracking-[0.5em] uppercase mb-6 block"
-                                                        style={{ color: currentStyle.accent }}
-                                                    >
-                                                        {theme === 'cyber' ? 'SYSTEM_INITIALIZED' : 'INTRODUCING'}
-                                                    </span>
+                                                    {/* Sticky 3D Background */}
+                                                    <div className="sticky top-0 h-screen w-full pointer-events-none z-0">
+                                                        <Canvas camera={{ position: [0, 0, 8], fov: 45 }}>
+                                                            <ambientLight intensity={0.5} />
+                                                            <directionalLight position={[10, 10, 10]} intensity={1.5} color={accentColor} />
+                                                            <pointLight position={[-10, 5, 10]} intensity={1} />
+                                                            <Environment preset="night" />
+                                                            {customModelUrl ? (
+                                                                <CustomModelRenderer url={customModelUrl} smoothProgress={smoothProgress} />
+                                                            ) : (
+                                                                <CinematicBlob smoothProgress={smoothProgress} />
+                                                            )}
+                                                            <OrbitControls enableZoom={false} enablePan={false} enableRotate={false} />
+                                                        </Canvas>
+                                                    </div>
 
-                                                    <h2 className={`text-[6vw] leading-[0.95] font-black uppercase mb-12 tracking-tighter break-words overflow-hidden ${theme === 'brutalist' ? 'italic' : ''}`}>
-                                                        {name || "YOUR NAME"}
-                                                    </h2>
+                                                    {/* Scroll progress indicator for cinematic theme */}
+                                                    <motion.div 
+                                                        className="fixed bottom-0 left-0 h-1.5 z-50 origin-left no-print" 
+                                                        style={{ scaleX: scrollYProgress, width: '100%', backgroundColor: accentColor }}
+                                                    />
 
-                                                    <div className="max-w-2xl mb-32">
-                                                        <p 
-                                                            className={`text-xl md:text-2xl font-medium mb-8 border-l-4 pl-6 ${theme === 'terminal' ? 'uppercase tracking-[0.2em]' : ''}`}
-                                                            style={{ borderColor: currentStyle.accent }}
+                                                    {/* Foreground Narrative Layer */}
+                                                    <div className="absolute inset-0 z-10 pointer-events-none">
+                                                        {activePage.sections.map((sectionId, idx) => {
+                                                            const sectionCount = activePage.sections.length;
+                                                            const start = idx / sectionCount;
+                                                            const end = (idx + 1) / sectionCount;
+                                                            
+                                                            return (
+                                                                <CinematicOverlay 
+                                                                    key={sectionId} 
+                                                                    progress={smoothProgress} 
+                                                                    range={[start, end]}
+                                                                    side={idx % 2 === 0 ? 'left' : 'right'}
+                                                                >
+                                                                    <SectionContent 
+                                                                        type={sectionId as any} 
+                                                                        data={{ name, role, bio, longBio, projects, gallery, experiences, accentColor }} 
+                                                                    />
+                                                                </CinematicOverlay>
+                                                            );
+                                                        })}
+                                                    </div>
+                                                </motion.div>
+                                            ) : (
+                                                <motion.div
+                                                    key={activePageId}
+                                                    initial={{ opacity: 0, x: 20 }}
+                                                    animate={{ opacity: 1, x: 0 }}
+                                                    transition={{ duration: 0.5 }}
+                                                >
+                                                    {/* Header Section */}
+                                                    {activePage.sections.includes('hero') && (
+                                                        <motion.header 
+                                                            initial={{ opacity: 0, y: 20 }}
+                                                            animate={{ opacity: 1, y: 0 }}
+                                                            className="mb-32 relative z-10"
                                                         >
-                                                            {role || "Your professional title"}
-                                                        </p>
-                                                        <p className={`text-lg leading-relaxed ${theme === 'terminal' ? 'font-mono' : 'opacity-80'}`}>
-                                                            {bio || "Your specialized narrative goes here..."}
-                                                        </p>
-                                                    </div>
-                                                </motion.header>
-                                            )}
-
-                                            {/* Works Section */}
-                                            {activePage.sections.includes('works') && (
-                                                <div className="mb-32">
-                                                    <div className="mb-16 flex justify-between items-end border-b border-white/10 pb-4">
-                                                        <h3 className="text-3xl font-black uppercase tracking-tighter">Selected Works</h3>
-                                                        <div className="h-0.5 flex-1 mx-8 bg-white/5" />
-                                                        <span className="text-[10px] font-bold opacity-30">[{projects.length}]</span>
-                                                    </div>
-
-                                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                                                        {projects.map((p, idx) => (
-                                                            <motion.div 
-                                                                key={p.id}
-                                                                whileHover={{ y: -10 }}
-                                                                className="rounded-3xl border overflow-hidden group/p"
-                                                                style={{ 
-                                                                    backgroundColor: currentStyle.card,
-                                                                    borderColor: theme === 'brutalist' ? 'black' : 'rgba(255,255,255,0.05)',
-                                                                    borderWidth: theme === 'brutalist' ? '4px' : '1px',
-                                                                    boxShadow: theme === 'brutalist' ? '8px 8px 0 0 rgba(0,0,0,1)' : 'none'
-                                                                }}
+                                                            <span 
+                                                                className="text-[10px] font-bold tracking-[0.5em] uppercase mb-6 block"
+                                                                style={{ color: currentStyle.accent }}
                                                             >
-                                                                {p.image && (
-                                                                    <div className="aspect-video w-full overflow-hidden">
-                                                                        <img src={p.image} className="w-full h-full object-cover group-hover/p:scale-110 transition-transform duration-700" />
-                                                                    </div>
-                                                                )}
-                                                                <div className="p-8">
-                                                                    <div className="flex justify-between items-center mb-4">
-                                                                        <span className="text-xs font-mono opacity-20">0{idx+1}_</span>
-                                                                        <div className="flex gap-2">
-                                                                            {p.tags.map(t => (
-                                                                                <span key={t} className="text-[9px] px-2 py-0.5 border border-white/10 rounded-full opacity-40 uppercase">{t}</span>
-                                                                            ))}
+                                                                {theme === 'cyber' ? 'SYSTEM_INITIALIZED' : 'INTRODUCING'}
+                                                            </span>
+
+                                                            <h2 className={`text-[6vw] leading-[0.95] font-black uppercase mb-12 tracking-tighter break-words overflow-hidden ${theme === 'brutalist' ? 'italic' : ''}`}>
+                                                                {name || "YOUR NAME"}
+                                                            </h2>
+
+                                                            <div className="max-w-2xl mb-32">
+                                                                <p 
+                                                                    className={`text-xl md:text-2xl font-medium mb-8 border-l-4 pl-6 ${theme === 'terminal' ? 'uppercase tracking-[0.2em]' : ''}`}
+                                                                    style={{ borderColor: currentStyle.accent }}
+                                                                >
+                                                                    {role || "Your professional title"}
+                                                                </p>
+                                                                <p className={`text-lg leading-relaxed ${theme === 'terminal' ? 'font-mono' : 'opacity-80'}`}>
+                                                                    {bio || "Your specialized narrative goes here..."}
+                                                                </p>
+                                                            </div>
+                                                        </motion.header>
+                                                    )}
+
+                                                    {/* Works Section */}
+                                                    {activePage.sections.includes('works') && (
+                                                        <div className="mb-32">
+                                                            <div className="mb-16 flex justify-between items-end border-b border-white/10 pb-4">
+                                                                <h3 className="text-3xl font-black uppercase tracking-tighter">Selected Works</h3>
+                                                                <div className="h-0.5 flex-1 mx-8 bg-white/5" />
+                                                                <span className="text-[10px] font-bold opacity-30">[{projects.length}]</span>
+                                                            </div>
+
+                                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                                                {projects.map((p, idx) => (
+                                                                    <motion.div 
+                                                                        key={p.id}
+                                                                        whileHover={{ y: -10 }}
+                                                                        className="rounded-3xl border overflow-hidden group/p"
+                                                                        style={{ 
+                                                                            backgroundColor: currentStyle.card,
+                                                                            borderColor: theme === 'brutalist' ? 'black' : 'rgba(255,255,255,0.05)',
+                                                                            borderWidth: theme === 'brutalist' ? '4px' : '1px',
+                                                                            boxShadow: theme === 'brutalist' ? '8px 8px 0 0 rgba(0,0,0,1)' : 'none'
+                                                                        }}
+                                                                    >
+                                                                        {p.image && (
+                                                                            <div className="aspect-video w-full overflow-hidden">
+                                                                                <img src={p.image} className="w-full h-full object-cover group-hover/p:scale-110 transition-transform duration-700" />
+                                                                            </div>
+                                                                        )}
+                                                                        <div className="p-8">
+                                                                            <div className="flex justify-between items-center mb-4">
+                                                                                <span className="text-xs font-mono opacity-20">0{idx+1}_</span>
+                                                                                <div className="flex gap-2">
+                                                                                    {p.tags.map(t => (
+                                                                                        <span key={t} className="text-[9px] px-2 py-0.5 border border-white/10 rounded-full opacity-40 uppercase">{t}</span>
+                                                                                    ))}
+                                                                                </div>
+                                                                            </div>
+                                                                            <h4 className="text-2xl font-black uppercase tracking-tight mb-2 group-hover/p:text-cyan-400 transition-colors">
+                                                                                {p.title}
+                                                                            </h4>
+                                                                            <p className="text-sm opacity-50 leading-relaxed">{p.description}</p>
                                                                         </div>
-                                                                    </div>
-                                                                    <h4 className="text-2xl font-black uppercase tracking-tight mb-2 group-hover/p:text-cyan-400 transition-colors">
-                                                                        {p.title}
-                                                                    </h4>
-                                                                    <p className="text-sm opacity-50 leading-relaxed">{p.description}</p>
-                                                                </div>
-                                                            </motion.div>
-                                                        ))}
-                                                    </div>
-                                                </div>
-                                            )}
-
-                                            {/* Gallery Section */}
-                                            {activePage.sections.includes('gallery') && (
-                                                <div className="mb-32">
-                                                    <div className="mb-16 flex justify-between items-end border-b border-white/10 pb-4">
-                                                        <h3 className="text-3xl font-black uppercase tracking-tighter">Gallery</h3>
-                                                        <div className="h-0.5 flex-1 mx-8 bg-white/5" />
-                                                    </div>
-                                                    <div className="grid grid-cols-2 lg:grid-cols-3 gap-6">
-                                                        {gallery.map((item, idx) => (
-                                                            <motion.div 
-                                                                key={item.id}
-                                                                whileHover={{ scale: 1.05, rotate: idx % 2 === 0 ? 2 : -2 }}
-                                                                className={`aspect-square rounded-3xl overflow-hidden border ${theme === 'brutalist' ? 'border-4 border-black shadow-[6px_6px_0_0_black]' : 'border-white/10'}`}
-                                                            >
-                                                                {item.url ? (
-                                                                    <img src={item.url} className="w-full h-full object-cover" />
-                                                                ) : (
-                                                                    <div className="w-full h-full bg-white/5 flex items-center justify-center text-white/10"><ImageIcon className="size-8" /></div>
-                                                                )}
-                                                            </motion.div>
-                                                        ))}
-                                                    </div>
-                                                </div>
-                                            )}
-
-                                            {/* Experience Section */}
-                                            {activePage.sections.includes('experience') && (
-                                                <div className="mb-32">
-                                                    <div className="mb-16 flex justify-between items-end border-b border-white/10 pb-4">
-                                                        <h3 className="text-3xl font-black uppercase tracking-tighter">Experience</h3>
-                                                        <div className="h-0.5 flex-1 mx-8 bg-white/5" />
-                                                    </div>
-                                                    <div className="space-y-16">
-                                                        {experiences.map((exp) => (
-                                                            <div key={exp.id} className="relative pl-12 border-l-4 border-white/5 py-4 transition-all hover:border-cyan-500/30 group">
-                                                                <div 
-                                                                    className="absolute top-0 left-[-11px] size-5 rounded-full border-4 border-black transition-transform group-hover:scale-125"
-                                                                    style={{ backgroundColor: currentStyle.accent }}
-                                                                />
-                                                                <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6">
-                                                                    <div>
-                                                                        <h4 className={`text-3xl font-black uppercase tracking-tight mb-2 ${theme === 'terminal' ? 'font-mono' : ''}`}>{exp.company}</h4>
-                                                                        <p className={`text-xl font-black italic mb-2 ${theme === 'terminal' ? 'font-mono' : 'text-cyan-500'}`}>{exp.position}</p>
-                                                                    </div>
-                                                                    <span className="text-lg font-black opacity-30 uppercase tracking-widest">{exp.duration}</span>
-                                                                </div>
-                                                                <p className="opacity-60 text-lg leading-relaxed max-w-2xl">{exp.description}</p>
+                                                                    </motion.div>
+                                                                ))}
                                                             </div>
-                                                        ))}
-                                                    </div>
-                                                </div>
-                                            )}
+                                                        </div>
+                                                    )}
 
-                                            {/* Text Block Section */}
-                                            {activePage.sections.includes('text') && (
-                                                <div className="mb-40">
-                                                    <div className="mb-20 flex flex-col md:flex-row md:items-end justify-between border-b border-white/10 pb-6 gap-4">
-                                                        <h3 className="text-4xl md:text-6xl font-black uppercase tracking-tighter">My Story</h3>
-                                                        <p className="text-sm font-bold opacity-30 uppercase tracking-[0.3em]">Biography</p>
-                                                    </div>
-                                                    <div className={`max-w-4xl text-xl md:text-2xl leading-[1.7] ${theme === 'terminal' ? 'font-mono' : (theme === 'brutalist' ? 'font-black uppercase tracking-tight' : 'opacity-80 font-medium italic')}`}>
-                                                        {longBio.split('\n').map((para, i) => (
-                                                            <p key={i} className="mb-10">{para}</p>
-                                                        ))}
-                                                    </div>
-                                                </div>
-                                            )}
-
-                                            {/* Skills Section */}
-                                            {activePage.sections.includes('skills') && (
-                                                <div className="py-20">
-                                                    <h3 className={`text-4xl font-black uppercase mb-12 tracking-tighter ${theme === 'terminal' ? 'font-mono terminal-text' : (theme === 'brutalist' ? 'italic' : 'opacity-20')}`}>Expertise</h3>
-                                                    <div className="flex flex-wrap gap-4">
-                                                        {['Frontend', 'Backend', 'UI/UX', 'Mobile'].map(skill => (
-                                                            <div 
-                                                                key={skill} 
-                                                                className={`px-8 py-4 border rounded-full text-lg font-bold uppercase tracking-widest ${theme === 'brutalist' ? 'text-black' : ''} ${theme === 'terminal' ? 'font-mono' : ''}`}
-                                                                style={{ 
-                                                                    backgroundColor: theme === 'brutalist' ? '#FACC15' : 'rgba(255,255,255,0.05)',
-                                                                    borderColor: theme === 'brutalist' ? '#000000' : (theme === 'terminal' ? 'rgba(0,255,65,0.4)' : 'rgba(255,255,255,0.1)'),
-                                                                    borderWidth: theme === 'brutalist' ? '3px' : '1px'
-                                                                }}
-                                                            >
-                                                                {skill}
+                                                    {/* Gallery Section */}
+                                                    {activePage.sections.includes('gallery') && (
+                                                        <div className="mb-32">
+                                                            <div className="mb-16 flex justify-between items-end border-b border-white/10 pb-4">
+                                                                <h3 className="text-3xl font-black uppercase tracking-tighter">Gallery</h3>
+                                                                <div className="h-0.5 flex-1 mx-8 bg-white/5" />
                                                             </div>
-                                                        ))}
-                                                    </div>
-                                                </div>
-                                            )}
+                                                            <div className="grid grid-cols-2 lg:grid-cols-3 gap-6">
+                                                                {gallery.map((item, idx) => (
+                                                                    <motion.div 
+                                                                        key={item.id}
+                                                                        whileHover={{ scale: 1.05, rotate: idx % 2 === 0 ? 2 : -2 }}
+                                                                        className={`aspect-square rounded-3xl overflow-hidden border ${theme === 'brutalist' ? 'border-4 border-black shadow-[6px_6px_0_0_black]' : 'border-white/10'}`}
+                                                                    >
+                                                                        {item.url ? (
+                                                                            <img src={item.url} className="w-full h-full object-cover" />
+                                                                        ) : (
+                                                                            <div className="w-full h-full bg-white/5 flex items-center justify-center text-white/10"><ImageIcon className="size-8" /></div>
+                                                                        )}
+                                                                    </motion.div>
+                                                                ))}
+                                                            </div>
+                                                        </div>
+                                                    )}
 
-                                            {/* Contact Section */}
-                                            {activePage.sections.includes('contact') && (
-                                                <div 
-                                                    className={`pt-32 border-t flex flex-col md:flex-row justify-between items-center gap-12 mt-20 ${theme === 'brutalist' ? 'border-black border-t-8' : (theme === 'terminal' ? 'border-green-500/20' : 'border-white/10')}`}
-                                                >
-                                                    <div>
-                                                        <h3 className={`text-6xl font-black uppercase tracking-tighter mb-4 ${theme === 'terminal' ? 'font-mono terminal-text' : ''}`}>Let's Connect</h3>
-                                                        <p className={`text-xl opacity-40 uppercase tracking-[0.4em] ${theme === 'terminal' ? 'font-mono' : ''}`}>Available for projects 2026</p>
-                                                    </div>
-                                                    <div className="flex gap-8">
-                                                        {['GitHub', 'LinkedIn', 'Twitter'].map(link => (
-                                                            <span key={link} className={`text-xl font-black uppercase hover:scale-110 cursor-pointer transition-transform ${theme === 'terminal' ? 'font-mono text-green-500' : 'opacity-40 hover:opacity-100'}`}>{link}</span>
-                                                        ))}
-                                                    </div>
-                                                </div>
+                                                    {/* Experience Section */}
+                                                    {activePage.sections.includes('experience') && (
+                                                        <div className="mb-32">
+                                                            <div className="mb-16 flex justify-between items-end border-b border-white/10 pb-4">
+                                                                <h3 className="text-3xl font-black uppercase tracking-tighter">Experience</h3>
+                                                                <div className="h-0.5 flex-1 mx-8 bg-white/5" />
+                                                            </div>
+                                                            <div className="space-y-16">
+                                                                {experiences.map((exp) => (
+                                                                    <div key={exp.id} className="relative pl-12 border-l-4 border-white/5 py-4 transition-all hover:border-cyan-500/30 group">
+                                                                        <div 
+                                                                            className="absolute top-0 left-[-11px] size-5 rounded-full border-4 border-black transition-transform group-hover:scale-125"
+                                                                            style={{ backgroundColor: currentStyle.accent }}
+                                                                        />
+                                                                        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6">
+                                                                            <div>
+                                                                                <h4 className={`text-3xl font-black uppercase tracking-tight mb-2 ${theme === 'terminal' ? 'font-mono' : ''}`}>{exp.company}</h4>
+                                                                                <p className={`text-xl font-black italic mb-2 ${theme === 'terminal' ? 'font-mono' : 'text-cyan-500'}`}>{exp.position}</p>
+                                                                            </div>
+                                                                            <span className="text-lg font-black opacity-30 uppercase tracking-widest">{exp.duration}</span>
+                                                                        </div>
+                                                                        <p className="opacity-60 text-lg leading-relaxed max-w-2xl">{exp.description}</p>
+                                                                    </div>
+                                                                ))}
+                                                            </div>
+                                                        </div>
+                                                    )}
+
+                                                    {/* Text Block Section */}
+                                                    {activePage.sections.includes('text') && (
+                                                        <div className="mb-40">
+                                                            <div className="mb-20 flex flex-col md:flex-row md:items-end justify-between border-b border-white/10 pb-6 gap-4">
+                                                                <h3 className="text-4xl md:text-6xl font-black uppercase tracking-tighter">My Story</h3>
+                                                                <p className="text-sm font-bold opacity-30 uppercase tracking-[0.3em]">Biography</p>
+                                                            </div>
+                                                            <div className={`max-w-4xl text-xl md:text-2xl leading-[1.7] ${theme === 'terminal' ? 'font-mono' : (theme === 'brutalist' ? 'font-black uppercase tracking-tight' : 'opacity-80 font-medium italic')}`}>
+                                                                {longBio.split('\n').map((para, i) => (
+                                                                    <p key={i} className="mb-10">{para}</p>
+                                                                ))}
+                                                            </div>
+                                                        </div>
+                                                    )}
+
+                                                    {/* Skills Section */}
+                                                    {activePage.sections.includes('skills') && (
+                                                        <div className="py-20">
+                                                            <h3 className={`text-4xl font-black uppercase mb-12 tracking-tighter ${theme === 'terminal' ? 'font-mono terminal-text' : (theme === 'brutalist' ? 'italic' : 'opacity-20')}`}>Expertise</h3>
+                                                            <div className="flex flex-wrap gap-4">
+                                                                {['Frontend', 'Backend', 'UI/UX', 'Mobile'].map(skill => (
+                                                                    <div 
+                                                                        key={skill} 
+                                                                        className={`px-8 py-4 border rounded-full text-lg font-bold uppercase tracking-widest ${theme === 'brutalist' ? 'text-black' : ''} ${theme === 'terminal' ? 'font-mono' : ''}`}
+                                                                        style={{ 
+                                                                            backgroundColor: theme === 'brutalist' ? '#FACC15' : 'rgba(255,255,255,0.05)',
+                                                                            borderColor: theme === 'brutalist' ? '#000000' : (theme === 'terminal' ? 'rgba(0,255,65,0.4)' : 'rgba(255,255,255,0.1)'),
+                                                                            borderWidth: theme === 'brutalist' ? '3px' : '1px'
+                                                                        }}
+                                                                    >
+                                                                        {skill}
+                                                                    </div>
+                                                                ))}
+                                                            </div>
+                                                        </div>
+                                                    )}
+
+                                                    {/* Contact Section */}
+                                                    {activePage.sections.includes('contact') && (
+                                                        <div 
+                                                            className={`pt-32 border-t flex flex-col md:flex-row justify-between items-center gap-12 mt-20 ${theme === 'brutalist' ? 'border-black border-t-8' : (theme === 'terminal' ? 'border-green-500/20' : 'border-white/10')}`}
+                                                        >
+                                                            <div>
+                                                                <h3 className={`text-6xl font-black uppercase tracking-tighter mb-4 ${theme === 'terminal' ? 'font-mono terminal-text' : ''}`}>Let's Connect</h3>
+                                                                <p className={`text-xl opacity-40 uppercase tracking-[0.4em] ${theme === 'terminal' ? 'font-mono' : ''}`}>Available for projects 2026</p>
+                                                            </div>
+                                                            <div className="flex gap-8">
+                                                                {['GitHub', 'LinkedIn', 'Twitter'].map(link => (
+                                                                    <span key={link} className={`text-xl font-black uppercase hover:scale-110 cursor-pointer transition-transform ${theme === 'terminal' ? 'font-mono text-green-500' : 'opacity-40 hover:opacity-100'}`}>{link}</span>
+                                                                ))}
+                                                            </div>
+                                                        </div>
+                                                    )}
+                                                </motion.div>
                                             )}
-                                        </motion.div>
-                                    </AnimatePresence>
-                                </div>
+                                        </AnimatePresence>
+                                    </div>
                             </div>
                         </div>
                     </main>
