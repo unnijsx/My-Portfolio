@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import renderblob from '../../assets/images/renderblob.png';
 import rheox from '../../assets/images/rheoxdashboard.png';
 import portfoliocreator from '../../assets/images/portfoliocreator.png';
+import keralafreelance from '../../assets/images/keralafreelance.png';
 
 interface LiveArchitecturesProps {
     isColorful?: boolean;
@@ -31,7 +32,8 @@ export default function LiveArchitectures({ isColorful }: LiveArchitecturesProps
                 </div>
             </motion.div>
 
-            <div className="w-full flex justify-center py-6 md:py-12 relative h-[80vh] md:h-[100vh] group z-10">
+            <div className="w-full flex justify-center py-6 md:py-12 relative min-h-[100vh] md:h-[120vh] group z-10">
+
                 
                 {/* Floating Image 1 (Back left) */}
                 <motion.div 
@@ -54,6 +56,31 @@ export default function LiveArchitectures({ isColorful }: LiveArchitecturesProps
                         <div className="absolute inset-x-0 bottom-0 p-8 flex flex-col justify-end bg-gradient-to-t from-black/80 to-transparent translate-y-4 opacity-0 group-hover/item:translate-y-0 group-hover/item:opacity-100 transition-all">
                             <h4 className="text-xl font-black uppercase mb-1">RenderBlob</h4>
                             <p className="text-[10px] font-bold tracking-widest text-cyan-400">3D SPATIAL EXPLORATION</p>
+                        </div>
+                    </a>
+                </motion.div>
+
+                {/* Floating Image 4 (Middle Left) - NEW */}
+                <motion.div 
+                    initial={{ opacity: 0, x: -50, y: 50, rotate: -5 }}
+                    whileInView={{ opacity: 1, x: 0, y: 0, rotate: -2 }}
+                    whileHover={{ y: -20, rotate: 0, zIndex: 100 }}
+                    transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    className={`absolute left-[-2%] md:left-[8%] top-[35%] md:top-[40%] w-[75%] md:w-[48%] aspect-video rounded-2xl overflow-hidden shadow-2xl border transition-all duration-500 z-15 cursor-pointer ${
+                        isColorful ? 'border-lime-500/30' : 'border-white/10'
+                    }`}
+                >
+                    <a href="https://keralafreelancecommunity.unnijsx.online/" target="_blank" rel="noreferrer" className="block w-full h-full relative group/item">
+                        <img 
+                            src={keralafreelance} 
+                            alt="Kerala Freelance Community" 
+                            className="w-full h-full object-cover scale-105 group-hover:scale-110 transition-transform duration-[1.5s]" 
+                        />
+                        <div className={`absolute inset-0 transition-colors duration-1000 ${isColorful ? 'bg-lime-950/20 group-hover:bg-transparent' : 'bg-black/40 group-hover:bg-black/10'}`} />
+                        <div className="absolute inset-x-0 bottom-0 p-8 flex flex-col justify-end bg-gradient-to-t from-black/80 to-transparent translate-y-4 opacity-0 group-hover/item:translate-y-0 group-hover/item:opacity-100 transition-all">
+                            <h4 className="text-xl font-black uppercase mb-1">Kerala Freelance Community</h4>
+                            <p className="text-[10px] font-bold tracking-widest text-lime-400">COMMUNITY HUB & ROLES</p>
                         </div>
                     </a>
                 </motion.div>
