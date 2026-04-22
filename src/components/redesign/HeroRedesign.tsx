@@ -3,7 +3,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowDownRight, Download } from 'lucide-react';
 import profileImage from '../../assets/images/bgremovedmyimage.png';
 // @ts-ignore
-import resumeUrl from '../../assets/UNNIKRISHNAN_RESUME.pdf?url';
+import resumeUrl from '../../assets/UNNNIKRISHNAN_V_P_MERNSTACK_RESUME.pdf?url';
 import { saveAs } from 'file-saver';
 
 interface HeroRedesignProps {
