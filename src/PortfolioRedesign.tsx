@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ReactLenis } from 'lenis/react';
 import { Sun, Moon } from 'lucide-react';
+import { Helmet } from 'react-helmet-async';
 import HeroRedesign from './components/redesign/HeroRedesign';
 import ServicesRedesign from './components/redesign/ServicesRedesign';
 import WorksRedesign from './components/redesign/WorksRedesign';
@@ -33,7 +34,11 @@ export default function PortfolioRedesign() {
     return (
         <ReactLenis root>
             <div className={`transition-colors duration-1000 ${isColorful ? 'bg-[#0A0A0B]' : 'bg-[#E5E5E0]'} text-[#1c1c1c] font-sans selection:bg-black selection:text-white w-full overflow-x-clip`}>
-
+                <Helmet>
+                    <title>Unnikrishnan | Full Stack Developer</title>
+                    <meta name="description" content="Looking for growth in your business? Make it digitalized! Contact Unnikrishnan for modern Website Development, UI/UX design, and full-stack solutions." />
+                </Helmet>
+                
                 {/* Navbar */}
                 <nav className="fixed top-0 left-0 w-full z-50 px-6 py-8 md:px-12 pointer-events-none">
                     <div className="flex justify-between items-center w-full max-w-[1400px] mx-auto">

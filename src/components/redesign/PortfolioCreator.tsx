@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Helmet } from 'react-helmet-async';
 import { 
     User, 
     Briefcase, 
@@ -102,7 +103,7 @@ const SectionContent = ({ type, data }: { type: 'hero' | 'works' | 'skills' | 'c
                         {data.projects.slice(0, 2).map((p: any) => (
                             <div key={p.id} className="flex gap-4">
                                 <div className="size-16 rounded-xl overflow-hidden shrink-0">
-                                    <img src={p.image} className="w-full h-full object-cover" />
+                                    <img src={p.image} className="w-full h-full object-cover" alt={p.title || "Project thumbnail"} />
                                 </div>
                                 <div>
                                     <p className="font-bold uppercase tracking-tight text-sm">{p.title}</p>
@@ -444,6 +445,10 @@ export default function Portfolio() {
 
     return (
         <div className="min-h-screen bg-[#0A0A0B] text-white selection:bg-cyan-500/30 font-sans overflow-hidden flex transition-colors duration-700">
+            <Helmet>
+                <title>Portfolio Creator | UNNI.JSX</title>
+                <meta name="description" content="Design your pixel-perfect portfolio using the UNNI.JSX Portfolio Creator." />
+            </Helmet>
             
             {/* Background Effects */}
             <div className="fixed inset-0 overflow-hidden pointer-events-none">
@@ -873,7 +878,7 @@ export default function Portfolio() {
                                                 {gallery.map((item, idx) => (
                                                     <div key={item.id} className="group relative aspect-square bg-white/5 border border-white/10 rounded-2xl overflow-hidden">
                                                         {item.url ? (
-                                                            <img src={item.url} className="w-full h-full object-cover" />
+                                                            <img src={item.url} className="w-full h-full object-cover" alt={item.caption || "Gallery image"} />
                                                         ) : (
                                                             <div className="w-full h-full flex items-center justify-center text-white/10"><ImageIcon className="size-6" /></div>
                                                         )}
@@ -1379,7 +1384,7 @@ export default function Portfolio() {
                                                                     >
                                                                         {p.image && (
                                                                             <div className="aspect-video w-full overflow-hidden">
-                                                                                <img src={p.image} className="w-full h-full object-cover group-hover/p:scale-110 transition-transform duration-700" />
+                                                                                <img src={p.image} className="w-full h-full object-cover group-hover/p:scale-110 transition-transform duration-700" alt={p.title || "Project preview"} />
                                                                             </div>
                                                                         )}
                                                                         <div className="p-8">
@@ -1417,7 +1422,7 @@ export default function Portfolio() {
                                                                         className={`aspect-square rounded-3xl overflow-hidden border ${theme === 'brutalist' ? 'border-4 border-black shadow-[6px_6px_0_0_black]' : 'border-white/10'}`}
                                                                     >
                                                                         {item.url ? (
-                                                                            <img src={item.url} className="w-full h-full object-cover" />
+                                                                            <img src={item.url} className="w-full h-full object-cover" alt={item.caption || "Gallery image preview"} />
                                                                         ) : (
                                                                             <div className="w-full h-full bg-white/5 flex items-center justify-center text-white/10"><ImageIcon className="size-8" /></div>
                                                                         )}
@@ -1575,7 +1580,7 @@ export default function Portfolio() {
                                                 backgroundColor: themeStyles[previewTheme as ThemeMode].card
                                             }}
                                         >
-                                            {p.image && <img src={p.image} className="w-full h-48 object-cover rounded-[24px] mb-8 grayscale hover:grayscale-0 transition-all duration-500" />}
+                                            {p.image && <img src={p.image} className="w-full h-48 object-cover rounded-[24px] mb-8 grayscale hover:grayscale-0 transition-all duration-500" alt={p.title || "Project detailed preview"} />}
                                             <h3 className="text-4xl font-black uppercase mb-4 tracking-tighter">{p.title}</h3>
                                             <p className="opacity-60 leading-relaxed font-medium text-lg">{p.description}</p>
                                         </div>
@@ -1587,7 +1592,7 @@ export default function Portfolio() {
                                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                                         {gallery.map((item, idx) => (
                                             <div key={item.id} className={`aspect-square rounded-[32px] overflow-hidden border group relative cursor-crosshair transition-all duration-500 hover:scale-[1.02] ${previewTheme === 'brutalist' ? 'border-[4px] border-black shadow-[8px_8px_0_0_black]' : 'border-white/10 shadow-2xl hover:shadow-cyan-500/20'}`}>
-                                                {item.url ? <img src={item.url} className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" /> : <div className="w-full h-full bg-white/5" />}
+                                                {item.url ? <img src={item.url} className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" alt={item.caption || "Gallery detailed image"} /> : <div className="w-full h-full bg-white/5" />}
                                                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
                                                     <p className="text-white text-xs font-bold uppercase tracking-widest">{item.caption || 'INSPIRATION'}</p>
                                                 </div>
