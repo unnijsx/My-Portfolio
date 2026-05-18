@@ -35,8 +35,8 @@ export default function PortfolioRedesign() {
         <ReactLenis root>
             <div className={`transition-colors duration-1000 ${isColorful ? 'bg-[#0A0A0B]' : 'bg-[#E5E5E0]'} text-[#1c1c1c] font-sans selection:bg-black selection:text-white w-full overflow-x-clip`}>
                 <Helmet>
-                    <title>Unnikrishnan | Full Stack Developer</title>
-                    <meta name="description" content="Looking for growth in your business? Make it digitalized! Contact Unnikrishnan for modern Website Development, UI/UX design, and full-stack solutions." />
+                    <title>Unnikrishnan V P | Full Stack Developer Portfolio</title>
+                    <meta name="description" content="Looking for growth in your business? Make it digitalized! Contact Unnikrishnan V P for modern Website Development, UI/UX design, and full-stack solutions." />
                 </Helmet>
                 
                 {/* Navbar */}

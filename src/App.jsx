@@ -25,7 +25,7 @@ function App() {
       {
         "@type": "Person",
         "@id": "https://unni.rheox.online/#person",
-        "name": "Unnikrishnan (unnijsx)",
+        "name": "Unnikrishnan V P (unnijsx)",
         "url": "https://unni.rheox.online/",
         "image": "https://unni.rheox.online/src/assets/1_1.jpg",
         "sameAs": [
