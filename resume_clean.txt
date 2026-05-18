@@ -28,7 +28,7 @@ Developed a job portal application enabling job seekers and recruiters to connec
 Implemented user authentication, role-based access, and responsive UI. Integrated CRUD 
 functionalities and optimized database queries for performance. 
  Department Automation (Django) 
-unniytman@gmail.com |  +91 8848853516 |  www.unnijsx.online |  Kannur, Kerala
+unniytman@gmail.com |  +91 8848853516 |  www.unni.rheox.online |  Kannur, Kerala
 Professional Summary
 Key Competencies
 Professional Experience

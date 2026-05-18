@@ -96,7 +96,7 @@ export default function LiveArchitectures({ isColorful }: LiveArchitecturesProps
                         isColorful ? 'border-lime-500/30' : 'border-white/10'
                     }`}
                 >
-                    <a href="https://keralafreelancecommunity.unnijsx.online/" target="_blank" rel="noreferrer" className="block w-full h-full relative group/item">
+                    <a href="https://keralafreelancecommunity.unni.rheox.online/" target="_blank" rel="noreferrer" className="block w-full h-full relative group/item">
                         <img 
                             src={keralafreelance} 
                             alt="Kerala Freelance Community" 
@@ -121,7 +121,7 @@ export default function LiveArchitectures({ isColorful }: LiveArchitecturesProps
                         isColorful ? 'border-purple-400/40 shadow-[0_0_50px_rgba(168,85,247,0.2)]' : 'border-white/20'
                     }`}
                 >
-                    <a href="https://rheox.unnijsx.online/" target="_blank" rel="noreferrer" className="block w-full h-full relative group/item">
+                    <a href="https://cloud.rheox.online/" target="_blank" rel="noreferrer" className="block w-full h-full relative group/item">
                         <img 
                             src={rheox} 
                             alt="Rheox Dashboard Interface" 

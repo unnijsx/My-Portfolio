@@ -8,10 +8,10 @@ function App() {
     "@graph": [
       {
         "@type": "Organization",
-        "@id": "https://unnijsx.online/#organization",
+        "@id": "https://unni.rheox.online/#organization",
         "name": "Unnijsx Online",
-        "url": "https://unnijsx.online/",
-        "logo": "https://unnijsx.online/src/assets/1_1.jpg",
+        "url": "https://unni.rheox.online/",
+        "logo": "https://unni.rheox.online/src/assets/1_1.jpg",
         "sameAs": [
           "https://www.linkedin.com/in/unnikrishnanvp/",
           "https://github.com/unnijsx",
@@ -24,16 +24,16 @@ function App() {
       },
       {
         "@type": "Person",
-        "@id": "https://unnijsx.online/#person",
+        "@id": "https://unni.rheox.online/#person",
         "name": "Unnikrishnan (unnijsx)",
-        "url": "https://unnijsx.online/",
-        "image": "https://unnijsx.online/src/assets/1_1.jpg",
+        "url": "https://unni.rheox.online/",
+        "image": "https://unni.rheox.online/src/assets/1_1.jpg",
         "sameAs": [
           "https://www.linkedin.com/in/unnikrishnanvp/",
           "https://github.com/unnijsx",
         ],
         "worksFor": {
-          "@id": "https://unnijsx.online/#organization"
+          "@id": "https://unni.rheox.online/#organization"
         }
       }
     ]
