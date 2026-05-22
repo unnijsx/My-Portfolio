@@ -50,10 +50,10 @@ export default function PortfolioRedesign() {
                     
                     {/* Open Graph / Facebook */}
                     <meta property="og:type" content="website" />
-                    <meta property="og:url" content="https://unni.rheox.online/" />
+                    <meta property="og:url" content="https://www.unnijsx.online/" />
                     <meta property="og:title" content="Unnikrishnan V P | Affordable Website Developer & SEO Expert | UNNI.JSX" />
                     <meta property="og:description" content="Affordable web developer & SEO expert. Get fast React/MERN web development, modern UI/UX, hosting, and secure deployment by Unnikrishnan V P (UNNI.JSX)." />
-                    <meta property="og:image" content="https://unni.rheox.online/og-image.jpg" />
+                    <meta property="og:image" content="https://www.unnijsx.online/og-image.jpg" />
                     <meta property="og:image:width" content="1200" />
                     <meta property="og:image:height" content="630" />
                     <meta property="og:image:type" content="image/jpeg" />
@@ -63,10 +63,10 @@ export default function PortfolioRedesign() {
 
                     {/* Twitter */}
                     <meta name="twitter:card" content="summary_large_image" />
-                    <meta name="twitter:url" content="https://unni.rheox.online/" />
+                    <meta name="twitter:url" content="https://www.unnijsx.online/" />
                     <meta name="twitter:title" content="Unnikrishnan V P | Affordable Website Developer & SEO Expert | UNNI.JSX" />
                     <meta name="twitter:description" content="Affordable web developer & SEO expert. Get fast React/MERN web development, modern UI/UX, hosting, and secure deployment by Unnikrishnan V P (UNNI.JSX)." />
-                    <meta name="twitter:image" content="https://unni.rheox.online/og-image.jpg" />
+                    <meta name="twitter:image" content="https://www.unnijsx.online/og-image.jpg" />
                     <meta name="twitter:site" content="@unnijsx" />
                     <meta name="twitter:creator" content="@unnijsx" />
                 </Helmet>
