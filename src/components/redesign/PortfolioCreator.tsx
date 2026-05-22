@@ -446,8 +446,33 @@ export default function Portfolio() {
     return (
         <div className="min-h-screen bg-[#0A0A0B] text-white selection:bg-cyan-500/30 font-sans overflow-hidden flex transition-colors duration-700">
             <Helmet>
-                <title>Portfolio Creator | UNNI.JSX</title>
-                <meta name="description" content="Design your pixel-perfect portfolio using the UNNI.JSX Portfolio Creator." />
+                <title>Portfolio Creator | Interactive Design Sandbox | UNNI.JSX</title>
+                <meta name="description" content="Design your pixel-perfect portfolio using the UNNI.JSX Portfolio Creator. Choose themes, customize layouts, and export professional code." />
+                <meta name="keywords" content="affordable website developer, affordable web developer, web developer affordable price, professional SEO specialist, website hosting and deployment, custom web development, React developer, full stack developer, Unnikrishnan V P, UNNI.JSX, rheox" />
+                <meta name="robots" content="index, follow" />
+                <meta name="publisher" content="Unnikrishnan V P" />
+
+                {/* Open Graph / Facebook */}
+                <meta property="og:type" content="website" />
+                <meta property="og:url" content="https://unni.rheox.online/portfoliocreator" />
+                <meta property="og:title" content="Portfolio Creator | Interactive Design Sandbox | UNNI.JSX" />
+                <meta property="og:description" content="Design your pixel-perfect portfolio using the UNNI.JSX Portfolio Creator. Choose themes, customize layouts, and export professional code." />
+                <meta property="og:image" content="https://unni.rheox.online/og-image.jpg" />
+                <meta property="og:image:width" content="1200" />
+                <meta property="og:image:height" content="630" />
+                <meta property="og:image:type" content="image/jpeg" />
+                <meta property="og:image:alt" content="Portfolio Creator | Interactive Design Sandbox | UNNI.JSX" />
+                <meta property="og:site_name" content="UNNI.JSX" />
+                <meta property="og:locale" content="en_US" />
+
+                {/* Twitter */}
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:url" content="https://unni.rheox.online/portfoliocreator" />
+                <meta name="twitter:title" content="Portfolio Creator | Interactive Design Sandbox | UNNI.JSX" />
+                <meta name="twitter:description" content="Design your pixel-perfect portfolio using the UNNI.JSX Portfolio Creator. Choose themes, customize layouts, and export professional code." />
+                <meta name="twitter:image" content="https://unni.rheox.online/og-image.jpg" />
+                <meta name="twitter:site" content="@unnijsx" />
+                <meta name="twitter:creator" content="@unnijsx" />
             </Helmet>
             
             {/* Background Effects */}
@@ -582,7 +607,7 @@ export default function Portfolio() {
                                     initial={{ x: -100, opacity: 0 }}
                                     animate={{ x: 0, opacity: 1 }}
                                     style={{ width: isSidebarExpanded ? sidebarWidth + 80 : 80 }}
-                                    className="relative z-50 flex border-r border-white/5 bg-[#0E0E0E] transition-all duration-300"
+                                    className="relative z-50 flex border-r border-white/5 bg-[#0E0E0E] transition-all duration-300 no-print"
                                 >
                         <aside 
                             style={{ width: isSidebarExpanded ? `${sidebarWidth}px` : '80px' }}
@@ -1234,10 +1259,10 @@ export default function Portfolio() {
                             </div>
 
                             {/* The "Viewport" */}
-                            <div className="flex-1 p-8 md:p-16 flex items-center justify-center">
+                            <div className="flex-1 p-8 md:p-16 flex items-center justify-center print-preview-parent">
                                 <div 
                                     ref={previewContainerRef}
-                                    className="w-full h-full rounded-[40px] border relative overflow-y-auto scroll-hide transition-all duration-1000 shadow-[0_40px_100px_-20px_rgba(0,0,0,0.9)]"
+                                    className="w-full h-full rounded-[40px] border relative overflow-y-auto scroll-hide transition-all duration-1000 shadow-[0_40px_100px_-20px_rgba(0,0,0,0.9)] portfolio-preview-viewport"
                                     style={{ 
                                         backgroundColor: currentStyle.bg,
                                         borderColor: theme === 'cyber' ? 'rgba(255,0,255,0.2)' : 'rgba(255,255,255,0.1)',
@@ -1686,10 +1711,69 @@ export default function Portfolio() {
                     animation: terminal-flicker 0.1s infinite;
                 }
                 @media print {
-                    .no-print { display: none !important; }
-                    aside { display: none !important; }
-                    main { width: 100% !important; margin: 0 !important; padding: 0 !important; }
-                    body { background: white !important; color: black !important; }
+                    .no-print,
+                    aside,
+                    [class*="no-print"],
+                    button,
+                    .fixed,
+                    .absolute.z-50 { 
+                        display: none !important; 
+                    }
+                    
+                    html, body, #root, [class*="min-h-screen"] {
+                        height: auto !important;
+                        min-height: 100vh !important;
+                        overflow: visible !important;
+                        background: transparent !important;
+                        color: inherit !important;
+                        display: block !important;
+                        width: 100% !important;
+                        margin: 0 !important;
+                        padding: 0 !important;
+                    }
+
+                    .flex-1,
+                    [class*="flex-1"],
+                    [class*="overflow-hidden"],
+                    [class*="overflow-y-auto"] {
+                        display: block !important;
+                        overflow: visible !important;
+                        height: auto !important;
+                        width: 100% !important;
+                        max-height: none !important;
+                    }
+
+                    div.flex-1.flex.overflow-hidden {
+                        display: block !important;
+                        overflow: visible !important;
+                    }
+
+                    .print-preview-parent {
+                        padding: 0 !important;
+                        margin: 0 !important;
+                        display: block !important;
+                        width: 100% !important;
+                    }
+
+                    .portfolio-preview-viewport {
+                        position: static !important;
+                        width: 100% !important;
+                        height: auto !important;
+                        min-height: 100vh !important;
+                        overflow: visible !important;
+                        border: none !important;
+                        border-radius: 0 !important;
+                        box-shadow: none !important;
+                        margin: 0 !important;
+                        padding: 0 !important;
+                        print-color-adjust: exact !important;
+                        -webkit-print-color-adjust: exact !important;
+                    }
+
+                    .portfolio-preview-viewport > div {
+                        padding: 24px !important;
+                        min-height: auto !important;
+                    }
                 }
             `}</style>
         </div>

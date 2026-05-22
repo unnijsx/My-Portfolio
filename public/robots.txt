@@ -1,4 +1,9 @@
+# Modern Robots.txt for Unnikrishnan V P Portfolio
+# Optimized for Web Developer, SEO, Hosting, and Deployment Services
+
 User-agent: *
 Allow: /
 
+# Host & Sitemap Directories
+Host: https://unni.rheox.online
 Sitemap: https://unni.rheox.online/sitemap.xml

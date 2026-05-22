@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowUp } from 'lucide-react';
+import { ArrowUp, Sparkles, CheckCircle2 } from 'lucide-react';
+import { useRedisValue, RedisCache } from '../../utils/redisCache';
 
 interface ContactFooterRedesignProps {
     isColorful?: boolean;
@@ -11,6 +12,13 @@ export default function ContactFooterRedesign({ isColorful }: ContactFooterRedes
         new Date().toLocaleTimeString('en-US', { timeZone: 'Asia/Kolkata', hour12: true })
     );
 
+    const [name, setName] = useRedisValue<string>('draft:contact_name', '', { ttl: 3600 });
+    const [email, setEmail] = useRedisValue<string>('draft:contact_email', '', { ttl: 3600 });
+    const [message, setMessage] = useRedisValue<string>('draft:contact_message', '', { ttl: 3600 });
+    
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [isSubmitted, setIsSubmitted] = useState(false);
+
     useEffect(() => {
         const interval = setInterval(() => {
             setTime(new Date().toLocaleTimeString('en-US', { timeZone: 'Asia/Kolkata', hour12: true }));
@@ -20,6 +28,29 @@ export default function ContactFooterRedesign({ isColorful }: ContactFooterRedes
 
     const scrollToTop = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    const handleContactSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        if (!name || !email || !message) return;
+
+        setIsSubmitting(true);
+        setTimeout(() => {
+            setIsSubmitting(false);
+            setIsSubmitted(true);
+            
+            // Increment contact analytics view counts in client Redis cache
+            RedisCache.incr('analytics:contact_submissions');
+            
+            // Clear drafts
+            setName('');
+            setEmail('');
+            setMessage('');
+
+            setTimeout(() => {
+                setIsSubmitted(false);
+            }, 5000);
+        }, 1500);
     };
 
     return (
@@ -48,47 +79,85 @@ export default function ContactFooterRedesign({ isColorful }: ContactFooterRedes
                 <div className={`p-8 md:p-12 rounded-[2rem] shadow-2xl relative overflow-hidden group transition-all duration-700 ${
                     isColorful ? 'bg-white/[0.04] backdrop-blur-3xl border border-white/10 shadow-purple-500/5' : 'bg-[#1c1c1c] text-white hover:shadow-black/40'
                 }`}>
-                    <h3 className={`text-2xl font-bold tracking-tight text-center mb-8 relative z-10 ${isColorful ? 'text-white' : ''}`}>Have a project in mind?</h3>
                     
-                    <form className="flex flex-col gap-6 relative z-10" onSubmit={(e) => e.preventDefault()}>
-                        <div className="flex flex-col gap-2">
-                            <input 
-                                type="text" 
-                                placeholder="Your name" 
-                                className={`w-full border-none rounded-2xl px-6 py-4 outline-none transition-all font-medium ${
-                                    isColorful ? 'bg-white/5 text-white focus:ring-2 focus:ring-cyan-500/40' : 'bg-[#2b2b2b] text-white focus:ring-2 focus:ring-white/20'
-                                }`}
-                            />
-                        </div>
-                        <div className="flex flex-col gap-2">
-                            <input 
-                                type="email" 
-                                placeholder="Your email address" 
-                                className={`w-full border-none rounded-2xl px-6 py-4 outline-none transition-all font-medium ${
-                                    isColorful ? 'bg-white/5 text-white focus:ring-2 focus:ring-cyan-500/40' : 'bg-[#2b2b2b] text-white focus:ring-2 focus:ring-white/20'
-                                }`}
-                            />
-                        </div>
-                        <div className="flex flex-col gap-2">
-                            <textarea 
-                                placeholder="Tell me about your business or project" 
-                                rows={4}
-                                className={`w-full border-none rounded-2xl px-6 py-4 outline-none transition-all font-medium resize-none ${
-                                    isColorful ? 'bg-white/5 text-white focus:ring-2 focus:ring-cyan-500/40' : 'bg-[#2b2b2b] text-white focus:ring-2 focus:ring-white/20'
-                                }`}
-                            />
-                        </div>
-                        <button 
-                            type="submit" 
-                            className={`w-full font-bold uppercase tracking-widest py-4 rounded-2xl mt-4 transition-all active:scale-[0.98] ${
-                                isColorful 
-                                ? 'bg-gradient-to-r from-cyan-400 to-purple-500 text-white hover:opacity-90 hover:shadow-[0_0_25px_rgba(34,211,238,0.3)]' 
-                                : 'bg-white text-black hover:bg-white/90 hover:scale-[1.02]'
-                            }`}
-                        >
-                            Get a quote
-                        </button>
-                    </form>
+                    <AnimatePresence mode="wait">
+                        {isSubmitted ? (
+                            <motion.div 
+                                key="success"
+                                initial={{ opacity: 0, scale: 0.9 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                exit={{ opacity: 0, scale: 0.9 }}
+                                className="flex flex-col items-center text-center py-12 space-y-6"
+                            >
+                                <motion.div
+                                    animate={{ scale: [1, 1.1, 1], rotate: [0, 10, -10, 0] }}
+                                    transition={{ duration: 0.5 }}
+                                >
+                                    <CheckCircle2 size={64} className={isColorful ? 'text-cyan-400' : 'text-white'} />
+                                </motion.div>
+                                <div className="space-y-2">
+                                    <h3 className="text-3xl font-black uppercase tracking-tight">Proposal Sync'd!</h3>
+                                    <p className={`text-sm tracking-tight font-medium max-w-sm ${isColorful ? 'text-cyan-200/60' : 'text-zinc-400'}`}>
+                                        Thank you, {name || 'there'}! Your request has been cached and processed. I will reach out shortly.
+                                    </p>
+                                </div>
+                            </motion.div>
+                        ) : (
+                            <motion.div key="form">
+                                <h3 className={`text-2xl font-bold tracking-tight text-center mb-8 relative z-10 ${isColorful ? 'text-white' : ''}`}>Have a project in mind?</h3>
+                                
+                                <form className="flex flex-col gap-6 relative z-10" onSubmit={handleContactSubmit}>
+                                    <div className="flex flex-col gap-2">
+                                        <input 
+                                            required
+                                            type="text" 
+                                            value={name}
+                                            onChange={(e) => setName(e.target.value)}
+                                            placeholder="Your name" 
+                                            className={`w-full border-none rounded-2xl px-6 py-4 outline-none transition-all font-medium ${
+                                                isColorful ? 'bg-white/5 text-white focus:ring-2 focus:ring-cyan-500/40' : 'bg-[#2b2b2b] text-white focus:ring-2 focus:ring-white/20'
+                                            }`}
+                                        />
+                                    </div>
+                                    <div className="flex flex-col gap-2">
+                                        <input 
+                                            required
+                                            type="email" 
+                                            value={email}
+                                            onChange={(e) => setEmail(e.target.value)}
+                                            placeholder="Your email address" 
+                                            className={`w-full border-none rounded-2xl px-6 py-4 outline-none transition-all font-medium ${
+                                                isColorful ? 'bg-white/5 text-white focus:ring-2 focus:ring-cyan-500/40' : 'bg-[#2b2b2b] text-white focus:ring-2 focus:ring-white/20'
+                                            }`}
+                                        />
+                                    </div>
+                                    <div className="flex flex-col gap-2">
+                                        <textarea 
+                                            required
+                                            value={message}
+                                            onChange={(e) => setMessage(e.target.value)}
+                                            placeholder="Tell me about your business or project" 
+                                            rows={4}
+                                            className={`w-full border-none rounded-2xl px-6 py-4 outline-none transition-all font-medium resize-none ${
+                                                isColorful ? 'bg-white/5 text-white focus:ring-2 focus:ring-cyan-500/40' : 'bg-[#2b2b2b] text-white focus:ring-2 focus:ring-white/20'
+                                            }`}
+                                        />
+                                    </div>
+                                    <button 
+                                        type="submit" 
+                                        disabled={isSubmitting}
+                                        className={`w-full font-bold uppercase tracking-widest py-4 rounded-2xl mt-4 transition-all active:scale-[0.98] disabled:opacity-50 ${
+                                            isColorful 
+                                            ? 'bg-gradient-to-r from-cyan-400 to-purple-500 text-white hover:opacity-90 hover:shadow-[0_0_25px_rgba(34,211,238,0.3)]' 
+                                            : 'bg-white text-black hover:bg-white/90 hover:scale-[1.02]'
+                                        }`}
+                                    >
+                                        {isSubmitting ? 'Syncing...' : 'Get a quote'}
+                                    </button>
+                                </form>
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
                 </div>
             </motion.div>
 

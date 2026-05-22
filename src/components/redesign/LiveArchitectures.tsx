@@ -1,17 +1,77 @@
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { ArrowUpRight } from 'lucide-react';
 import renderblob from '../../assets/images/renderblob.png';
 import rheox from '../../assets/images/rheoxdashboard.png';
 import portfoliocreator from '../../assets/images/portfoliocreator.png';
-import keralafreelance from '../../assets/images/keralafreelance.png';
+import rheoxservices from '../../assets/images/rheoxservices.png';
+import niranjanportfolio from '../../assets/images/niranjanportfolio.png';
 
 interface LiveArchitecturesProps {
     isColorful?: boolean;
 }
 
+const PROJECTS_DATA = [
+    {
+        title: "Portfolio Creator",
+        category: "BUILDER SUITE",
+        image: portfoliocreator,
+        link: "/portfoliocreator",
+        isInternal: true,
+        colorClass: "border-cyan-500/10 bg-cyan-950/5 hover:border-cyan-500/30 text-cyan-400",
+        colorText: "text-cyan-400",
+        colorBorder: "border-cyan-500/20",
+        colorGlow: "shadow-[0_0_40px_rgba(34,211,238,0.04)] hover:shadow-[0_0_50px_rgba(34,211,238,0.15)] hover:border-cyan-500/30"
+    },
+    {
+        title: "Rheox Dev Services",
+        category: "CREATIVE DIGITAL PRODUCTION",
+        image: rheoxservices,
+        link: "https://development.rheox.online/",
+        isInternal: false,
+        colorClass: "border-rose-500/10 bg-rose-950/5 hover:border-rose-500/30 text-rose-400",
+        colorText: "text-rose-400",
+        colorBorder: "border-rose-500/20",
+        colorGlow: "shadow-[0_0_40px_rgba(244,63,94,0.04)] hover:shadow-[0_0_50px_rgba(244,63,94,0.15)] hover:border-rose-500/30"
+    },
+    {
+        title: "RenderBlob Portfolio",
+        category: "Portfolio",
+        image: renderblob,
+        link: "https://renderblob-portfolio.vercel.app/",
+        isInternal: false,
+        colorClass: "border-blue-500/10 bg-blue-950/5 hover:border-blue-500/30 text-blue-400",
+        colorText: "text-blue-400",
+        colorBorder: "border-blue-500/20",
+        colorGlow: "shadow-[0_0_40px_rgba(59,130,246,0.04)] hover:shadow-[0_0_50px_rgba(59,130,246,0.15)] hover:border-blue-500/30"
+    },
+    {
+        title: "Niranjan Portfolio",
+        category: "Portfolio",
+        image: niranjanportfolio,
+        link: "https://niranjan.rheox.online/",
+        isInternal: false,
+        colorClass: "border-amber-500/10 bg-amber-950/5 hover:border-amber-500/30 text-amber-400",
+        colorText: "text-amber-400",
+        colorBorder: "border-amber-500/20",
+        colorGlow: "shadow-[0_0_40px_rgba(245,158,11,0.04)] hover:shadow-[0_0_50px_rgba(245,158,11,0.15)] hover:border-amber-500/30"
+    },
+    {
+        title: "Rheox Dashboard",
+        category: "DISCORD BOT DASHBOARD",
+        image: rheox,
+        link: "https://cloud.rheox.online/",
+        isInternal: false,
+        colorClass: "border-purple-500/10 bg-purple-950/5 hover:border-purple-500/30 text-purple-400",
+        colorText: "text-purple-400",
+        colorBorder: "border-purple-500/20",
+        colorGlow: "shadow-[0_0_40px_rgba(168,85,247,0.04)] hover:shadow-[0_0_50px_rgba(168,85,247,0.15)] hover:border-purple-500/30"
+    }
+];
+
 export default function LiveArchitectures({ isColorful }: LiveArchitecturesProps) {
     return (
-        <section id="architectures" className={`relative transition-colors duration-1000 ${isColorful ? 'bg-transparent' : 'bg-[#0E0E0E]'} text-[#E5E5E0] py-32 px-6 md:px-12 selection:bg-white selection:text-black`}>
+        <section id="works" className={`relative transition-colors duration-1000 ${isColorful ? 'bg-transparent' : 'bg-[#0E0E0E]'} text-[#E5E5E0] py-32 px-6 md:px-12 selection:bg-white selection:text-black`}>
             <motion.div 
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -32,115 +92,65 @@ export default function LiveArchitectures({ isColorful }: LiveArchitecturesProps
                 </div>
             </motion.div>
 
-            <div className="w-full flex justify-center py-6 md:py-12 relative min-h-[100vh] md:h-[120vh] group z-10">
+            {/* Premium, responsive Grid - High performance, no overloading */}
+            <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 relative z-10">
+                {PROJECTS_DATA.map((project, index) => {
+                    const CardWrapper = ({ children, className }: { children: React.ReactNode; className: string }) => {
+                        if (project.isInternal) {
+                            return <Link to={project.link} className={className}>{children}</Link>;
+                        }
+                        return <a href={project.link} target="_blank" rel="noreferrer" className={className}>{children}</a>;
+                    };
 
-                
-                {/* Floating Image 1 (Back left) - Portfolio Creator */}
-                <motion.div 
-                    initial={{ opacity: 0, x: -100, rotate: -10 }}
-                    whileInView={{ opacity: 1, x: 0, rotate: -5 }}
-                    whileHover={{ y: -20, rotate: 0, zIndex: 100 }}
-                    transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-                    viewport={{ once: true, margin: "-100px" }}
-                    className={`absolute left-[-5%] md:left-[5%] top-[5%] md:top-[10%] w-[70%] md:w-[40%] aspect-[16/10] rounded-2xl overflow-hidden shadow-2xl border transition-all duration-500 z-10 cursor-pointer ${
-                        isColorful ? 'border-cyan-500/30' : 'border-white/10'
-                    }`}
-                >
-                    <Link to="/portfoliocreator" className="block w-full h-full relative group/item">
-                        <img 
-                            src={portfoliocreator} 
-                            alt="Portfolio Creator Interface" 
-                            className="w-full h-full object-cover scale-105 group-hover:scale-110 transition-transform duration-[1.5s]" 
-                        />
-                        <div className={`absolute inset-0 transition-colors duration-1000 ${isColorful ? 'bg-cyan-950/20 group-hover:bg-transparent' : 'bg-black/40 group-hover:bg-black/10'}`} />
-                        <div className="absolute inset-x-0 bottom-0 p-8 flex flex-col justify-end bg-gradient-to-t from-black/80 to-transparent translate-y-4 opacity-0 group-hover/item:translate-y-0 group-hover/item:opacity-100 transition-all">
-                            <h4 className="text-xl font-black uppercase mb-1">Portfolio Creator</h4>
-                            <p className="text-[10px] font-bold tracking-widest text-cyan-400">BUILDER SUITE</p>
-                        </div>
-                    </Link>
-                </motion.div>
+                    return (
+                        <motion.div
+                            key={project.title}
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: index * 0.05 }}
+                            viewport={{ once: true, margin: "-50px" }}
+                            className={`group rounded-3xl overflow-hidden border ${
+                                isColorful ? 'border-white/5 bg-white/[0.02] backdrop-blur-md hover:border-white/10' : 'border-white/10 bg-[#141416] hover:border-white/20'
+                            } ${project.colorGlow} p-4 flex flex-col justify-between transition-all duration-500`}
+                        >
+                            <CardWrapper className="block w-full flex-grow">
+                                {/* Image Box with Lazy Loading and GPU-safe transitions */}
+                                <div className="w-full aspect-[16/10] rounded-2xl overflow-hidden mb-6 relative bg-black/40 border border-white/5 flex items-center justify-center">
+                                    <img 
+                                        src={project.image} 
+                                        alt={project.title} 
+                                        className="w-full h-full object-contain group-hover:scale-[1.02] transition-transform duration-500"
+                                        loading="lazy"
+                                    />
+                                    <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors duration-500" />
+                                </div>
 
-                {/* Floating Image 4 (Middle Left) - Renderblob */}
-                <motion.div 
-                    initial={{ opacity: 0, x: -50, y: 50, rotate: -5 }}
-                    whileInView={{ opacity: 1, x: 0, y: 0, rotate: -2 }}
-                    whileHover={{ y: -20, rotate: 0, zIndex: 100 }}
-                    transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
-                    viewport={{ once: true, margin: "-100px" }}
-                    className={`absolute left-[-2%] md:left-[8%] top-[35%] md:top-[40%] w-[75%] md:w-[48%] aspect-video rounded-2xl overflow-hidden shadow-2xl border transition-all duration-500 z-20 cursor-pointer ${
-                        isColorful ? 'border-blue-500/30' : 'border-white/10'
-                    }`}
-                >
-                    <a href="https://renderblob-portfolio.vercel.app/" target="_blank" rel="noreferrer" className="block w-full h-full relative group/item">
-                        <img 
-                            src={renderblob} 
-                            alt="Renderblob 3D Exploration" 
-                            className="w-full h-full object-cover scale-105 group-hover:scale-110 transition-transform duration-[1.5s]" 
-                        />
-                        <div className={`absolute inset-0 transition-colors duration-1000 ${isColorful ? 'bg-blue-950/20 group-hover:bg-transparent' : 'bg-black/40 group-hover:bg-black/10'}`} />
-                        <div className="absolute inset-x-0 bottom-0 p-8 flex flex-col justify-end bg-gradient-to-t from-black/80 to-transparent translate-y-4 opacity-0 group-hover/item:translate-y-0 group-hover/item:opacity-100 transition-all">
-                            <h4 className="text-xl font-black uppercase mb-1">RenderBlob</h4>
-                            <p className="text-[10px] font-bold tracking-widest text-blue-400">3D SPATIAL & GEOMETRY</p>
-                        </div>
-                    </a>
-                </motion.div>
+                                {/* Typography Section */}
+                                <div className="px-2">
+                                    <p className={`text-[10px] font-bold tracking-[0.2em] uppercase mb-2 ${project.colorText}`}>
+                                        {project.category}
+                                    </p>
+                                    <h3 className="text-2xl font-black uppercase mb-4 tracking-tight leading-none text-[#E5E5E0]">
+                                        {project.title}
+                                    </h3>
+                                </div>
+                            </CardWrapper>
 
-                {/* Floating Image 2 (Front right) - Kerala Freelance */}
-                <motion.div 
-                    initial={{ opacity: 0, x: 100, y: 50, rotate: 10 }}
-                    whileInView={{ opacity: 1, x: 0, y: 0, rotate: 5 }}
-                    whileHover={{ y: -20, rotate: 0, zIndex: 100 }}
-                    transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-                    viewport={{ once: true, margin: "-100px" }}
-                    className={`absolute right-[-5%] md:right-[5%] top-[20%] md:top-[25%] w-[85%] md:w-[50%] aspect-video rounded-2xl overflow-hidden shadow-[0_30px_60px_rgba(0,0,0,0.8)] border transition-all duration-500 z-30 cursor-pointer ${
-                        isColorful ? 'border-lime-500/30' : 'border-white/10'
-                    }`}
-                >
-                    <a href="https://keralafreelancecommunity.unni.rheox.online/" target="_blank" rel="noreferrer" className="block w-full h-full relative group/item">
-                        <img 
-                            src={keralafreelance} 
-                            alt="Kerala Freelance Community" 
-                            className="w-full h-full object-cover scale-[1.03] group-hover:scale-105 transition-transform duration-[1.5s]" 
-                        />
-                         <div className={`absolute inset-0 transition-colors duration-1000 ${isColorful ? 'bg-lime-950/20 group-hover:bg-transparent' : 'bg-black/20 group-hover:bg-transparent'}`} />
-                         <div className="absolute inset-x-0 bottom-0 p-8 flex flex-col justify-end bg-gradient-to-t from-black/80 to-transparent translate-y-4 opacity-0 group-hover/item:translate-y-0 group-hover/item:opacity-100 transition-all">
-                            <h4 className="text-xl font-black uppercase mb-1">Kerala Freelance Community</h4>
-                            <p className="text-[10px] font-bold tracking-widest text-lime-400">NETWORK & COLLABORATION</p>
-                        </div>
-                    </a>
-                </motion.div>
-
-                {/* Floating Image 3 (Front center) - Rheox Dashboard */}
-                <motion.div 
-                    initial={{ opacity: 0, y: 100, scale: 0.9 }}
-                    whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                    whileHover={{ y: -30, rotate: 0, zIndex: 100 }}
-                    transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-                    viewport={{ once: true, margin: "-100px" }}
-                    className={`absolute left-1/2 -translate-x-1/2 bottom-0 w-[95%] md:w-[60%] aspect-video rounded-3xl overflow-hidden shadow-[0_50px_100px_rgba(0,0,0,0.9)] border transition-all duration-700 z-40 cursor-pointer ${
-                        isColorful ? 'border-purple-400/40 shadow-[0_0_50px_rgba(168,85,247,0.2)]' : 'border-white/20'
-                    }`}
-                >
-                    <a href="https://cloud.rheox.online/" target="_blank" rel="noreferrer" className="block w-full h-full relative group/item">
-                        <img 
-                            src={rheox} 
-                            alt="Rheox Dashboard Interface" 
-                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[2s]" 
-                        />
-                        <div className={`absolute inset-0 transition-colors duration-1000 ${isColorful ? 'bg-purple-950/30' : 'bg-black/30 group-hover:bg-transparent'}`} />
-                        <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/60 opacity-0 group-hover/item:opacity-100 transition-opacity">
-                            <span className="text-[10px] font-black uppercase tracking-[0.5em] px-8 py-3 bg-white text-black rounded-full mb-4">VIEW ANALYTICS</span>
-                            <p className="text-white/40 text-[9px] font-bold uppercase tracking-widest">LIVE SYSTEM</p>
-                        </div>
-                        <div className="absolute inset-x-0 bottom-0 p-12 flex flex-col justify-end bg-gradient-to-t from-black/90 to-transparent translate-y-4 opacity-0 group-hover/item:translate-y-0 group-hover/item:opacity-100 transition-all">
-                            <h4 className="text-4xl font-black uppercase mb-2 tracking-tighter">Rheox Dashboard</h4>
-                            <p className="text-[12px] font-bold tracking-[0.4em] text-purple-400 uppercase">SaaS Optimization Hub</p>
-                        </div>
-                    </a>
-                </motion.div>
-
+                            {/* Standardized "View Live" button */}
+                            <div className="mt-4 px-2 pb-2 flex justify-start items-center">
+                                <CardWrapper className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-bold tracking-widest uppercase transition-all duration-300 ${
+                                    isColorful 
+                                    ? `bg-white/5 hover:bg-white/10 ${project.colorText} border border-white/10` 
+                                    : 'bg-white text-black hover:bg-white/90'
+                                }`}>
+                                    <span>VIEW LIVE</span>
+                                    <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                                </CardWrapper>
+                            </div>
+                        </motion.div>
+                    );
+                })}
             </div>
-
         </section>
     );
 }

@@ -11,7 +11,7 @@ function App() {
         "@id": "https://unni.rheox.online/#organization",
         "name": "Unnijsx Online",
         "url": "https://unni.rheox.online/",
-        "logo": "https://unni.rheox.online/src/assets/1_1.jpg",
+        "logo": "https://unni.rheox.online/1_1.jpg",
         "sameAs": [
           "https://www.linkedin.com/in/unnikrishnanvp/",
           "https://github.com/unnijsx",
@@ -27,7 +27,7 @@ function App() {
         "@id": "https://unni.rheox.online/#person",
         "name": "Unnikrishnan V P (unnijsx)",
         "url": "https://unni.rheox.online/",
-        "image": "https://unni.rheox.online/src/assets/1_1.jpg",
+        "image": "https://unni.rheox.online/1_1.jpg",
         "sameAs": [
           "https://www.linkedin.com/in/unnikrishnanvp/",
           "https://github.com/unnijsx",

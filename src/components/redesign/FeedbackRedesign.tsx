@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { RatingInteraction } from '../ui/emoji-rating';
 import { X, Send, Sparkles } from 'lucide-react';
+import { useRedisValue, RedisCache } from '../../utils/redisCache';
 
 interface FeedbackRedesignProps {
     isColorful?: boolean;
@@ -9,12 +10,17 @@ interface FeedbackRedesignProps {
 
 export default function FeedbackRedesign({ isColorful }: FeedbackRedesignProps) {
     const [isPopupOpen, setIsPopupOpen] = useState(false);
-    const [rating, setRating] = useState(0);
-    const [feedback, setFeedback] = useState('');
+    const [rating, setRating] = useRedisValue<number>('draft:feedback_rating', 0, { ttl: 1800 });
+    const [feedback, setFeedback] = useRedisValue<string>('draft:feedback_text', '', { ttl: 1800 });
+    const [hasSubmittedToday, setHasSubmittedToday] = useRedisValue<boolean>('submitted:feedback', false, { ttl: 86400 });
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSubmitted, setIsSubmitted] = useState(false);
 
     const handleRatingChange = (val: number) => {
+        if (hasSubmittedToday) {
+            setIsPopupOpen(true);
+            return;
+        }
         setRating(val);
         // Let the emoji animation complete before opening the detailed feedback
         setTimeout(() => setIsPopupOpen(true), 800);
@@ -39,10 +45,13 @@ export default function FeedbackRedesign({ isColorful }: FeedbackRedesignProps) 
 
             if (response.ok) {
                 setIsSubmitted(true);
+                setHasSubmittedToday(true);
+                // Clear the drafts from Redis
+                setFeedback('');
+                setRating(0);
                 setTimeout(() => {
                     setIsPopupOpen(false);
                     setIsSubmitted(false);
-                    setFeedback('');
                 }, 3000);
             }
         } catch (error) {
@@ -81,10 +90,7 @@ export default function FeedbackRedesign({ isColorful }: FeedbackRedesignProps) 
                         viewport={{ once: true }}
                         className="text-center mb-20 space-y-4"
                     >
-                        <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-full border transition-all ${isColorful ? 'border-cyan-500/30 bg-cyan-500/10 text-cyan-400' : 'border-white/10 bg-white/5 text-white/40'}`}>
-                            <Sparkles size={10} className={isColorful ? 'text-cyan-400' : 'text-yellow-500/50'} />
-                            <span className="text-[10px] font-black uppercase tracking-[0.3em]">Experience Hub</span>
-                        </div>
+                        
                         <h2 className="text-5xl md:text-8xl font-black tracking-[-0.04em] uppercase leading-tight">
                             RATE THE <span className={`transition-colors ${isColorful ? 'text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500' : 'text-white/20'}`}>EXPERIENCE</span>
                         </h2>
@@ -151,17 +157,32 @@ export default function FeedbackRedesign({ isColorful }: FeedbackRedesignProps) 
                                 <X size={20} />
                             </button>
 
-                            {isSubmitted ? (
+                            {isSubmitted || hasSubmittedToday ? (
                                 <motion.div 
-                                    initial={{ opacity: 0, scale: 0.5 }}
+                                    initial={{ opacity: 0, scale: 0.9 }}
                                     animate={{ opacity: 1, scale: 1 }}
-                                    className="py-12 text-center space-y-6"
+                                    className="py-12 text-center space-y-6 flex flex-col items-center justify-center"
                                 >
-                                    <div className="text-6xl md:text-7xl">✨</div>
-                                    <div className="space-y-2">
+                                    <div className="text-6xl md:text-7xl animate-bounce">✨</div>
+                                    <div className="space-y-4">
                                         <h3 className={`text-3xl md:text-4xl font-black tracking-tighter uppercase underline underline-offset-8 ${isColorful ? 'decoration-cyan-500/30' : 'decoration-white/10'}`}>Gratitude</h3>
-                                        <p className={`text-sm md:text-lg font-bold tracking-tight uppercase ${isColorful ? 'text-cyan-400/60' : 'text-white/40'}`}>Your insight has been secured.</p>
+                                        <p className={`text-sm md:text-lg font-bold tracking-tight uppercase ${isColorful ? 'text-cyan-400/60' : 'text-white/40'}`}>
+                                            {isSubmitted ? "Your insight has been secured." : "Insight Secured & Saved Today!"}
+                                        </p>
+                                        <p className="text-xs text-white/30 max-w-xs mx-auto">
+                                            {hasSubmittedToday && "Anti-spam rate limit active. Your submission has been optimized and cached client-side for 24 hours."}
+                                        </p>
                                     </div>
+                                    {hasSubmittedToday && (
+                                        <button
+                                            onClick={() => setHasSubmittedToday(false)}
+                                            className={`text-[10px] tracking-widest uppercase font-black opacity-30 hover:opacity-100 transition-opacity border rounded-full px-4 py-2 mt-6 cursor-pointer ${
+                                                isColorful ? 'border-purple-500/30 text-purple-400' : 'border-white/10 text-white'
+                                            }`}
+                                        >
+                                            Reset Rate Limit (Debug Mode)
+                                        </button>
+                                    )}
                                 </motion.div>
                             ) : (
                                 <form onSubmit={handleSubmit} className="space-y-10 relative z-10">

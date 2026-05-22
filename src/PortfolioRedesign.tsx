@@ -5,21 +5,28 @@ import { Sun, Moon } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
 import HeroRedesign from './components/redesign/HeroRedesign';
 import ServicesRedesign from './components/redesign/ServicesRedesign';
-import WorksRedesign from './components/redesign/WorksRedesign';
 import SkillsRedesign from './components/redesign/SkillsRedesign';
 import LiveArchitectures from './components/redesign/LiveArchitectures';
 import FeedbackRedesign from './components/redesign/FeedbackRedesign';
 import ContactFooterRedesign from './components/redesign/ContactFooterRedesign';
 import OverlayMenu from './components/redesign/OverlayMenu';
+import { RedisCache, useRedisValue } from './utils/redisCache';
+import RedisConsole from './components/redesign/RedisConsole';
 
 export default function PortfolioRedesign() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [isColorful, setIsColorful] = useState(false);
+    const [isColorful, setIsColorful] = useRedisValue('theme:colorful', false);
     const { scrollY } = useScroll();
 
     // Fade logo in only after scrolling past the Hero header
     const logoOpacity = useTransform(scrollY, [0, 100], [0, 1]);
     const logoY = useTransform(scrollY, [0, 100], [-10, 0]);
+
+    useEffect(() => {
+        // Analytics: Increment local session view count
+        RedisCache.incr('analytics:page_views');
+        RedisCache.set('analytics:last_session_time', new Date().toLocaleString());
+    }, []);
 
     useEffect(() => {
         // Prevent body scroll when menu is open
@@ -35,8 +42,33 @@ export default function PortfolioRedesign() {
         <ReactLenis root>
             <div className={`transition-colors duration-1000 ${isColorful ? 'bg-[#0A0A0B]' : 'bg-[#E5E5E0]'} text-[#1c1c1c] font-sans selection:bg-black selection:text-white w-full overflow-x-clip`}>
                 <Helmet>
-                    <title>Unnikrishnan V P | Full Stack Developer Portfolio</title>
-                    <meta name="description" content="Looking for growth in your business? Make it digitalized! Contact Unnikrishnan V P for modern Website Development, UI/UX design, and full-stack solutions." />
+                    <title>Unnikrishnan V P | Affordable Website Developer & SEO Expert | UNNI.JSX</title>
+                    <meta name="description" content="Affordable web developer & SEO expert. Get fast React/MERN web development, modern UI/UX, hosting, and secure deployment by Unnikrishnan V P (UNNI.JSX)." />
+                    <meta name="keywords" content="affordable website developer, affordable web developer, web developer affordable price, professional SEO specialist, website hosting and deployment, custom web development, React developer, full stack developer, Unnikrishnan V P, UNNI.JSX, rheox" />
+                    <meta name="robots" content="index, follow, max-image-preview:large" />
+                    <meta name="publisher" content="Unnikrishnan V P" />
+                    
+                    {/* Open Graph / Facebook */}
+                    <meta property="og:type" content="website" />
+                    <meta property="og:url" content="https://unni.rheox.online/" />
+                    <meta property="og:title" content="Unnikrishnan V P | Affordable Website Developer & SEO Expert | UNNI.JSX" />
+                    <meta property="og:description" content="Affordable web developer & SEO expert. Get fast React/MERN web development, modern UI/UX, hosting, and secure deployment by Unnikrishnan V P (UNNI.JSX)." />
+                    <meta property="og:image" content="https://unni.rheox.online/og-image.jpg" />
+                    <meta property="og:image:width" content="1200" />
+                    <meta property="og:image:height" content="630" />
+                    <meta property="og:image:type" content="image/jpeg" />
+                    <meta property="og:image:alt" content="Unnikrishnan V P - Affordable Website Developer & SEO Expert Portfolio" />
+                    <meta property="og:site_name" content="UNNI.JSX" />
+                    <meta property="og:locale" content="en_US" />
+
+                    {/* Twitter */}
+                    <meta name="twitter:card" content="summary_large_image" />
+                    <meta name="twitter:url" content="https://unni.rheox.online/" />
+                    <meta name="twitter:title" content="Unnikrishnan V P | Affordable Website Developer & SEO Expert | UNNI.JSX" />
+                    <meta name="twitter:description" content="Affordable web developer & SEO expert. Get fast React/MERN web development, modern UI/UX, hosting, and secure deployment by Unnikrishnan V P (UNNI.JSX)." />
+                    <meta name="twitter:image" content="https://unni.rheox.online/og-image.jpg" />
+                    <meta name="twitter:site" content="@unnijsx" />
+                    <meta name="twitter:creator" content="@unnijsx" />
                 </Helmet>
                 
                 {/* Navbar */}
@@ -81,14 +113,13 @@ export default function PortfolioRedesign() {
                 <main className="relative z-10 transition-colors duration-1000">
                     <HeroRedesign isColorful={isColorful} setIsColorful={setIsColorful} />
                     <ServicesRedesign isColorful={isColorful} />
-                    <WorksRedesign isColorful={isColorful} />
                     <SkillsRedesign isColorful={isColorful} />
                     <LiveArchitectures isColorful={isColorful} />
                     <FeedbackRedesign isColorful={isColorful} />
                     <ContactFooterRedesign isColorful={isColorful} />
                 </main>
 
-
+                {import.meta.env.DEV && <RedisConsole isColorful={isColorful} />}
             </div>
         </ReactLenis>
     );
