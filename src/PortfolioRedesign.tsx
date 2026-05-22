@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ReactLenis } from 'lenis/react';
 import { Sun, Moon } from 'lucide-react';
-import { Helmet } from 'react-helmet-async';
 import HeroRedesign from './components/redesign/HeroRedesign';
 import ServicesRedesign from './components/redesign/ServicesRedesign';
 import SkillsRedesign from './components/redesign/SkillsRedesign';
@@ -41,35 +40,6 @@ export default function PortfolioRedesign() {
     return (
         <ReactLenis root>
             <div className={`transition-colors duration-1000 ${isColorful ? 'bg-[#0A0A0B]' : 'bg-[#E5E5E0]'} text-[#1c1c1c] font-sans selection:bg-black selection:text-white w-full overflow-x-clip`}>
-                <Helmet>
-                    <title>Unnikrishnan V P | Affordable Website Developer & SEO Expert | UNNI.JSX</title>
-                    <meta name="description" content="Affordable web developer & SEO expert. Get fast React/MERN web development, modern UI/UX, hosting, and secure deployment by Unnikrishnan V P (UNNI.JSX)." />
-                    <meta name="keywords" content="affordable website developer, affordable web developer, web developer affordable price, professional SEO specialist, website hosting and deployment, custom web development, React developer, full stack developer, Unnikrishnan V P, UNNI.JSX, rheox" />
-                    <meta name="robots" content="index, follow, max-image-preview:large" />
-                    <meta name="publisher" content="Unnikrishnan V P" />
-                    
-                    {/* Open Graph / Facebook */}
-                    <meta property="og:type" content="website" />
-                    <meta property="og:url" content="https://www.unni.rheox.online/" />
-                    <meta property="og:title" content="Unnikrishnan V P | Affordable Website Developer & SEO Expert | UNNI.JSX" />
-                    <meta property="og:description" content="Affordable web developer & SEO expert. Get fast React/MERN web development, modern UI/UX, hosting, and secure deployment by Unnikrishnan V P (UNNI.JSX)." />
-                    <meta property="og:image" content="https://www.unni.rheox.online/og-image.jpg" />
-                    <meta property="og:image:width" content="1200" />
-                    <meta property="og:image:height" content="630" />
-                    <meta property="og:image:type" content="image/jpeg" />
-                    <meta property="og:image:alt" content="Unnikrishnan V P - Affordable Website Developer & SEO Expert Portfolio" />
-                    <meta property="og:site_name" content="UNNI.JSX" />
-                    <meta property="og:locale" content="en_US" />
-
-                    {/* Twitter */}
-                    <meta name="twitter:card" content="summary_large_image" />
-                    <meta name="twitter:url" content="https://www.unni.rheox.online/" />
-                    <meta name="twitter:title" content="Unnikrishnan V P | Affordable Website Developer & SEO Expert | UNNI.JSX" />
-                    <meta name="twitter:description" content="Affordable web developer & SEO expert. Get fast React/MERN web development, modern UI/UX, hosting, and secure deployment by Unnikrishnan V P (UNNI.JSX)." />
-                    <meta name="twitter:image" content="https://www.unni.rheox.online/og-image.jpg" />
-                    <meta name="twitter:site" content="@unnijsx" />
-                    <meta name="twitter:creator" content="@unnijsx" />
-                </Helmet>
                 
                 {/* Navbar */}
                 <nav className="fixed top-0 left-0 w-full z-50 px-6 py-8 md:px-12 pointer-events-none">
