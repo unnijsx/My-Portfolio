@@ -1,6 +1,9 @@
 {
   "rewrites": [
-    { "source": "/(.*)", "destination": "/" }
+    {
+      "source": "/((?!robots\\.txt|sitemap\\.xml|sw\\.js|.*\\..*).*)",
+      "destination": "/"
+    }
   ],
   "headers": [
     {
