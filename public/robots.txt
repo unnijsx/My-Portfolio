@@ -5,5 +5,5 @@ User-agent: *
 Allow: /
 
 # Host & Sitemap Directories
-Host: https://www.unnijsx.online
-Sitemap: https://www.unnijsx.online/sitemap.xml
+Host: https://www.unni.rheox.online
+Sitemap: https://www.unni.rheox.online/sitemap.xml
