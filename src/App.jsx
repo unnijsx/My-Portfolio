@@ -7,6 +7,13 @@ function App() {
     "@context": "https://schema.org",
     "@graph": [
       {
+        "@type": "WebSite",
+        "@id": "https://www.unni.rheox.online/#website",
+        "name": "UNNI.JSX",
+        "alternateName": ["Unnikrishnan V P", "UNNI.JSX Portfolio"],
+        "url": "https://www.unni.rheox.online/"
+      },
+      {
         "@type": "Organization",
         "@id": "https://www.unni.rheox.online/#organization",
         "name": "UNNI.JSX",
