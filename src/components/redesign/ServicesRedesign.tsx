@@ -23,11 +23,23 @@ export default function ServicesRedesign({ isColorful }: ServicesRedesignProps) 
             title: "UI/UX & Frontend", 
             body: "Currently a MERN Stack Developer @ Srishti Innovative. I design and develop intuitive interfaces that work smoothly across devices, with a strong focus on pixel-perfect Figma translations.", 
             items: ["React, Material UI, Ant Design", "Figma → React Components", "Performance Optimization"] 
+        },
+        { 
+            num: "03", 
+            title: "SEO Optimization", 
+            body: "Optimizing search visibility and technical performance. I implement search engine strategies, schema structured data, semantic HTML, and core web vitals speed-tuning to rank websites high on Google.", 
+            items: ["Technical SEO & Schema.org", "Google Search Console & Indexing", "Performance & Speed Tuning"] 
+        },
+        { 
+            num: "04", 
+            title: "Hosting & Deployment", 
+            body: "Providing complete cloud infrastructure and deployment. I manage secure hosting for frontend interfaces and backend APIs, configure server environments, and handle end-to-end DNS and SSL setups.", 
+            items: ["Cloud Hosting & Serverless APIs", "End-to-End DNS & SSL Configuration", "CI/CD Pipelines & Deployments"] 
         }
     ];
 
     return (
-        <section id="services" className={`relative min-h-screen transition-colors duration-1000 ${isColorful ? 'bg-transparent' : 'bg-[#0E0E0E]'} text-[#E5E5E0] py-32 px-6 md:px-12 selection:bg-white selection:text-black`}>
+        <section id="services" className={`relative min-h-screen transition-colors duration-1000 ${isColorful ? 'bg-transparent' : 'bg-[#0E0E0E]'} text-[#E5E5E0] pt-32 pb-8 px-6 md:px-12 selection:bg-white selection:text-black`}>
             <motion.div 
                 variants={fadeUp}
                 initial="hidden"
@@ -50,8 +62,8 @@ export default function ServicesRedesign({ isColorful }: ServicesRedesignProps) 
                             (ABOUT ME)
                         </p>
                         <h3 className={`text-3xl font-black leading-tight border-l-2 pl-6 py-2 transition-colors duration-500 ${isColorful ? 'border-purple-500/40' : 'border-white/20'}`}>
-                             A Developer based <br />
-                             in <span className={`${isColorful ? 'text-cyan-400' : 'text-white'} italic transition-colors`}>India 🇮🇳</span>
+                             Web Developer based <br />
+                             in <span className={`${isColorful ? 'text-cyan-400' : 'text-white'} italic transition-colors`}>Kerala, India 🇮🇳</span>
                         </h3>
                         <div className="flex gap-4 items-center">
                             <div className={`size-12 rounded-full flex items-center justify-center font-bold text-xl border transition-all duration-500 ${isColorful ? 'bg-purple-500/10 border-purple-500/30' : 'bg-white/5 border-white/10'}`}>1+</div>
@@ -60,7 +72,7 @@ export default function ServicesRedesign({ isColorful }: ServicesRedesignProps) 
                     </motion.div>
                 </div>
 
-                <div className="col-span-1 md:col-span-7 flex flex-col gap-10 md:gap-12 pb-[10vh] md:pb-[20vh]">
+                <div className="col-span-1 md:col-span-7 flex flex-col gap-10 md:gap-12 pb-8">
                     
                     <motion.p 
                         variants={fadeUp}
@@ -69,7 +81,7 @@ export default function ServicesRedesign({ isColorful }: ServicesRedesignProps) 
                         viewport={{ once: true, margin: "-100px" }}
                         className={`text-xl md:text-2xl font-medium leading-relaxed max-w-xl mb-8 md:mb-12 transition-colors duration-500 ${isColorful ? 'text-white/90' : 'text-[#E5E5E0]/80'}`}
                     >
-                        I'm a detail-oriented and motivated MERN Stack Developer with experience in designing and building full-stack applications. I treat every problem as a puzzle to be solved with clean, efficient code.
+                        I'm Unnikrishnan V P, a professional website developer and freelance web developer in Kerala. Specializing in high-performance MERN stack applications, SEO, and modern digital architectures, I turn complex problems into clean, efficient web solutions.
                     </motion.p>
 
                     <div className="relative w-full">

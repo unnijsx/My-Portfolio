@@ -39,7 +39,7 @@ export default function HeroRedesign({ isColorful, setIsColorful }: HeroRedesign
                 className="w-full flex flex-row justify-between items-start z-[60] pt-8 md:pt-0 pointer-events-none"
             >
                 <div className="flex flex-col gap-1 pointer-events-auto">
-                    <span className={`text-[10px] font-bold uppercase tracking-[0.2em] opacity-40 ${isColorful ? 'text-white' : ''}`}>(Full Stack Developer)</span>
+                    <span className={`text-[10px] font-bold uppercase tracking-[0.2em] opacity-40 ${isColorful ? 'text-white' : ''}`}>(Web & Website Developer)</span>
                     <span className={`font-bold text-xs md:text-sm tracking-tight whitespace-nowrap ${isColorful ? 'text-white' : ''}`}>UNNIKRISHNAN V P</span>
                 </div>
 
@@ -128,7 +128,7 @@ export default function HeroRedesign({ isColorful, setIsColorful }: HeroRedesign
                 <div className="max-w-xs flex flex-col items-center md:items-start text-center md:text-left gap-4">
                     <ArrowDownRight size={32} strokeWidth={1} className={`${isColorful ? 'text-cyan-400/50' : 'opacity-40'} hidden md:block`} />
                     <p className={`text-base md:text-xl font-medium leading-tight max-w-[220px] md:max-w-none ${isColorful ? 'text-white/80' : 'text-[#1c1c1c]'}`}>
-                        Developer specialized in MERN stack, REST APIs, and full project architecture.
+                        Freelance website developer and web developer in Kerala, specializing in MERN stack, SEO, and full project architecture.
                     </p>
                 </div>
                 

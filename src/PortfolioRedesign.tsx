@@ -47,7 +47,7 @@ export default function PortfolioRedesign() {
                         {/* Logo - Fades in on scroll */}
                         <motion.div 
                             style={{ opacity: logoOpacity, y: logoY }}
-                            className={`text-sm font-black tracking-[0.2em] uppercase transition-colors duration-500 pointer-events-auto ${isColorful ? 'text-white' : 'text-black'}`}
+                            className="text-sm font-black tracking-[0.2em] uppercase transition-all duration-500 pointer-events-auto text-white mix-blend-difference"
                         >
                             UNNIKRISHNAN
                         </motion.div>

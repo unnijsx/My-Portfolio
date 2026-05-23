@@ -71,7 +71,7 @@ const PROJECTS_DATA = [
 
 export default function LiveArchitectures({ isColorful }: LiveArchitecturesProps) {
     return (
-        <section id="works" className={`relative transition-colors duration-1000 ${isColorful ? 'bg-transparent' : 'bg-[#0E0E0E]'} text-[#E5E5E0] py-32 px-6 md:px-12 selection:bg-white selection:text-black`}>
+        <section id="works" className={`relative transition-colors duration-1000 ${isColorful ? 'bg-transparent' : 'bg-[#0E0E0E]'} text-[#E5E5E0] pt-8 pb-32 px-6 md:px-12 selection:bg-white selection:text-black`}>
             <motion.div 
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}

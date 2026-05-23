@@ -16,7 +16,7 @@ export default function SkillsRedesign({ isColorful }: SkillsRedesignProps) {
     };
 
     return (
-        <section id="skills" className={`relative min-h-screen transition-colors duration-1000 ${isColorful ? 'bg-transparent' : 'bg-[#0E0E0E]'} text-[#E5E5E0] py-32 px-6 md:px-12 selection:bg-white selection:text-black flex flex-col justify-between overflow-hidden`}>
+        <section id="skills" className={`relative transition-colors duration-1000 ${isColorful ? 'bg-transparent' : 'bg-[#0E0E0E]'} text-[#E5E5E0] py-8 md:py-10 px-6 md:px-12 selection:bg-white selection:text-black overflow-hidden`}>
             
             {/* Top Section */}
             <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8 items-start relative z-10 w-full">

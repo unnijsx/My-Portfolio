@@ -56,13 +56,13 @@ export default function ContactFooterRedesign({ isColorful }: ContactFooterRedes
     return (
         <section id="contact" className={`relative transition-colors duration-1000 ${isColorful ? 'bg-transparent text-white selection:bg-cyan-500' : 'bg-[#E5E5E0] text-[#1c1c1c] selection:bg-black'} selection:text-white pt-32 rounded-t-[3rem] -mt-[3rem] z-20 shadow-[0_-20px_50px_rgba(0,0,0,0.5)] overflow-hidden`}>
             {/* Top Heading */}
-            <div className="px-6 md:px-12 text-center flex justify-center mb-16 overflow-hidden max-w-full relative z-10">
+            <div className="px-6 md:px-12 text-center flex justify-center mb-8 md:mb-12 max-w-full relative z-10">
                 <motion.h2 
-                    initial={{ y: 100, opacity: 0 }}
+                    initial={{ y: 20, opacity: 0 }}
                     whileInView={{ y: 0, opacity: 1 }}
-                    transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+                    transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                     viewport={{ once: true }}
-                    className={`text-[10vw] leading-[0.8] font-black tracking-[-0.04em] uppercase max-w-full break-words transition-all duration-700 ${isColorful ? 'text-transparent bg-clip-text bg-gradient-to-r from-white via-cyan-200 to-purple-400 drop-shadow-[0_0_30px_rgba(255,255,255,0.1)]' : ''}`}
+                    className={`text-[10vw] md:text-[6vw] lg:text-[5vw] leading-[0.8] font-black tracking-[-0.04em] uppercase max-w-full break-words transition-all duration-700 ${isColorful ? 'text-transparent bg-clip-text bg-gradient-to-r from-white via-cyan-200 to-purple-400 drop-shadow-[0_0_30px_rgba(255,255,255,0.1)]' : 'text-[#1c1c1c]'}`}
                 >
                     LET'S MAKE<br />IT HAPPEN
                 </motion.h2>
