@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowUp, Sparkles, CheckCircle2 } from 'lucide-react';
 import { useRedisValue, RedisCache } from '../../utils/redisCache';
+import { BuyMeChaiCard } from './BuyMeChai';
 
 interface ContactFooterRedesignProps {
     isColorful?: boolean;
@@ -160,6 +161,8 @@ export default function ContactFooterRedesign({ isColorful }: ContactFooterRedes
                     </AnimatePresence>
                 </div>
             </motion.div>
+
+            <BuyMeChaiCard isColorful={isColorful} />
 
             {/* Footer Area */}
             <div className={`border-t px-6 md:px-12 py-12 flex flex-col md:flex-row justify-between gap-12 font-medium relative z-10 transition-colors ${isColorful ? 'border-white/5' : 'border-black/10'}`}>

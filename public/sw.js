@@ -36,6 +36,9 @@ self.addEventListener('fetch', (event) => {
   const url = new URL(event.request.url);
   if (!url.protocol.startsWith('http')) return;
 
+  // Bypass service worker interception completely during development on localhost
+  if (url.hostname === 'localhost' || url.hostname === '127.0.0.1') return;
+
   // Network-First for HTML/navigation requests (guarantees latest JS/CSS bundle hashes on redeployment)
   if (event.request.mode === 'navigate' || url.pathname === '/' || url.pathname.endsWith('.html')) {
     event.respondWith(

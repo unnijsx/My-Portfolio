@@ -11,6 +11,7 @@ import ContactFooterRedesign from './components/redesign/ContactFooterRedesign';
 import OverlayMenu from './components/redesign/OverlayMenu';
 import { RedisCache, useRedisValue } from './utils/redisCache';
 import RedisConsole from './components/redesign/RedisConsole';
+import { BuyMeChaiFloating } from './components/redesign/BuyMeChai';
 
 export default function PortfolioRedesign() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -88,6 +89,8 @@ export default function PortfolioRedesign() {
                     <FeedbackRedesign isColorful={isColorful} />
                     <ContactFooterRedesign isColorful={isColorful} />
                 </main>
+
+                <BuyMeChaiFloating isColorful={isColorful} />
 
                 {import.meta.env.DEV && <RedisConsole isColorful={isColorful} />}
             </div>
