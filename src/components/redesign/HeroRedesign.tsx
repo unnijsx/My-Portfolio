@@ -88,9 +88,9 @@ export default function HeroRedesign({ isColorful, setIsColorful }: HeroRedesign
                             initial={{ opacity: 0, scale: 1.1 }}
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: TEXT_DELAY }}
-                            className={`text-[11vw] sm:text-5xl md:text-[12vw] font-black tracking-[-0.06em] uppercase whitespace-nowrap leading-none transition-all duration-700 w-full text-center ${isColorful ? 'text-transparent bg-clip-text bg-gradient-to-r from-white via-cyan-100 to-purple-200 drop-shadow-[0_0_40px_rgba(34,211,238,0.2)]' : ''}`}
+                            className={`text-[9vw] sm:text-5xl md:text-[9.5vw] font-black tracking-[-0.06em] uppercase whitespace-nowrap leading-none transition-all duration-700 w-full text-center ${isColorful ? 'text-transparent bg-clip-text bg-gradient-to-r from-white via-cyan-100 to-purple-200 drop-shadow-[0_0_40px_rgba(34,211,238,0.2)]' : ''}`}
                         >
-                            UNNIKRISHNAN
+                            UNNIKRISHNAN V P
                         </motion.h1>
                     </div>
                 </motion.div>
@@ -109,7 +109,7 @@ export default function HeroRedesign({ isColorful, setIsColorful }: HeroRedesign
                     >
                         <img 
                             src={profileImage} 
-                            alt="Unnikrishnan" 
+                            alt="Unnikrishnan V P - Freelance Web Developer & MERN Stack Expert" 
                             className={`w-full h-full object-contain object-bottom transition-all duration-700 ${isColorful ? 'filter-none brightness-90 group-hover:brightness-110' : 'filter grayscale brightness-[0.85] md:brightness-[0.85] group-hover:brightness-100'}`}
                         />
                         {/* Fades photo into the section background */}

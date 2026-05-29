@@ -81,7 +81,7 @@ export default function ServicesRedesign({ isColorful }: ServicesRedesignProps) 
                         viewport={{ once: true, margin: "-100px" }}
                         className={`text-xl md:text-2xl font-medium leading-relaxed max-w-xl mb-8 md:mb-12 transition-colors duration-500 ${isColorful ? 'text-white/90' : 'text-[#E5E5E0]/80'}`}
                     >
-                        I'm Unnikrishnan V P, a professional website developer and freelance web developer in Kerala. Specializing in high-performance MERN stack applications, SEO, and modern digital architectures, I turn complex problems into clean, efficient web solutions.
+                        I'm Unnikrishnan V P, a professional freelance web developer and MERN stack expert based in Kerala, India. If you are looking for an expert MERN developer or custom website design, I specialize in building high-performance systems and robust technical SEO setups to turn complex business needs into clean, lightning-fast digital solutions.
                     </motion.p>
 
                     <div className="relative w-full">

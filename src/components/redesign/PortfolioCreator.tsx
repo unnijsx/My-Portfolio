@@ -454,10 +454,10 @@ export default function Portfolio() {
 
                 {/* Open Graph / Facebook */}
                 <meta property="og:type" content="website" />
-                <meta property="og:url" content="https://www.unni.rheox.online/portfoliocreator" />
+                <meta property="og:url" content="https://unni.rheox.online/portfoliocreator" />
                 <meta property="og:title" content="Portfolio Creator | Interactive Design Sandbox | UNNI.JSX" />
                 <meta property="og:description" content="Design your pixel-perfect portfolio using the UNNI.JSX Portfolio Creator. Choose themes, customize layouts, and export professional code." />
-                <meta property="og:image" content="https://www.unni.rheox.online/og-image.jpg" />
+                <meta property="og:image" content="https://unni.rheox.online/og-image.jpg" />
                 <meta property="og:image:width" content="1200" />
                 <meta property="og:image:height" content="630" />
                 <meta property="og:image:type" content="image/jpeg" />
@@ -467,10 +467,10 @@ export default function Portfolio() {
 
                 {/* Twitter */}
                 <meta name="twitter:card" content="summary_large_image" />
-                <meta name="twitter:url" content="https://www.unni.rheox.online/portfoliocreator" />
+                <meta name="twitter:url" content="https://unni.rheox.online/portfoliocreator" />
                 <meta name="twitter:title" content="Portfolio Creator | Interactive Design Sandbox | UNNI.JSX" />
                 <meta name="twitter:description" content="Design your pixel-perfect portfolio using the UNNI.JSX Portfolio Creator. Choose themes, customize layouts, and export professional code." />
-                <meta name="twitter:image" content="https://www.unni.rheox.online/og-image.jpg" />
+                <meta name="twitter:image" content="https://unni.rheox.online/og-image.jpg" />
                 <meta name="twitter:site" content="@unnijsx" />
                 <meta name="twitter:creator" content="@unnijsx" />
             </Helmet>

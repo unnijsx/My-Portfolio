@@ -8,17 +8,17 @@ function App() {
     "@graph": [
       {
         "@type": "WebSite",
-        "@id": "https://www.unni.rheox.online/#website",
+        "@id": "https://unni.rheox.online/#website",
         "name": "UNNI.JSX",
-        "alternateName": ["Unnikrishnan V P", "UNNI.JSX Portfolio"],
-        "url": "https://www.unni.rheox.online/"
+        "alternateName": ["Unnikrishnan V P", "Unnikrishnan MERN", "Unnikrishnan Web Developer", "Unnikrishnan VP Web Developer", "Unnikrishnan", "UNNI.JSX Portfolio"],
+        "url": "https://unni.rheox.online/"
       },
       {
         "@type": "Organization",
-        "@id": "https://www.unni.rheox.online/#organization",
+        "@id": "https://unni.rheox.online/#organization",
         "name": "UNNI.JSX",
-        "url": "https://www.unni.rheox.online/",
-        "logo": "https://www.unni.rheox.online/1_1.jpg",
+        "url": "https://unni.rheox.online/",
+        "logo": "https://unni.rheox.online/1_1.jpg",
         "sameAs": [
           "https://www.linkedin.com/in/unnikrishnanvp/",
           "https://github.com/unnijsx",
@@ -31,16 +31,16 @@ function App() {
       },
       {
         "@type": "Person",
-        "@id": "https://www.unni.rheox.online/#person",
+        "@id": "https://unni.rheox.online/#person",
         "name": "Unnikrishnan V P",
-        "jobTitle": "Website Developer & Web Developer",
-        "url": "https://www.unni.rheox.online/",
-        "image": "https://www.unni.rheox.online/1_1.jpg",
+        "jobTitle": "Freelance Web Developer & MERN Stack Expert",
+        "url": "https://unni.rheox.online/",
+        "image": "https://unni.rheox.online/1_1.jpg",
         "sameAs": [
           "https://www.linkedin.com/in/unnikrishnanvp/",
           "https://github.com/unnijsx",
         ],
-        "description": "Unnikrishnan V P is a professional website developer and freelance web developer based in Kerala, India, specializing in full-stack React/MERN development, custom UI/UX, and SEO.",
+        "description": "Unnikrishnan V P is a professional freelance web developer and MERN stack expert based in Kerala, India, specializing in custom React applications, high-performance websites, and expert technical SEO.",
         "address": {
           "@type": "PostalAddress",
           "addressLocality": "Kochi",
@@ -49,6 +49,8 @@ function App() {
         },
         "knowsAbout": [
           "Web Development",
+          "MERN Stack Development",
+          "Freelance Web Development",
           "Website Design",
           "MERN Stack",
           "React.js",
@@ -58,18 +60,18 @@ function App() {
           "Cloud Hosting"
         ],
         "worksFor": {
-          "@id": "https://www.unni.rheox.online/#organization"
+          "@id": "https://unni.rheox.online/#organization"
         }
       },
       {
         "@type": "ProfessionalService",
-        "@id": "https://www.unni.rheox.online/#service",
-        "name": "Unnikrishnan V P | Freelance Web Developer in Kerala",
-        "description": "Professional web developer and website developer in Kerala, India. Specializing in high-performance React/MERN stack solutions, custom website design, SEO, and web hosting.",
-        "url": "https://www.unni.rheox.online/",
+        "@id": "https://unni.rheox.online/#service",
+        "name": "Unnikrishnan V P | Freelance Web Developer & MERN Stack Expert",
+        "description": "Unnikrishnan V P is an expert freelance web developer and MERN stack developer in Kerala, India, specializing in high-performance React/MERN systems, custom websites, DNS configuration, and technical SEO.",
+        "url": "https://unni.rheox.online/",
         "telephone": "+91 8848853516",
         "priceRange": "$$",
-        "image": "https://www.unni.rheox.online/1_1.jpg",
+        "image": "https://unni.rheox.online/1_1.jpg",
         "address": {
           "@type": "PostalAddress",
           "addressLocality": "Kochi",

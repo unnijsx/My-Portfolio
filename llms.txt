@@ -1,0 +1,30 @@
+# Unnikrishnan V P | Freelance Web Developer & MERN Stack Expert
+
+> Top-rated freelance MERN stack developer and web developer based in Kerala, India. Specializing in high-performance custom websites, custom web applications, advanced technical SEO architecture, and robust digital systems.
+
+## Primary Domain
+- [Portfolio Home Page](https://unni.rheox.online/) - Fully interactive MERN stack portfolio featuring beautiful animations, theme controls, and direct contact widgets.
+- [Portfolio Creator](https://unni.rheox.online/portfoliocreator) - An interactive sandbox for developers to design customized, premium portfolios and export optimized code blocks.
+
+## Core Technical Competencies
+- **Frontend Systems**: React, TypeScript, Next.js, Vite, Tailwind CSS, Framer Motion, GSAP, Lenis (Smooth Scroll), Three.js (3D Renderings, Torus knots, interactive elements).
+- **Backend Architecture**: Node.js, Express.js, RESTful APIs, JWT Authentication, WebSockets.
+- **Database & Caching**: MongoDB, Redis (caching systems, page views tracking, persistent console logs).
+- **SEO & Optimization**: Core Web Vitals optimization, Semantic HTML5 layout, JSON-LD Schema integration, light-speed performance adjustments.
+- **Deployment & Cloud Systems**: Vercel (rewrites, custom hosting routing), DNS Management, Cloudinary.
+
+## Professional Digital Services
+- **Full-Stack Web Applications**: Tailor-made, responsive React/Node portals, client back-offices, and highly animated dashboards.
+- **Premium Creative UI/UX Design**: Striking color schemes, glassmorphic visual layers, micro-interactions, dark modes, and modern typography combinations.
+- **SEO, Auditing & Web Speed**: Advanced technical SEO setups, XML sitemaps, structured schema data, Google Search Console indexing configuration.
+- **Consultation & Hosting Architectures**: Secure domain routing, custom hosting setup, SSL/TLS checks, third-party API integrations.
+
+## Career Orbit & Contact Info
+- **Developer Name**: Unnikrishnan V P
+- **Developer Pseudonym**: UNNI.JSX
+- **Headquarters**: Kochi, Kerala, India
+- **Email**: [unniytman@gmail.com](mailto:unniytman@gmail.com)
+- **Phone / WhatsApp**: [+91 8848853516](tel:+918848853516)
+- **LinkedIn**: [linkedin.com/in/unnikrishnanvp](https://www.linkedin.com/in/unnikrishnanvp/)
+- **GitHub**: [github.com/unnijsx](https://github.com/unnijsx)
+- **Associated Brand**: [Rheox.online](https://rheox.online) (Digital solutions, web development, cybersecurity, and server bot architectures)
