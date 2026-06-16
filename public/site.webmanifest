@@ -1,0 +1,21 @@
+{
+  "name": "Unnikrishnan V P - MERN Stack Developer",
+  "short_name": "UNNI.JSX",
+  "description": "Portfolio of Unnikrishnan V P, Freelance Web Developer & MERN Stack Expert.",
+  "icons": [
+    {
+      "src": "/1_1.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg"
+    },
+    {
+      "src": "/1_1.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    }
+  ],
+  "theme_color": "#000000",
+  "background_color": "#000000",
+  "display": "standalone",
+  "start_url": "/"
+}
