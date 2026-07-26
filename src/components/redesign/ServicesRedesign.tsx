@@ -104,18 +104,19 @@ function ServiceCard({ svc, index, totalCards, isColorful }: { svc: any, index: 
         offset: ["start start", "end start"]
     });
 
-    // Mimic accordion slowly closing: use scaleY with originTop and reduce opacity to 0
-    const scaleY = useTransform(scrollYProgress, [0, 1], [1, index === totalCards - 1 ? 1 : 0]);
-    const opacity = useTransform(scrollYProgress, [0, 1], [1, index === totalCards - 1 ? 1 : 0]);
-    // Extra depth: scale down slightly while closing
-    const scale = useTransform(scrollYProgress, [0, 1], [1, index === totalCards - 1 ? 1 : 0.9]);
+    // Elegant stacking deck animation: uniform scale down, translate up, and fade slightly
+    const scale = useTransform(scrollYProgress, [0, 1], [1, index === totalCards - 1 ? 1 : 0.94]);
+    const y = useTransform(scrollYProgress, [0, 1], [0, index === totalCards - 1 ? 0 : -25]);
+    const opacity = useTransform(scrollYProgress, [0, 1], [1, index === totalCards - 1 ? 1 : 0.5]);
 
     return (
-        <div ref={cardRef} className="h-[100vh] relative last:h-fit">
+        <div ref={cardRef} className="h-[90vh] md:h-[100vh] relative last:h-fit flex items-start">
             <motion.div 
-                style={{ scaleY, scale, opacity, translateZ: 0 }}
-                className={`sticky top-28 md:top-40 origin-top w-full flex flex-col md:flex-row gap-6 md:gap-24 border-t pt-8 md:pt-12 pb-8 md:pb-12 shadow-[0_-20px_50px_rgba(0,0,0,0.8)] z-10 will-change-transform transition-colors duration-1000 ${
-                    isColorful ? 'bg-[#0A0A0B] border-white/5' : 'bg-[#0E0E0E] border-white/10'
+                style={{ scale, y, opacity, translateZ: 0 }}
+                className={`sticky top-28 md:top-36 origin-top w-full flex flex-col md:flex-row gap-6 md:gap-16 p-8 md:p-12 rounded-[2rem] border shadow-[0_20px_50px_rgba(0,0,0,0.4)] z-10 will-change-transform transition-all duration-700 ${
+                    isColorful 
+                        ? 'bg-[#0F0D15]/95 border-purple-500/15 shadow-purple-900/10' 
+                        : 'bg-[#121212]/98 border-white/10 shadow-black/80'
                 }`}
             >
                 <div className={`text-2xl md:text-4xl font-black tracking-tighter transition-colors duration-500 ${isColorful ? 'text-purple-400/50' : 'opacity-50'}`}>({svc.num})</div>
