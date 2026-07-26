@@ -2,7 +2,7 @@
 Error: 'charmap' codec can't encode character '\U0001f4e7' in position 26: character maps to <undefined>
 --------------------------------------------------
 --- EXTRACTING: c:\Users\unnik\Desktop\Personal Projects\myportfolio\dist\assets\UNNIKISHNAN_MERN-CV-DmAditxJ.pdf ---
-unniytman@gmail.com
+unni@rheox.online
 www.unni.rheox.online
 +91 8848853516
 Srishti Innovative 

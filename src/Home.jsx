@@ -1027,7 +1027,7 @@ const Home = () => {
                               EMAIL
                             </Typography>
                             <Typography variant="body1" color="text.primary" sx={{ fontWeight: 600 }}>
-                              unniytman@gmail.com
+                              unni@rheox.online
                             </Typography>
                           </Box>
                         </Box>

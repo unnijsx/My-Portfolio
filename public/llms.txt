@@ -23,7 +23,7 @@
 - **Developer Name**: Unnikrishnan V P
 - **Developer Pseudonym**: UNNI.JSX
 - **Headquarters**: Kochi, Kerala, India
-- **Email**: [unniytman@gmail.com](mailto:unniytman@gmail.com)
+- **Email**: [unni@rheox.online](mailto:unni@rheox.online)
 - **Phone / WhatsApp**: [+91 8848853516](tel:+918848853516)
 - **LinkedIn**: [linkedin.com/in/unnikrishnanvp](https://www.linkedin.com/in/unnikrishnanvp/)
 - **GitHub**: [github.com/unnijsx](https://github.com/unnijsx)

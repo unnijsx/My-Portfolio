@@ -85,14 +85,14 @@ export default function OverlayMenu({ isOpen, onClose, isColorful, setIsColorful
                                 <h4 className="text-[10px] font-bold tracking-widest uppercase text-white/50 mb-1">Email Address</h4>
                                 <button 
                                     onClick={() => {
-                                        navigator.clipboard.writeText('unniytman@gmail.com');
+                                        navigator.clipboard.writeText('unni@rheox.online');
                                         setCopied(true);
                                         setTimeout(() => setCopied(false), 2000);
                                     }}
                                     className="text-sm font-medium transition-all relative flex items-center gap-3 group/mail"
                                 >
                                     <span className={`transition-colors duration-300 ${copied ? 'text-green-400' : 'text-[#EAEAEA] hover:text-white'}`}>
-                                        {copied ? 'Copied to clipboard!' : 'unniytman@gmail.com'}
+                                        {copied ? 'Copied to clipboard!' : 'unni@rheox.online'}
                                     </span>
                                 </button>
                             </div>
