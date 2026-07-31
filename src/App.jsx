@@ -3,12 +3,14 @@ import { Route, Routes } from 'react-router-dom';
 
 const PortfolioRedesign = lazy(() => import('./PortfolioRedesign'));
 const PortfolioCreator = lazy(() => import('./components/redesign/PortfolioCreator'));
+const PortfolioRedesignV2 = lazy(() => import('./PortfolioRedesignV2'));
 
 function App() {
   return (
     <Suspense fallback={<div className="h-screen w-full bg-[#E5E5E0] dark:bg-[#0A0A0B] flex items-center justify-center"></div>}>
       <Routes>
-        <Route path='/' element={<PortfolioRedesign />} />
+        <Route path='/' element={<PortfolioRedesignV2 />} />
+        <Route path='/v1' element={<PortfolioRedesign />} />
         <Route path='/portfoliocreator' element={<PortfolioCreator />} />
       </Routes>
     </Suspense>

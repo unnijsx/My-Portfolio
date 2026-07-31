@@ -54,6 +54,18 @@ export default function PortfolioRedesign() {
                         </motion.div>
 
                         <div className="flex items-center gap-4">
+                            {/* V2 Preview Button */}
+                            <a 
+                                href="/"
+                                className={`px-4 py-2 text-xs font-mono rounded-full border transition-all pointer-events-auto hover:scale-105 duration-350 ${
+                                    isColorful 
+                                    ? 'bg-white/10 border-white/20 text-white hover:bg-white/20' 
+                                    : 'bg-[#EAEAEA] border-black/15 text-black hover:bg-black/5'
+                                }`}
+                            >
+                                NEW DESIGN
+                            </a>
+
                             {/* Menu Button */}
                             <motion.button 
                                 initial={{ opacity: 0, scale: 0.8 }}
